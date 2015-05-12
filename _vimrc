@@ -32,15 +32,16 @@
 " =============================================================================
 
 
-" < 0x01 >. Set Global Variables. {{{
-" ===================================
-" +-----------+-----------+---------+
-" |           | isWindows | isLinux |
-" +-----------+-----------+---------+
-" | isGUI     |           |         |
-" +-----------+-----------+---------+
-" | isConsole |           |         |
-" +-----------+-----------+---------+
+" < 0x01 >. Set Global Variables. {
+" =====================================
+
+"   +-----------+-----------+---------+
+"   |           | isWindows | isLinux |
+"   +-----------+-----------+---------+
+"   | isGUI     |           |         |
+"   +-----------+-----------+---------+
+"   | isConsole |           |         |
+"   +-----------+-----------+---------+
 
     set nocompatible
     let g:isWindows = 0
@@ -59,7 +60,7 @@
     else
         let g:isConsole = 1
     endif
-" }}}
+" }
 
 
 " < 0x02 >. Vundle The Vim Plugin System. {{{
@@ -85,12 +86,28 @@
     " Plugin 'XXXX' equals
     " Plugin 'https://github.com/vim-scrips/XXXX.git'
     Plugin 'gmarik/Vundle.vim'
+"   Plugin 'Lokaltog/vim-powerline' depressed
+    Plugin 'bling/vim-airline'
+    Plugin 'kien/ctrlp.vim'
+    Plugin 'Shougo/unite.vim'
+    Plugin 'majutsushi/tagbar'
+    Plugin 'chrisbra/csv.vim'
+    Plugin 'scrooloose/nerdtree'
+    Plugin 'scrooloose/nerdcommenter'
+    Plugin 'scrooloose/syntastic'
+    Plugin 'airblade/vim-gitgutter'
+    Plugin 'mhinz/vim-signify'
+    Plugin 'jmcantrell/vim-virtualenv'
+    Plugin 'edkolev/tmuxline.vim'
+    Plugin 'edkolev/promptline.vim'
+
+    Plugin 'Yggdroot/indentLine'
     Plugin 'a.vim'
     Plugin 'Align'
     Plugin 'bufexplorer.zip'
     Plugin 'ccvext.vim'
     Plugin 'cSyntaxAfter'
-    Plugin 'ctrlpvim/ctrlp.vim'
+"    Plugin 'ctrlpvim/ctrlp.vim'
     Plugin 'chase/vim-ansible-yaml'
 
     Plugin 'godlygeek/tabular'
@@ -99,10 +116,6 @@
     Plugin 'vim-pandoc/vim-pandoc'
     
     Plugin 'jiangmiao/auto-pairs'
-    Plugin 'Lokaltog/vim-powerline'
-    Plugin 'scrooloose/nerdtree'
-    Plugin 'scrooloose/nerdcommenter'
-    Plugin 'scrooloose/syntastic'
     Plugin 'std_c.zip'
     Plugin 'Shougo/neocomplcache.vim'
     Plugin 'taglist.vim'
@@ -110,7 +123,6 @@
     Plugin 'tpope/vim-surround'
     Plugin 'tpope/vim-commentary'
     Plugin 'TxtBrowser'
-    Plugin 'majutsushi/tagbar'
     Plugin 'mattn/emmet-vim'
     Plugin 'Mark--Karkat'
     Plugin 'msanders/snipmate.vim'
@@ -120,7 +132,6 @@
     Plugin 'wesleyche/SrcExpl'
     Plugin 'xolox/vim-shell'
     Plugin 'xolox/vim-misc'
-    Plugin 'Yggdroot/indentLine'
     Plugin 'ZoomWin'
     " full screen the window
 "    Plugin 'derekmcloughlin/gvimfullscreen_win32'
@@ -216,8 +227,13 @@
     "set fileencoding=utf-8
     "set termencoding=utf-8
     set fileencodings=ucs-bom,utf-8,GB232,GBK,GB8030,cp936,default,latin-1
-    set fileformat=unix
-    set fileformats=unix,dos
+    if g:isWindows
+        set fileformat=dos
+        set fileformats=dos,unix
+    else
+        set fileformat=unix
+        set fileformats=unix,dos
+    endif
     set formatoptions=croql
     set backspace=indent,eol,start
 " }} 
@@ -261,7 +277,7 @@
 
 "  < 0x00. Settings for plugins. >
 " =============================================================================
-" Plugins.Yggdroot/indentLine {{{
+" plugins.yggdroot/indentline {{{
 " ------------------------------
     nmap <leader>il :IndentLinesToggle<CR>
     let g:indentLine_enabled=1
@@ -275,7 +291,7 @@
     endif
 " }}}
 
-" Plugins.scrooloose/nerdtree {{{
+" plugins.scrooloose/nerdtree {{{
 " -------------------------------
     autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
     if g:isWindows
@@ -303,7 +319,7 @@
 
 " Plugins.derekmcloughlin/gvimfullscreen_win32 {{{
 " ------------------------------------------------
-"    map <F11> <Esc>:call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR><C-L>
+    map <F11> <Esc>:call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR><C-L>
 " }}}
 
 " Plugins.For.Markdown
@@ -318,6 +334,42 @@
     let g:pandoc#filetypes#pandoc_markdown = 0
     let g:pandoc#modules#disabled = ["folding"]
     let g:pandoc#spell#enabled = 0
+" }
+
+" Plugins.scrooloose/syntastic {
+" ------------------------------
+    set statusline+=%#warningmsg#
+    set statusline+=%{SyntasticStatuslineFlag()}
+    set statusline+=%*
+
+    let g:syntastic_always_populate_loc_list = 1
+    let g:syntastic_auto_loc_list = 1
+    let g:syntastic_check_on_open = 1
+    let g:syntastic_check_on_wq = 0
+
+    let g:syntastic_python_python_exec = 'c:/Python27/'
+" }
+
+" plugins.kien/ctrlp {
+" --------------------
+    let g:ctrlp_map = '<c-p>'
+    let g:ctrlp_cmd = 'CtrlP'
+    if exists("g:ctrl_user_command")
+        unlet g:ctrlp_user_command
+    endif
+    set wildignore+=.* 
+    set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+    set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
+    
+    let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+"    let g:ctrlp_custom_ignore = {
+"        \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+"        \ 'file': '\v\.(exe|so|dll)$',
+"        \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
+"        \ } 
+    "let g:ctrlp_custom_ignore = { 'dir':  '\v[\/]\.(git|hg|svn)$', 'file': '\v\.(exe|so|dll)$', 'link': 'some_bad_symbolic_links'}
+    "let g:ctrlp_user_command = 'find %s -type f'        " MacOSX/Linux
+    "let g:ctrlp_user_command = 'dir %s /-n /b /s /a-d'  " Windows
 " }
 
 "  < 0x00. Map common keyboard shortcuts. >
@@ -335,14 +387,14 @@ vmap <C-c> "+y
 vmap <S-Insert> "+gP
 nmap <C-c> "+yy
 vmap <C-x> "+d
-map <C-b> "+p
+"map <C-b> "+p
 if g:isWindows
     nmap <leader>e :tabnew $HOME/_vimrc<CR>
-    imap <S-Insert> <Esc><S-Insert>i
 else
     nmap <leader>e :tabnew $HOME/.vimrc<CR>
 endif
 nmap <leader>t :tabnew<CR>
-nnoremap <leader>gq :%!pandoc -f html -t markdown <bar> pandoc -f markdown -t html<CR>
-vnoremap <leader>gq :!pandoc -f html -t markdown <bar> pandoc -f markdown -t html<CR>
+nnoremap <leader>pd :!pandoc % -f markdown -t html -s -o %.html && %.html<CR>
+"nnoremap <leader>gq :%!pandoc -f html -t markdown <bar> pandoc -f markdown -t html<CR>
+"vnoremap <leader>gq :!pandoc -f html -t markdown <bar> pandoc -f markdown -t html<CR>
 
