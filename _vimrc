@@ -32,8 +32,8 @@
 " =============================================================================
 
 
-" < 0x01 >. Set Global Variables. {
-" =====================================
+" < 0x01 >. Set Global Variables.
+" ===============================
 
 "   +-----------+-----------+---------+
 "   |           | isWindows | isLinux |
@@ -86,8 +86,7 @@
     " Plugin 'XXXX' equals
     " Plugin 'https://github.com/vim-scrips/XXXX.git'
     Plugin 'gmarik/Vundle.vim'
-"   Plugin 'Lokaltog/vim-powerline' depressed
-    Plugin 'bling/vim-airline'
+    Plugin 'bling/vim-airline' " Plugin 'Lokaltog/vim-powerline' is deprecated 
     Plugin 'kien/ctrlp.vim'
     Plugin 'Shougo/unite.vim'
     Plugin 'majutsushi/tagbar'
@@ -144,9 +143,8 @@
 " }
 
 
-"  < 0x03 >. General settins for code writing and file editing. {
-" =================================================================
-" set t_Co=256              save for linux gvim
+"  < 0x03 >. General settins for code writing and file editing. 
+" ==============================================================================
 " set nocompatible          showmode showcmd
 " set shortmess=atI
 
@@ -178,6 +176,9 @@
         set guifont=gohufont-14:h12
         set guifontwide=Yahei\ Mono:h10.5
     else
+        if g:isGUI
+            set t_Co=256
+        endif
         colorscheme rainbow_neon
         set guifont=Terminus\ 10
     endif
@@ -189,8 +190,8 @@
     " set guifont=Source\ Code\ Pro\ 11:h11
 " }}
 
-" tabs and indent {
-" -----------------
+" tabs and indent 
+" {
     set shiftwidth=4
     set tabstop=4
     set expandtab
@@ -205,8 +206,8 @@
 " }
 
 
-" search options {
-" ----------------
+" search options 
+" {
     set showmatch
     set incsearch
     set ignorecase
@@ -214,8 +215,8 @@
     set hlsearch
 " }
 
-" file options {
-" --------------
+" file options 
+" {
     syntax on
     filetype on
     filetype plugin on
@@ -225,7 +226,7 @@
     endif
     "set fileencoding=utf-8
     "set termencoding=utf-8
-    set fileencodings=ucs-bom,utf-8,GB232,GBK,GB8030,cp936,default,latin-1
+    set fileencodings=ucs-bom,utf-8,cp936,default,latin-1,GB232,GBK,GB8030
     if g:isWindows
         set fileformat=dos
         set fileformats=dos,unix
@@ -237,8 +238,8 @@
     set backspace=indent,eol,start
 " }} 
 
-" code fold {{
-" -------------
+" code fold 
+" {
     set foldenable
     set foldmethod=indent    "/marker/syntax"
     set foldcolumn=1
@@ -253,11 +254,11 @@
     let xml_syntax_folding=1              " XML
     " use SPACE to unfold code, zR: open all folds zM: close all folds
     nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
-" }}
+" }
 
 
-" set nowrap {{{
-" --------------
+" set nowrap 
+" {
     set writebackup
     set nobackup
     set noswapfile          " use version control insead
@@ -268,7 +269,7 @@
     endif
     set autoread
     set autochdir
-" }}}
+" }
 
 "au BufWinEnter * let w:m2=matchadd('Underlined', '\%>' . 80 . 'v.\+', -1)
 
@@ -326,10 +327,11 @@ endif
 " refering from link http://vim.wikia.com/wiki/Improved_Hex_editing
 
 
-"  < 0x00. Settings for plugins. >
+"  < 0x04 >. SETTINGS FOR PLUGINS.
 " =============================================================================
-" plugins.yggdroot/indentline {{{
-" ------------------------------
+
+" plugins.yggdroot/indentline 
+" {
     nmap <leader>il :IndentLinesToggle<CR>
     let g:indentLine_enabled=1
     "let g:indentLine_char = '┊'
@@ -341,10 +343,10 @@ endif
     else
         let g:indentLine_color_term =239
     endif
-" }}}
+" }
 
-" plugins.scrooloose/nerdtree {
-" -----------------------------
+" plugins.scrooloose/nerdtree 
+" {
     autocmd bufenter * if (winnr("$") == 1 && 
                 \ exists("b:NERDTreeType") && 
                 \ b:NERDTreeType == "primary") | q | 
@@ -358,27 +360,16 @@ endif
 " }
 
 
-" Plugins.Lokaltog/vim-powerline {{{
-" ----------------------------------
-    let g:PowerLine_symbols = 'fancy'
-    set laststatus=2
-    "set fillchars+=stl:\ ,stlnc:\
-    if g:isLinux
-        set -g default-terminal "screen-256color"
-    endif
-" }}}
-
-
-" plugins.derekmcloughlin/gvimfullscreen_win32 {
-" ------------------------------------------------
+" plugins.derekmcloughlin/gvimfullscreen_win32 
+" {
     map <F11> <Esc>:call libcallnr("gvimfullscreen.dll",
                 \ "ToggleFullScreen", 0)<CR><C-L>
 " }
 
-" Plugins.For.Markdown
+" plugins.for.markdown
 "    - plasticboy/vim-markdown 
-"    - {
-" ---------------------------------
+"    - 
+" {
     au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn} 
                 \ set filetype=markdown
     let g:vim_markdown_folding_disabled=1 " Markdown
@@ -390,8 +381,8 @@ endif
     let g:pandoc#spell#enabled = 0
 " }
 
-" Plugins.scrooloose/syntastic {
-" ------------------------------
+" Plugins.scrooloose/syntastic 
+" {
     set statusline+=%#warningmsg#
     set statusline+=%{SyntasticStatuslineFlag()}
     set statusline+=%*
@@ -404,8 +395,8 @@ endif
     let g:syntastic_python_python_exec = 'c:/Python27/'
 " }
 
-" plugins.kien/ctrlp {
-" --------------------
+" plugins.kien/ctrlp 
+" {
     let g:ctrlp_map = '<c-p>'
     let g:ctrlp_cmd = 'CtrlP'
     if exists("g:ctrl_user_command")
@@ -426,8 +417,9 @@ endif
     "let g:ctrlp_user_command = 'dir %s /-n /b /s /a-d'  " Windows
 " }
 
-"  < 0x00. Map common keyboard shortcuts. >
+"  < 0x05 >. Map common keyboard shortcuts. 
 " =============================================================================
+
 imap <C-a> <Esc>I
 imap <C-e> <ESC>A
 map <C-Tab> <C-W>w
@@ -441,7 +433,6 @@ vmap <C-c> "+y
 vmap <S-Insert> "+gP
 nmap <C-c> "+yy
 vmap <C-x> "+d
-"map <C-b> "+p
 if g:isWindows
     nmap <leader>e :tabnew $HOME/_vimrc<CR>
 else
