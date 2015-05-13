@@ -63,17 +63,14 @@
 " }
 
 
-" < 0x02 >. Vundle The Vim Plugin System. {{{
-" ===========================================
-    " BRIEF:  see :h vundle for more details
-    " :PluginList      - list configured plugins
-    " :PluginInstall   - installs plugins; append '!' to update
-    " :PluginUpdate    - equal :PluginInstall!
-    " :PluginClean     - confirms removal of unused plugins; append '!' to 
-    "                    auto-appove
-    " REF:
-    " http://www.oschina.net/code/snippet_574132_13357
-    "
+" < 0x02 >. VUNDLE THE VIM PLUGIN SYSTEM. 
+" ==============================================================
+" BRIEF:  see :h vundle for more details
+" :PluginList      - list configured plugins
+" :PluginInstall   - installs plugins; append '!' to update
+" :PluginUpdate    - equal :PluginInstall!
+" :PluginClean     - confirms removal of unused plugins; append '!' to 
+"                    auto-appove
     filetype off
     if g:isLinux
         set rtp+=~/.vim/bundle/Vundle.vim
@@ -173,7 +170,8 @@
         else
             colorscheme Tomorrow-Night-Eighties
         endif
-        set guifont=gohufont-14:h12
+        set guifont=Terminus:h12
+        "set guifont=gohufont-14:h12
         set guifontwide=Yahei\ Mono:h10.5
     else
         if g:isGUI
@@ -329,6 +327,27 @@ endif
 
 "  < 0x04 >. SETTINGS FOR PLUGINS.
 " =============================================================================
+
+" plugins.bling/vim-airline
+" {
+    let g:Powerline_symbols = 'fancy'
+    set t_Co=256
+    set fillchars+=stl:\ ,stlnc:\
+    set laststatus=2
+    let g:airline#extensions#tabline#enabled = 1
+    let g:airline_theme             = 'powerlineish'
+
+    if !exists('g:airline_symbols')
+        let g:airline_symbols = {}
+    endif
+" unicode symbols
+"    let g:airline_section_b = '%{strftime("%C")}'
+"    let g:airline_section_y = 'BN: %{bufnr("%")}'
+"    let g:airline#extensions#tabline#enabled = 1
+"    let g:airline#extensions#tabline#left_sep = ' '
+"    let g:airline#extensions#tabline#left_alt_sep = '|'
+    
+" }
 
 " plugins.yggdroot/indentline 
 " {
