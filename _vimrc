@@ -107,13 +107,12 @@
     Plugin 'bufexplorer.zip'
     Plugin 'ccvext.vim'
     Plugin 'cSyntaxAfter'
-"    Plugin 'ctrlpvim/ctrlp.vim'
     Plugin 'chase/vim-ansible-yaml'
-
+    " markdown plugins
     Plugin 'godlygeek/tabular'
     Plugin 'plasticboy/vim-markdown'
-    Plugin 'vim-pandoc/vim-pandoc-syntax'
-    Plugin 'vim-pandoc/vim-pandoc'
+"    Plugin 'vim-pandoc/vim-pandoc-syntax'
+"   Plugin 'vim-pandoc/vim-pandoc'
     
     Plugin 'jiangmiao/auto-pairs'
     Plugin 'std_c.zip'
@@ -190,8 +189,8 @@
     " set guifont=Source\ Code\ Pro\ 11:h11
 " }}
 
-" tabs and indent {{
-" -------------------
+" tabs and indent {
+" -----------------
     set shiftwidth=4
     set tabstop=4
     set expandtab
@@ -203,20 +202,20 @@
     " And Markdown
     autocmd FileType markdown set sw=4
     autocmd FileType markdown set sts=4
-" }}
+" }
 
 
-" search options {{
-" ------------------
+" search options {
+" ----------------
     set showmatch
     set incsearch
     set ignorecase
     set smartcase
     set hlsearch
-" }}
+" }
 
-" file options {{
-" ----------------
+" file options {
+" --------------
     syntax on
     filetype on
     filetype plugin on
@@ -275,6 +274,58 @@
 
 
 
+" autocmds to automatically enter hex mode and handle file writes properly
+if has("autocmd")
+  " vim -b : edit binary using xxd-format!
+  augroup Binary
+    au!
+
+    " set binary option for all binary files before reading them
+    au BufReadPre *.bin,*.hex,*.exe,*.dll setlocal binary
+
+    " if on a fresh read the buffer variable is already set, it's wrong
+    au BufReadPost *
+          \ if exists('b:editHex') && b:editHex |
+          \   let b:editHex = 0 |
+          \ endif
+
+    " convert to hex on startup for binary files automatically
+    au BufReadPost *
+          \ if &binary | Hexmode | endif
+
+    " When the text is freed, the next time the buffer is made active it will
+    " re-read the text and thus not match the correct mode, we will need to
+    " convert it again if the buffer is again loaded.
+    au BufUnload *
+          \ if getbufvar(expand("<afile>"), 'editHex') == 1 |
+          \   call setbufvar(expand("<afile>"), 'editHex', 0) |
+          \ endif
+
+    " before writing a file when editing in hex mode, convert back to non-hex
+    au BufWritePre *
+          \ if exists("b:editHex") && b:editHex && &binary |
+          \  let oldro=&ro | let &ro=0 |
+          \  let oldma=&ma | let &ma=1 |
+          \  silent exe "%!xxd -r" |
+          \  let &ma=oldma | let &ro=oldro |
+          \  unlet oldma | unlet oldro |
+          \ endif
+
+    " after writing a binary file, if we're in hex mode, restore hex mode
+    au BufWritePost *
+          \ if exists("b:editHex") && b:editHex && &binary |
+          \  let oldro=&ro | let &ro=0 |
+          \  let oldma=&ma | let &ma=1 |
+          \  silent exe "%!xxd" |
+          \  exe "set nomod" |
+          \  let &ma=oldma | let &ro=oldro |
+          \  unlet oldma | unlet oldro |
+          \ endif
+  augroup END
+endif
+" refering from link http://vim.wikia.com/wiki/Improved_Hex_editing
+
+
 "  < 0x00. Settings for plugins. >
 " =============================================================================
 " plugins.yggdroot/indentline {{{
@@ -285,51 +336,54 @@
     if g:isGUI
         let g:indentLine_char = "¦"
         let g:indentLine_first_char = "¦"
-        let g:indentLine_color_gui = '#A4E57E'
+        "let g:indentLine_color_gui = '#A4E57E'
+        let g:indentLine_color_gui = '#C0C0C0'
     else
         let g:indentLine_color_term =239
     endif
 " }}}
 
-" plugins.scrooloose/nerdtree {{{
-" -------------------------------
-    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+" plugins.scrooloose/nerdtree {
+" -----------------------------
+    autocmd bufenter * if (winnr("$") == 1 && 
+                \ exists("b:NERDTreeType") && 
+                \ b:NERDTreeType == "primary") | q | 
+                \ endif
     if g:isWindows
         let g:NERDTreeCopyCmd= 'copy '
     else
         let g:NERDTreeCopyCmd= 'cp -r'
     endif
     nmap <F2> :NERDTreeToggle ..<CR>
-" }}}
+" }
 
-" {{{ Plugins.jistr/vim-nerdtree-tabs
-" -----------------------------------
-" map <F3> <plug>:NERDTreeTabsToggle<CR>
-" }}}
-"
 
 " Plugins.Lokaltog/vim-powerline {{{
 " ----------------------------------
     let g:PowerLine_symbols = 'fancy'
     set laststatus=2
     "set fillchars+=stl:\ ,stlnc:\
-    " set -g default-terminal "screen-256color"
+    if g:isLinux
+        set -g default-terminal "screen-256color"
+    endif
 " }}}
 
 
-" Plugins.derekmcloughlin/gvimfullscreen_win32 {{{
+" plugins.derekmcloughlin/gvimfullscreen_win32 {
 " ------------------------------------------------
-    map <F11> <Esc>:call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR><C-L>
-" }}}
+    map <F11> <Esc>:call libcallnr("gvimfullscreen.dll",
+                \ "ToggleFullScreen", 0)<CR><C-L>
+" }
 
 " Plugins.For.Markdown
 "    - plasticboy/vim-markdown 
 "    - {
 " ---------------------------------
+    au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn} 
+                \ set filetype=markdown
     let g:vim_markdown_folding_disabled=1 " Markdown
     let g:vim_markdown_math=1
     let g:vim_markdown_frontmatter=1
-    au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn} set filetype=markdown
     let g:pandoc#filetypes#handled = ["pandoc", "markdown"]
     let g:pandoc#filetypes#pandoc_markdown = 0
     let g:pandoc#modules#disabled = ["folding"]
