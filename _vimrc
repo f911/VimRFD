@@ -1,14 +1,11 @@
 " ===========================================================================-
 " Copyright (C) 2014 nick All Rights Reserved
-" MAINTAINER:   nick
-" CREATED:      2014-10-04
-" LASTMODIFY:   2015-01-08
-" VERSION:      V1.0
-" DESCRIPTION:  
-"   Gvim or Vim resource files, store as ~/.vim(*nix) or ~/_vimrc 
-" (windows). Currently most for Gvim on Windows. use git to mantain it.
+" Maintainer:   nick
+" Created:      2014-10-04
+" LastModify:   2015-01-08
+" Version:      v1.0
 " 
-" SECTIONS:
+" Sections:
 "   - Global Variables.
 "   - Vundle The Vim Plugin System.
 "   - User Interface.
@@ -24,10 +21,10 @@
 "   - Key Mapping
 "   - Local Settings.
 "
-" TODO_LIST:    
+" TODO_List:    
 "     - Windows CMD Supports
 "
-" REFERENCE:
+" Reference:
 "    - http://www.oschina.net/code/snippet_574132_13357
 " =============================================================================
 
@@ -71,6 +68,8 @@
 " :PluginUpdate    - equal :PluginInstall!
 " :PluginClean     - confirms removal of unused plugins; append '!' to 
 "                    auto-appove
+" Plugin 'XXXX' equals Plugin 'https://github.com/vim-scrips/XXXX.git'
+"
     filetype off
     if g:isLinux
         set rtp+=~/.vim/bundle/Vundle.vim
@@ -80,22 +79,46 @@
         let path='~/vimfiles/bundle'
         call vundle#begin(path)
     endif
-    " Plugin 'XXXX' equals
-    " Plugin 'https://github.com/vim-scrips/XXXX.git'
+
     Plugin 'gmarik/Vundle.vim'
-    Plugin 'bling/vim-airline' " Plugin 'Lokaltog/vim-powerline' is deprecated 
+
+    " airline plugins and support plugins
+    Plugin 'bling/vim-airline' " powerline is deprecated 
     Plugin 'kien/ctrlp.vim'
     Plugin 'Shougo/unite.vim'
     Plugin 'majutsushi/tagbar'
     Plugin 'chrisbra/csv.vim'
+    Plugin 'airblade/vim-gitgutter'
+    Plugin 'jmcantrell/vim-virtualenv'
+
+    Plugin 'mhinz/vim-startify'
+    Plugin 'mhinz/vim-tmuxify'
+    Plugin 'mhinz/vim-signify'
+
+    Plugin 'mattn/vimtweak'
+"    Plugin 'mattn/transparency-windows-vim'
+    Plugin 'mattn/emmet-vim'
+    
+    Plugin 'edkolev/tmuxline.vim'
+    Plugin 'edkolev/promptline.vim'
+
     Plugin 'scrooloose/nerdtree'
     Plugin 'scrooloose/nerdcommenter'
     Plugin 'scrooloose/syntastic'
-    Plugin 'airblade/vim-gitgutter'
-    Plugin 'mhinz/vim-signify'
-    Plugin 'jmcantrell/vim-virtualenv'
-    Plugin 'edkolev/tmuxline.vim'
-    Plugin 'edkolev/promptline.vim'
+   
+    Plugin 'tpope/vim-fugitive'
+    Plugin 'tpope/vim-surround'
+    Plugin 'tpope/vim-commentary'
+
+    Plugin 'xolox/vim-shell'
+    Plugin 'xolox/vim-misc'
+
+"   markdown plugins
+"   Plugin 'godlygeek/tabular'
+"   Plugin 'plasticboy/vim-markdown'
+    Plugin 'vim-pandoc/vim-pandoc'
+    Plugin 'vim-pandoc/vim-pandoc-syntax'
+    Plugin 'vim-pandoc/vim-pandoc-after'
 
     Plugin 'Yggdroot/indentLine'
     Plugin 'a.vim'
@@ -104,29 +127,18 @@
     Plugin 'ccvext.vim'
     Plugin 'cSyntaxAfter'
     Plugin 'chase/vim-ansible-yaml'
-    " markdown plugins
-    Plugin 'godlygeek/tabular'
-    Plugin 'plasticboy/vim-markdown'
-"    Plugin 'vim-pandoc/vim-pandoc-syntax'
-"   Plugin 'vim-pandoc/vim-pandoc'
     
     Plugin 'jiangmiao/auto-pairs'
     Plugin 'std_c.zip'
     Plugin 'Shougo/neocomplcache.vim'
     Plugin 'taglist.vim'
-    Plugin 'tpope/vim-fugitive'
-    Plugin 'tpope/vim-surround'
-    Plugin 'tpope/vim-commentary'
     Plugin 'TxtBrowser'
-    Plugin 'mattn/emmet-vim'
     Plugin 'Mark--Karkat'
     Plugin 'msanders/snipmate.vim'
     Plugin 'OmniCppComplete'
     Plugin 'repeat.vim'
     Plugin 'vim-javacompleteex'
     Plugin 'wesleyche/SrcExpl'
-    Plugin 'xolox/vim-shell'
-    Plugin 'xolox/vim-misc'
     Plugin 'ZoomWin'
     " full screen the window
 "    Plugin 'derekmcloughlin/gvimfullscreen_win32'
@@ -152,12 +164,12 @@
     "set laststatus=2
     set cmdheight=1
     set cursorline
-    hi CursorLine term=underline cterm=underline guibg=#202020
+    hi CursorLine term=underline cterm=underline guibg=#3A3A3A
     hi CursorLine ctermbg=darkgrey guibg=gray13
     if g:isGUI
         " au GUIEnter * simalt ~x
         winpos 100 20
-        set columns=180
+        set columns=200
         set lines=60
         " set guioptions-=T
     endif
@@ -197,10 +209,8 @@
     set smartindent
     set autoindent
     " Except for Makefiles; hard tabs of width 2
-    autocmd FileType make set ts=2
+    au FileType make set ts=2
     " And Markdown
-    autocmd FileType markdown set sw=4
-    autocmd FileType markdown set sts=4
 " }
 
 
@@ -225,16 +235,16 @@
     "set fileencoding=utf-8
     "set termencoding=utf-8
     set fileencodings=ucs-bom,utf-8,cp936,default,latin-1,GB232,GBK,GB8030
-    if g:isWindows
+    "if g:isWindows
         set fileformat=dos
-        set fileformats=dos,unix
-    else
-        set fileformat=unix
-        set fileformats=unix,dos
-    endif
+        set fileformats=dos
+    "else
+    "    set fileformat=unix
+    "    set fileformats=unix,dos
+    "endif
     set formatoptions=croql
     set backspace=indent,eol,start
-" }} 
+" } 
 
 " code fold 
 " {
@@ -340,12 +350,6 @@ endif
     if !exists('g:airline_symbols')
         let g:airline_symbols = {}
     endif
-" unicode symbols
-"    let g:airline_section_b = '%{strftime("%C")}'
-"    let g:airline_section_y = 'BN: %{bufnr("%")}'
-"    let g:airline#extensions#tabline#enabled = 1
-"    let g:airline#extensions#tabline#left_sep = ' '
-"    let g:airline#extensions#tabline#left_alt_sep = '|'
     
 " }
 
@@ -381,16 +385,35 @@ endif
 
 " plugins.derekmcloughlin/gvimfullscreen_win32 
 " {
-    map <F11> <Esc>:call libcallnr("gvimfullscreen.dll",
-                \ "ToggleFullScreen", 0)<CR><C-L>
+    map <F11> <Esc>:call libcallnr('gvimfullscreen.dll',
+                \ 'ToggleFullScreen', 0)<CR><C-L>
 " }
+
+" plugins.mattn/vimtweak
+" {
+    if g:isWindows && g:isGUI
+        function! s:Transparency(v)
+            call libcallnr('vimtweak.dll', 'SetAlpha', 255-a:v) 
+        endfunction
+        augroup transparency_windows
+          autocmd!
+          autocmd FocusGained * call s:Transparency(12)
+          autocmd FocusLost * call s:Transparency(60)
+        augroup END
+    endif
+    map <F10> <Esc>:call libcallnr('vimtweak.dll', 
+                \ 'SetAlpha', 232)<CR>
+    map <S-F10> <Esc>:call libcallnr('vimtweak.dll',
+                \ 'SetAlpha', 255)<CR>
+" }
+
 
 " plugins.for.markdown
 "    - plasticboy/vim-markdown 
 "    - 
 " {
-    au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn} 
-                \ set filetype=markdown
+  "  au BufNewFile,BufFilePre,BufRead *.md setf markdown
+    au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown.pandoc
     let g:vim_markdown_folding_disabled=1 " Markdown
     let g:vim_markdown_math=1
     let g:vim_markdown_frontmatter=1
@@ -398,6 +421,10 @@ endif
     let g:pandoc#filetypes#pandoc_markdown = 0
     let g:pandoc#modules#disabled = ["folding"]
     let g:pandoc#spell#enabled = 0
+    nnoremap <leader>pd :!pandoc % -f markdown -t html -s -o %.html && %.html<CR>
+    let g:vim_pandoc_syntax_exists = 1
+    " vim-pandoc-after
+    let g:pandoc#after#modules#enabled = ["nrrwrgn", "ultisnips"]
 " }
 
 " Plugins.scrooloose/syntastic 
@@ -436,6 +463,33 @@ endif
     "let g:ctrlp_user_command = 'dir %s /-n /b /s /a-d'  " Windows
 " }
 
+" plugins.mhinz/vim-startify
+" {
+    let g:startify_custom_header = [
+            \ '  +--------------------------------------------------------------------------+   ',
+            \ ' /               --=  NICK''s PERSIONAL DEVELOPMENT STUDIO  =--                \  ',
+            \ ' |                          fatework@arch.team                                | ',
+            \ ' |                                         ________  __ __                    | ',
+            \ ' |                   __                   /\_____  \/\ \\ \                   |',
+            \ ' |           __  __ /\_\    ___ ___       \/___//''/''\ \ \\ \                  | ',
+            \ ' |          /\ \/\ \\/\ \ /'' __` __`\         /'' /''  \ \ \\ \_                | ',
+            \ ' |          \ \ \_/ |\ \ \/\ \/\ \/\ \       /'' /''__  \ \__ ,__\              | ',
+            \ ' |           \ \___/  \ \_\ \_\ \_\ \_\     /\_/ /\_\  \/_/\_\_/              | ',
+            \ ' |            \/__/    \/_/\/_/\/_/\/_/     \//  \/_/     \/_/                | ',
+            \ ' +----------------------------------------------------------------------------+ ',
+            \ ' |                                                                            |',
+            \ '',
+            \ ]
+    let g:startify_custom_footer = [
+            \ ' |                                                                            | ',
+            \ ' |                          fatework@arch.team                                | ',
+            \ ' \               --=  NICK''s PERSIONAL DEVELOPMENT STUDIO  =--                / ',
+            \ '  +--------------------------------------------------------------------------+ ',
+            \ '',
+            \ ]
+" }
+
+
 "  < 0x05 >. Map common keyboard shortcuts. 
 " =============================================================================
 
@@ -458,7 +512,7 @@ else
     nmap <leader>e :tabnew $HOME/.vimrc<CR>
 endif
 nmap <leader>t :tabnew<CR>
-nnoremap <leader>pd :!pandoc % -f markdown -t html -s -o %.html && %.html<CR>
+nmap <leader>nl <ESC>:nohl<CR>
 "nnoremap <leader>gq :%!pandoc -f html -t markdown <bar> pandoc -f markdown -t html<CR>
 "vnoremap <leader>gq :!pandoc -f html -t markdown <bar> pandoc -f markdown -t html<CR>
 
