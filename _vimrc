@@ -438,7 +438,7 @@ endif
     let g:syntastic_check_on_open = 1
     let g:syntastic_check_on_wq = 0
 
-    let g:syntastic_python_python_exec = 'c:/Python27/'
+    let g:syntastic_python_python_exec = 'C:/Python27/'
 " }
 
 " plugins.kien/ctrlp 
@@ -458,9 +458,10 @@ endif
 "        \ 'file': '\v\.(exe|so|dll)$',
 "        \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
 "        \ } 
-    "let g:ctrlp_custom_ignore = { 'dir':  '\v[\/]\.(git|hg|svn)$', 'file': '\v\.(exe|so|dll)$', 'link': 'some_bad_symbolic_links'}
-    "let g:ctrlp_user_command = 'find %s -type f'        " MacOSX/Linux
-    "let g:ctrlp_user_command = 'dir %s /-n /b /s /a-d'  " Windows
+"   let g:ctrlp_custom_ignore = { 'dir':  '\v[\/]\.(git|hg|svn)$', 
+"       \ 'file': '\v\.(exe|so|dll)$', 'link': 'some_bad_symbolic_links'}
+"   let g:ctrlp_user_command = 'find %s -type f'        " MacOSX/Linux
+"   let g:ctrlp_user_command = 'dir %s /-n /b /s /a-d'  " Windows
 " }
 
 " plugins.mhinz/vim-startify
@@ -487,6 +488,7 @@ endif
             \ '  +--------------------------------------------------------------------------+ ',
             \ '',
             \ ]
+    map <leader>st <Esc>:Startify<CR>
 " }
 
 
@@ -495,9 +497,9 @@ endif
 
 imap <C-a> <Esc>I
 imap <C-e> <ESC>A
-map <C-Tab> <C-W>w
-imap <C-Tab> <C-O><C-W>w
-imap <C-Tab> <C-C><C-Tab>
+"map <C-Tab> <C-W>w
+"imap <C-Tab> <C-O><C-W>w
+"imap <C-Tab> <C-C><C-Tab>
 map <kMinus> :cp<C-M>
 map - :cp<C-M>
 map <kPlus> :cn<C-M>
@@ -513,6 +515,11 @@ else
 endif
 nmap <leader>t :tabnew<CR>
 nmap <leader>nl <ESC>:nohl<CR>
+nmap <C-Tab> <Esc>gt
+nmap <C-S-Tab> <Esc>gT
+imap <C-Tab> <Esc>gt
+imap <C-S-Tab> <Esc>gT
+
 "nnoremap <leader>gq :%!pandoc -f html -t markdown <bar> pandoc -f markdown -t html<CR>
 "vnoremap <leader>gq :!pandoc -f html -t markdown <bar> pandoc -f markdown -t html<CR>
 
