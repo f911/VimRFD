@@ -90,6 +90,7 @@
     Plugin 'chrisbra/csv.vim'
     Plugin 'airblade/vim-gitgutter'
     Plugin 'jmcantrell/vim-virtualenv'
+    Plugin 'mbbill/fencview'
 
     Plugin 'mhinz/vim-startify'
     Plugin 'mhinz/vim-tmuxify'
@@ -180,7 +181,7 @@
         if g:isGUI
             colorscheme rainbow_neon
         else
-            colorscheme Tomorrow-Night-Eighties
+            colorscheme desert
         endif
         set guifont=Terminus:h12
         "set guifont=gohufont-14:h12
@@ -508,6 +509,7 @@ vmap <C-c> "+y
 vmap <S-Insert> "+gP
 nmap <C-c> "+yy
 vmap <C-x> "+d
+map <C-s> :w
 if g:isWindows
     nmap <leader>e :tabnew $HOME/_vimrc<CR>
 else
@@ -519,7 +521,8 @@ nmap <C-Tab> <Esc>gt
 nmap <C-S-Tab> <Esc>gT
 imap <C-Tab> <Esc>gt
 imap <C-S-Tab> <Esc>gT
-
+nnoremap K i<CR><Esc>
+map  <leader>w <Esc><C-W><C-W>
 "nnoremap <leader>gq :%!pandoc -f html -t markdown <bar> pandoc -f markdown -t html<CR>
 "vnoremap <leader>gq :!pandoc -f html -t markdown <bar> pandoc -f markdown -t html<CR>
 
