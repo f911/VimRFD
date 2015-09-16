@@ -141,6 +141,7 @@
     Plugin 'vim-javacompleteex'
     Plugin 'wesleyche/SrcExpl'
     Plugin 'ZoomWin'
+    Plugin 'jeroenbourgois/vim-actionscript'
     " full screen the window
 "    Plugin 'derekmcloughlin/gvimfullscreen_win32'
     " Plugin 'jistr/vim-nerdtree-tabs'
@@ -523,6 +524,8 @@ imap <C-Tab> <Esc>gt
 imap <C-S-Tab> <Esc>gT
 nnoremap K i<CR><Esc>
 map  <leader>w <Esc><C-W><C-W>
+map <F9> <Esc>:w<CR>:!start cmd /c %<CR>
+map <leader>up <Esc>:PluginUpdate<CR>
 "nnoremap <leader>gq :%!pandoc -f html -t markdown <bar> pandoc -f markdown -t html<CR>
 "vnoremap <leader>gq :!pandoc -f html -t markdown <bar> pandoc -f markdown -t html<CR>
 
