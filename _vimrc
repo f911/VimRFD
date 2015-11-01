@@ -392,22 +392,21 @@ endif
 " }
 
 " plugins.mattn/vimtweak
-" {
+" -------------------------------------------------------------
     if g:isWindows && g:isGUI
         function! s:Transparency(v)
             call libcallnr('vimtweak.dll', 'SetAlpha', 255-a:v) 
         endfunction
         augroup transparency_windows
           autocmd!
-          autocmd FocusGained * call s:Transparency(12)
-          autocmd FocusLost * call s:Transparency(60)
+          autocmd FocusGained * call s:Transparency(4)
+          autocmd FocusLost * call s:Transparency(90)
         augroup END
     endif
     map <F10> <Esc>:call libcallnr('vimtweak.dll', 
                 \ 'SetAlpha', 232)<CR>
     map <S-F10> <Esc>:call libcallnr('vimtweak.dll',
                 \ 'SetAlpha', 255)<CR>
-" }
 
 
 " plugins.for.markdown
