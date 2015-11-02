@@ -195,6 +195,7 @@
         set guifont=Terminus\ 10
     endif
     
+    set lazyredraw       " Fix the problems for scrolling slowly
     " REF: http://vim.wikia.com/wiki/The_perfect_programming_font
     " set guifont=ProggyCleanTT\ 12
     " set guifont=ProggyClean
@@ -217,13 +218,13 @@
 
 
 " search options 
-" {
+" -----------------------------------------------------------------------------
     set showmatch
     set incsearch
     set ignorecase
     set smartcase
     set hlsearch
-" }
+" ----
 
 " file options 
 " {
@@ -236,7 +237,8 @@
     endif
     "set fileencoding=utf-8
     "set termencoding=utf-8
-    set fileencodings=ucs-bom,utf-8,cp936,default,latin-1,GB232,GBK,GB8030
+    let &termencoding=&encoding
+    set fileencodings=utf-8,cp936,default,latin-1,GB232,GBK,GB8030,ucs-bom
     "if g:isWindows
         set fileformat=dos
         set fileformats=dos
@@ -249,7 +251,7 @@
 " } 
 
 " code fold 
-" {
+" -----------------------------------------------------------------------------
     set foldenable
     set foldmethod=indent    "/marker/syntax"
     set foldcolumn=1
@@ -264,11 +266,11 @@
     let xml_syntax_folding=1              " XML
     " use SPACE to unfold code, zR: open all folds zM: close all folds
     nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
-" }
+" ----
 
 
-" set nowrap 
-" {
+" Set Nowrap 
+" -----------------------------------------------------------------------------
     set writebackup
     set nobackup
     set noswapfile          " use version control insead
@@ -279,7 +281,7 @@
     endif
     set autoread
     set autochdir
-" }
+" ----
 
 "au BufWinEnter * let w:m2=matchadd('Underlined', '\%>' . 80 . 'v.\+', -1)
 
