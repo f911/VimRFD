@@ -61,7 +61,8 @@
 
 
 " < 0x02 >. VUNDLE THE VIM PLUGIN SYSTEM. 
-" ==============================================================
+" =======================================
+" 
 " BRIEF:  see :h vundle for more details
 " :PluginList      - list configured plugins
 " :PluginInstall   - installs plugins; append '!' to update
@@ -71,7 +72,7 @@
 " Plugin 'XXXX' equals Plugin 'https://github.com/vim-scrips/XXXX.git'
 "
     filetype off
-    if g:isLinux
+    if g:isLinux    " The MSYS carry out from Git on Windows  
         set rtp+=~/.vim/bundle/Vundle.vim
         call vundle#begin()
     else
@@ -97,7 +98,7 @@
     Plugin 'mhinz/vim-signify'
 
     Plugin 'mattn/vimtweak'
-"    Plugin 'mattn/transparency-windows-vim'
+    Plugin 'mattn/transparency-windows-vim'
     Plugin 'mattn/emmet-vim'
     
     Plugin 'edkolev/tmuxline.vim'
@@ -155,7 +156,7 @@
 
 
 "  < 0x03 >. General settins for code writing and file editing. 
-" ==============================================================================
+" =============================================================
 " set nocompatible          showmode showcmd
 " set shortmess=atI
 
@@ -196,6 +197,8 @@
     endif
     
     set lazyredraw       " Fix the problems for scrolling slowly
+    set modifiable       " Fix E21: in NerdTree
+
     " REF: http://vim.wikia.com/wiki/The_perfect_programming_font
     " set guifont=ProggyCleanTT\ 12
     " set guifont=ProggyClean
@@ -204,7 +207,7 @@
 " }}
 
 " tabs and indent 
-" {
+" ---------------
     set shiftwidth=4
     set tabstop=4
     set expandtab
@@ -214,11 +217,10 @@
     " Except for Makefiles; hard tabs of width 2
     au FileType make set ts=2
     " And Markdown
-" }
 
 
 " search options 
-" -----------------------------------------------------------------------------
+" --------------
     set showmatch
     set incsearch
     set ignorecase
@@ -270,7 +272,7 @@
 
 
 " Set Nowrap 
-" -----------------------------------------------------------------------------
+" ----------
     set writebackup
     set nobackup
     set noswapfile          " use version control insead
@@ -388,13 +390,13 @@ endif
 
 
 " plugins.derekmcloughlin/gvimfullscreen_win32 
-" {
+" --------------------------------------------
     map <F11> <Esc>:call libcallnr('gvimfullscreen.dll',
                 \ 'ToggleFullScreen', 0)<CR><C-L>
-" }
+"
 
 " plugins.mattn/vimtweak
-" {
+" ----------------------
     if g:isWindows && g:isGUI
         function! s:Transparency(v)
             call libcallnr('vimtweak.dll', 'SetAlpha', 255-a:v) 
@@ -409,7 +411,7 @@ endif
                 \ 'SetAlpha', 232)<CR>
     map <S-F10> <Esc>:call libcallnr('vimtweak.dll',
                 \ 'SetAlpha', 255)<CR>
-" }
+"
 
 
 " plugins.for.markdown
