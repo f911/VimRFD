@@ -31,7 +31,7 @@
 
 " < 0x01 >. Set Global Variables.
 " ===============================
-
+"
 "   +-----------+-----------+---------+
 "   |           | isWindows | isLinux |
 "   +-----------+-----------+---------+
@@ -81,7 +81,8 @@
         call vundle#begin(path)
     endif
 
-    Plugin 'gmarik/Vundle.vim'
+"    Plugin 'gmarik/Vundle.vim'
+    Plugin 'VundleVim/Vundle.vim'
 
     " airline plugins and support plugins
     Plugin 'bling/vim-airline' " powerline is deprecated 
@@ -116,7 +117,7 @@
     Plugin 'xolox/vim-misc'
 
 "   markdown plugins
-"   Plugin 'godlygeek/tabular'
+   Plugin 'godlygeek/tabular'
 "   Plugin 'plasticboy/vim-markdown'
     Plugin 'vim-pandoc/vim-pandoc'
     Plugin 'vim-pandoc/vim-pandoc-syntax'
@@ -143,6 +144,15 @@
     Plugin 'wesleyche/SrcExpl'
     Plugin 'ZoomWin'
     Plugin 'jeroenbourgois/vim-actionscript'
+
+" {{{ Adding plugins for nodejs
+" -----------------------------
+"   Require npm install -g js-beautify
+    Plugin 'maksimr/vim-jsbeautify'
+    Plugin 'einars/js-beautify'
+    Plugin 'walm/jshint'
+" }}}
+
     " full screen the window
 "    Plugin 'derekmcloughlin/gvimfullscreen_win32'
     " Plugin 'jistr/vim-nerdtree-tabs'
@@ -206,8 +216,8 @@
     " set guifont=Source\ Code\ Pro\ 11:h11
 " }}
 
-" tabs and indent 
-" ---------------
+" {{{ tabs and indent 
+" -------------------
     set shiftwidth=4
     set tabstop=4
     set expandtab
@@ -217,19 +227,20 @@
     " Except for Makefiles; hard tabs of width 2
     au FileType make set ts=2
     " And Markdown
+" }}}
 
 
-" search options 
-" --------------
+" {{{ search options 
+" ------------------
     set showmatch
     set incsearch
     set ignorecase
     set smartcase
     set hlsearch
-" ----
+" }}}
 
-" file options 
-" {
+" {{{ file options 
+" ----------------
     syntax on
     filetype on
     filetype plugin on
@@ -250,10 +261,10 @@
     "endif
     set formatoptions=croql
     set backspace=indent,eol,start
-" } 
+" }}} 
 
-" code fold 
-" -----------------------------------------------------------------------------
+" {{{ code folding
+" ----------------
     set foldenable
     set foldmethod=indent    "/marker/syntax"
     set foldcolumn=1
@@ -268,11 +279,11 @@
     let xml_syntax_folding=1              " XML
     " use SPACE to unfold code, zR: open all folds zM: close all folds
     nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
-" ----
+" }}}
 
 
-" Set Nowrap 
-" ----------
+" {{{ text wrapping 
+" -----------------
     set writebackup
     set nobackup
     set noswapfile          " use version control insead
@@ -283,7 +294,7 @@
     endif
     set autoread
     set autochdir
-" ----
+" }}}
 
 "au BufWinEnter * let w:m2=matchadd('Underlined', '\%>' . 80 . 'v.\+', -1)
 
@@ -342,10 +353,10 @@ endif
 
 
 "  < 0x04 >. SETTINGS FOR PLUGINS.
-" =============================================================================
+" ================================
 
-" plugins.bling/vim-airline
-" {
+" {{{ plugins.bling/vim-airline
+" -----------------------------
     let g:Powerline_symbols = 'fancy'
     set t_Co=256
     set fillchars+=stl:\ ,stlnc:\
@@ -356,11 +367,10 @@ endif
     if !exists('g:airline_symbols')
         let g:airline_symbols = {}
     endif
-    
-" }
+" }}}
 
-" plugins.yggdroot/indentline 
-" {
+" {{{ plugins.yggdroot/indentline 
+" -------------------------------
     nmap <leader>il :IndentLinesToggle<CR>
     let g:indentLine_enabled=1
     "let g:indentLine_char = '┊'
@@ -372,10 +382,10 @@ endif
     else
         let g:indentLine_color_term =239
     endif
-" }
+" }}}
 
-" plugins.scrooloose/nerdtree 
-" {
+" {{{ plugins.scrooloose/nerdtree 
+" -------------------------------
     autocmd bufenter * if (winnr("$") == 1 && 
                 \ exists("b:NERDTreeType") && 
                 \ b:NERDTreeType == "primary") | q | 
@@ -386,17 +396,17 @@ endif
         let g:NERDTreeCopyCmd= 'cp -r'
     endif
     nmap <F2> :NERDTreeToggle ..<CR>
-" }
+" }}}
 
 
-" plugins.derekmcloughlin/gvimfullscreen_win32 
-" --------------------------------------------
+" {{{ plugins.derekmcloughlin/gvimfullscreen_win32 
+" ------------------------------------------------
     map <F11> <Esc>:call libcallnr('gvimfullscreen.dll',
                 \ 'ToggleFullScreen', 0)<CR><C-L>
-"
+" }}}
 
-" plugins.mattn/vimtweak
-" ----------------------
+" {{{ plugins.mattn/vimtweak
+" --------------------------
     if g:isWindows && g:isGUI
         function! s:Transparency(v)
             call libcallnr('vimtweak.dll', 'SetAlpha', 255-a:v) 
@@ -408,10 +418,24 @@ endif
         augroup END
     endif
     map <F10> <Esc>:call libcallnr('vimtweak.dll', 
-                \ 'SetAlpha', 232)<CR>
+                \ 'SetAlpha', 166)<CR>
     map <S-F10> <Esc>:call libcallnr('vimtweak.dll',
-                \ 'SetAlpha', 255)<CR>
-"
+                \ 'SetAlpha', 235)<CR>
+" }}}
+
+
+" {{{ Modify the window size
+" --------------------------
+    map <F12>   <Esc>:set columns=100<CR><Esc>:set lines=32<CR>
+    map <S-F12> <Esc>:set columns=200<CR><Esc>:set lines=60<CR>
+" }}}
+
+
+" {{{
+" --------
+    let g:editorconfig_Beautifier=expand('$HOME/vimfiles/.editorconfig')
+" }}}
+
 
 
 " plugins.for.markdown
@@ -433,8 +457,8 @@ endif
     let g:pandoc#after#modules#enabled = ["nrrwrgn", "ultisnips"]
 " }
 
-" Plugins.scrooloose/syntastic 
-" {
+" {{{ Plugins.scrooloose/syntastic 
+" --------------------------------
     set statusline+=%#warningmsg#
     set statusline+=%{SyntasticStatuslineFlag()}
     set statusline+=%*
@@ -445,10 +469,10 @@ endif
     let g:syntastic_check_on_wq = 0
 
     let g:syntastic_python_python_exec = 'C:/Python27/'
-" }
+" }}}
 
-" plugins.kien/ctrlp 
-" {
+" {{{ plugins.kien/ctrlp 
+" ----------------------
     let g:ctrlp_map = '<c-p>'
     let g:ctrlp_cmd = 'CtrlP'
     if exists("g:ctrl_user_command")
@@ -468,10 +492,10 @@ endif
 "       \ 'file': '\v\.(exe|so|dll)$', 'link': 'some_bad_symbolic_links'}
 "   let g:ctrlp_user_command = 'find %s -type f'        " MacOSX/Linux
 "   let g:ctrlp_user_command = 'dir %s /-n /b /s /a-d'  " Windows
-" }
+" }}}
 
-" plugins.mhinz/vim-startify
-" {
+" {{{ plugins.mhinz/vim-startify
+" ------------------------------
     let g:startify_custom_header = [
             \ '  +--------------------------------------------------------------------------+   ',
             \ ' /               --=  NICK''s PERSIONAL DEVELOPMENT STUDIO  =--                \  ',
@@ -495,7 +519,7 @@ endif
             \ '',
             \ ]
     map <leader>st <Esc>:Startify<CR>
-" }
+" }}}
 
 
 "  < 0x05 >. Map common keyboard shortcuts. 
@@ -530,6 +554,10 @@ nnoremap K i<CR><Esc>
 map  <leader>w <Esc><C-W><C-W>
 map <F9> <Esc>:w<CR>:!start cmd /c %<CR>
 map <leader>up <Esc>:PluginUpdate<CR>
+map <leader> <Esc>:w<CR><Esc>:so $HOME/_vimrc<CR><Esc>:PluginUpdate<CR>
 "nnoremap <leader>gq :%!pandoc -f html -t markdown <bar> pandoc -f markdown -t html<CR>
 "vnoremap <leader>gq :!pandoc -f html -t markdown <bar> pandoc -f markdown -t html<CR>
 
+
+
+" vim: se ai si et ts=4 sw=4:
