@@ -4,6 +4,3 @@ alias ll="ls -lh --color=auto"
 alias la="ls -alh --color=auto"
 alias dir="ls -alh --color=auto"
 alias gvimdiff="gvim -d"
-
-cd /c/workspace
-
