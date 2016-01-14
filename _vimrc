@@ -73,7 +73,9 @@
 "
     filetype off
     if g:isLinux    " The MSYS carry out from Git on Windows  
-        set rtp+=~/.vim/bundle/Vundle.vim
+        set rtp+=~/vimfiles/
+        set rtp+=~/vimfiles/bundle/Vundle.vim/
+
         call vundle#begin()
     else
         set rtp+=~/vimfiles/bundle/Vundle.vim/
@@ -560,4 +562,4 @@ map <leader> <Esc>:w<CR><Esc>:so $HOME/_vimrc<CR><Esc>:PluginUpdate<CR>
 
 
 
-" vim: se ai si et ts=4 sw=4:
+" vim: se ai si et ts=4 sw=4 ff=unix:
