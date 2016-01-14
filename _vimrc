@@ -73,10 +73,10 @@
 "
     filetype off
     if g:isLinux    " The MSYS carry out from Git on Windows  
-        set rtp+=~/vimfiles/
+        set rtp=~/vimfiles,~/vimfiles/bundle/Vundle.vim,$VIMRUNTIME
         set rtp+=~/vimfiles/bundle/Vundle.vim/
-
-        call vundle#begin()
+        let path='~/vimfiles/bundle'
+        call vundle#begin(path)
     else
         set rtp+=~/vimfiles/bundle/Vundle.vim/
         let path='~/vimfiles/bundle'
@@ -152,18 +152,15 @@
 "   Require npm install -g js-beautify
     Plugin 'maksimr/vim-jsbeautify'
     Plugin 'einars/js-beautify'
-    Plugin 'walm/jshint'
+   " Plugin 'walm/jshint'
 " }}}
 
     " full screen the window
 "    Plugin 'derekmcloughlin/gvimfullscreen_win32'
     " Plugin 'jistr/vim-nerdtree-tabs'
     " Plugin 'EditPlus.git'   " a color scheme
-    if g:isLinux
-        call vundle#end()
-    else
-        call vundle#end(path)
-    endif
+    call vundle#end()           " required
+    filetype plugin indent on   " required
 " }
 
 
@@ -254,13 +251,13 @@
     "set termencoding=utf-8
     let &termencoding=&encoding
     set fileencodings=utf-8,cp936,default,latin-1,GB232,GBK,GB8030,ucs-bom
-    "if g:isWindows
+    if g:isWindows
         set fileformat=dos
-        set fileformats=dos
-    "else
-    "    set fileformat=unix
-    "    set fileformats=unix,dos
-    "endif
+        set fileformats=dos,unix
+    else
+        set fileformat=unix
+        set fileformats=unix,dos
+    endif
     set formatoptions=croql
     set backspace=indent,eol,start
 " }}} 
@@ -462,15 +459,20 @@ endif
 " {{{ Plugins.scrooloose/syntastic 
 " --------------------------------
     set statusline+=%#warningmsg#
-    set statusline+=%{SyntasticStatuslineFlag()}
+    if g:isWindows
+        set statusline+=%{SyntasticStatuslineFlag()}
+    endif
     set statusline+=%*
 
     let g:syntastic_always_populate_loc_list = 1
     let g:syntastic_auto_loc_list = 1
     let g:syntastic_check_on_open = 1
     let g:syntastic_check_on_wq = 0
+    if g:isWindows
+        let g:syntastic_python_python_exec = 'C:/Python27/'
+    endif
 
-    let g:syntastic_python_python_exec = 'C:/Python27/'
+    let g:syntastic_javascript_checkers = ['jshint']
 " }}}
 
 " {{{ plugins.kien/ctrlp 
