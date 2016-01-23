@@ -1,4 +1,4 @@
-# Vim The Real Funny Game For Coder
+# Vim A Real Big Game For Coder
 
 It seems that the "vim" could turns out to be a big game with endless adventures and tasks 
 for us, rather than a simple text editor. But the "vim" is in essence a simple text editor.
@@ -11,4 +11,4 @@ servers for servering public, for the sake of contribution and aspiration. "vim"
 of editor, and the King Arthur in coder's Rounds.
  
 
-    --- a vim player      
+--- a vim player      
