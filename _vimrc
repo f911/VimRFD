@@ -1,13 +1,43 @@
 " ============================================================================
 " Copyright (C) 2014 nick All Rights Reserved
+<<<<<<< HEAD
 "
 " VIM RESOURCE FILE:  .vimrc / _vimrc
+=======
+" Maintainer:   nick
+" Created:      2014-10-04
+" LastModify:   2016-02-02
+" Version:      v1.2
+" 
+" Sections:
+"   - 0x01. Global Variable Definitions.
+"   - 0x02. General Display And Actions.
+"   - 0x03. Vundle Plugins' List.
+"   - 0x04. Vundle Plugins' Configuration. 
+"   - 0x05. Key Mappings.
+"
+" Features:
+"   - c/c++/bash
+"   - vbscript 
+"   - actionscript
+"   - markdown
+"   - nodejs
+"
+" Platforms:
+"   - Windows / MSYS
+"   - Linux : test on CentOS / Unbuntu
+"   - Mac OS X
+"
+" TODO_List:    
+"   - js's plugins configuration.
+>>>>>>> 629b1a07bf51cf5230243fff90cf7453f2fe3df8
 "
 "        Maintainer:  nick
 "           Created:  2014-10-04
 "        LastModify:  2016-02-03
 "           Version:  v1.2
 " =============================================================================
+<<<<<<< HEAD
 " 
 "          Sections:
 "
@@ -41,6 +71,12 @@
 " 0x01. Global Variable Definitions.
 " ==================================
 "
+=======
+
+" 0x01. Global Variable Definitions.
+" ==================================
+"
+>>>>>>> 629b1a07bf51cf5230243fff90cf7453f2fe3df8
 " +-----------+-----------+--------+-------+---------+
 " |           | isWindows | isMsys | isMac | isLinux |
 " +-----------+-----------+--------+-------+---------+
@@ -57,8 +93,12 @@
     let g:isGUI     = 0
     let g:isConsole = 0
     
+<<<<<<< HEAD
 "   use `:help feature-list` to see all feature list, and `:version` to show which has
 "   clear about `options` and `features` 
+=======
+"   use :help feature-list to see all feature list
+>>>>>>> 629b1a07bf51cf5230243fff90cf7453f2fe3df8
     if(has("win16") || has("win32") || has("win64") || has("win95"))
         let g:isWindows = 1
     elseif (has("win32unix") && $OS=="Windows_NT")
@@ -99,14 +139,22 @@
     endif
    
     set background=dark
+<<<<<<< HEAD
     
+=======
+>>>>>>> 629b1a07bf51cf5230243fff90cf7453f2fe3df8
     if g:isWindows
         if g:isGUI
+            set t_Co=256
             colorscheme rainbow_neon
             set guifont=Terminus:h12
             set guifontwide=Yahei\ Mono:h10.5
+<<<<<<< HEAD
         elseif g:isConsole
             set t_Co=256
+=======
+        else
+>>>>>>> 629b1a07bf51cf5230243fff90cf7453f2fe3df8
             colorscheme desert
         else
             set t_Co=256
@@ -119,6 +167,7 @@
         else
             colorscheme rainbow_neon
         endif
+<<<<<<< HEAD
     elseif g:isMac
         if g:isGUI
             colorscheme rainbow_neon
@@ -127,6 +176,8 @@
         endif
     elseif g:isLinux
     else
+=======
+>>>>>>> 629b1a07bf51cf5230243fff90cf7453f2fe3df8
     endif
     
     set lazyredraw       " Fix the problems for scrolling slowly
@@ -378,6 +429,10 @@ endif
     " full screen the window
 "    Plugin 'derekmcloughlin/gvimfullscreen_win32'
     " Plugin 'jistr/vim-nerdtree-tabs'
+<<<<<<< HEAD
+=======
+    " Plugin 'EditPlus.git'   " a color scheme
+>>>>>>> 629b1a07bf51cf5230243fff90cf7453f2fe3df8
     call vundle#end()           " required
     filetype plugin indent on   " required
 " }
@@ -607,5 +662,9 @@ map <leader> <Esc>:w<CR><Esc>:so $HOME/_vimrc<CR><Esc>:PluginUpdate<CR>
 
 
 
+<<<<<<< HEAD
 " vim: se ai si et ts=4 sw=4 ft=vim :
+=======
+" vim: se ai si et ts=4 sw=4 ff=unix:
+>>>>>>> 629b1a07bf51cf5230243fff90cf7453f2fe3df8
 " EOF
