@@ -1,54 +1,71 @@
-" ===========================================================================-
+" ============================================================================
 " Copyright (C) 2014 nick All Rights Reserved
-" Maintainer:   nick
-" Created:      2014-10-04
-" LastModify:   2016-01-19
-" Version:      v1.0
-" 
-" Sections:
-"   - Global Variables.
-"   - Vundle The Vim Plugin System.
-"   - User Interface.
-"       -- 
-"   - Text Editing And Display.
-"       -- Indent Related
-"       -- Search Related
-"       -- Fold Related
-"       -- File Type Specific
-"   - Plugin Settings.
-"       -- NERDTree
-"       -- Yggdroot/indentLine
-"   - Key Mapping
-"   - Local Settings.
 "
-" TODO_List:    
-"     - Windows CMD Supports
+" VIM RESOURCE FILE:  .vimrc / _vimrc
 "
-" Reference:
-"    - http://www.oschina.net/code/snippet_574132_13357
+"        Maintainer:  nick
+"           Created:  2014-10-04
+"        LastModify:  2016-02-03
+"           Version:  v1.2
 " =============================================================================
-
-
-" < 0x01 >. Set Global Variables.
-" ===============================
+" 
+"          Sections:
 "
-"   +-----------+-----------+---------+
-"   |           | isWindows | isLinux |
-"   +-----------+-----------+---------+
-"   | isGUI     |           |         |
-"   +-----------+-----------+---------+
-"   | isConsole |           |         |
-"   +-----------+-----------+---------+
+" - 0x01. Global Variable Definitions.
+" - 0x02. General Display And Actions.
+" - 0x03. Vundle Plugins' List.
+" - 0x04. Vundle Plugins' Configuration. 
+" - 0x05. Key Mappings.
+"
+"          Features:
+"
+" - c/c++/bash
+" - vbscript 
+" - actionscript
+" - markdown
+" - nodejs
+"
+"         Platforms:
+"
+" - Windows / MSYS
+" - Linux: test on CentOS / Unbuntu
+" - Mac OS X
+"
+"         TODO_List:
+"
+" - js's plugins configuration.
+"
+"         Reference:
+"
+" - http://www.oschina.net/code/snippet_574132_13357
+" 0x01. Global Variable Definitions.
+" ==================================
+"
+" +-----------+-----------+--------+-------+---------+
+" |           | isWindows | isMsys | isMac | isLinux |
+" +-----------+-----------+--------+-------+---------+
+" | isGUI     |           |        |       |         |
+" +-----------+-----------+--------+-------+---------+
+" | isConsole |           |        |       |         |
+" +-----------+-----------+--------+-------+---------+
 
     set nocompatible
     let g:isWindows = 0
+    let g:isMsys    = 0
+    let g:isMac     = 0
     let g:isLinux   = 0
     let g:isGUI     = 0
     let g:isConsole = 0
-
-    if(has("win32") || has("win64") || has("win95") || has("win16"))
+    
+"   use `:help feature-list` to see all feature list, and `:version` to show which has
+"   clear about `options` and `features` 
+    if(has("win16") || has("win32") || has("win64") || has("win95"))
         let g:isWindows = 1
-    else
+    elseif (has("win32unix") && $OS=="Windows_NT")
+        let g:isMsys    = 1
+    elseif (has("macunix"))
+        let g:isMac     = 1
+    elseif (has("unix"))
         let g:isLinux   = 1
     endif
     
@@ -59,121 +76,16 @@
     endif
 " }
 
-
-" < 0x02 >. VUNDLE THE VIM PLUGIN SYSTEM. 
-" =======================================
-" 
-" BRIEF:  see :h vundle for more details
-" :PluginList      - list configured plugins
-" :PluginInstall   - installs plugins; append '!' to update
-" :PluginUpdate    - equal :PluginInstall!
-" :PluginClean     - confirms removal of unused plugins; append '!' to 
-"                    auto-appove
-" Plugin 'XXXX' equals Plugin 'https://github.com/vim-scrips/XXXX.git'
-"
-    filetype off
-    if g:isLinux    " The MSYS carry out from Git on Windows  
-        set rtp=~/vimfiles,~/vimfiles/bundle/Vundle.vim,$VIMRUNTIME
-        set rtp+=~/vimfiles/bundle/Vundle.vim/
-        let path='~/vimfiles/bundle'
-        call vundle#begin(path)
-    else
-        set rtp+=~/vimfiles/bundle/Vundle.vim/
-        let path='~/vimfiles/bundle'
-        call vundle#begin(path)
-    endif
-
-"    Plugin 'gmarik/Vundle.vim'
-    Plugin 'VundleVim/Vundle.vim'
-
-    " airline plugins and support plugins
-    Plugin 'bling/vim-airline' " powerline is deprecated 
-    Plugin 'kien/ctrlp.vim'
-    Plugin 'Shougo/unite.vim'
-    Plugin 'majutsushi/tagbar'
-    Plugin 'chrisbra/csv.vim'
-    Plugin 'airblade/vim-gitgutter'
-    Plugin 'jmcantrell/vim-virtualenv'
-    Plugin 'mbbill/fencview'
-
-    Plugin 'mhinz/vim-startify'
-    Plugin 'mhinz/vim-tmuxify'
-    Plugin 'mhinz/vim-signify'
-
-    Plugin 'mattn/vimtweak'
-    Plugin 'mattn/transparency-windows-vim'
-    Plugin 'mattn/emmet-vim'
-    
-    Plugin 'edkolev/tmuxline.vim'
-    Plugin 'edkolev/promptline.vim'
-
-    Plugin 'scrooloose/nerdtree'
-    Plugin 'scrooloose/nerdcommenter'
-    Plugin 'scrooloose/syntastic'
-   
-    Plugin 'tpope/vim-fugitive'
-    Plugin 'tpope/vim-surround'
-    Plugin 'tpope/vim-commentary'
-
-    Plugin 'xolox/vim-shell'
-    Plugin 'xolox/vim-misc'
-
-"   markdown plugins
-   Plugin 'godlygeek/tabular'
-"   Plugin 'plasticboy/vim-markdown'
-    Plugin 'vim-pandoc/vim-pandoc'
-    Plugin 'vim-pandoc/vim-pandoc-syntax'
-    Plugin 'vim-pandoc/vim-pandoc-after'
-
-    Plugin 'Yggdroot/indentLine'
-    Plugin 'a.vim'
-    Plugin 'Align'
-    Plugin 'bufexplorer.zip'
-    Plugin 'ccvext.vim'
-    Plugin 'cSyntaxAfter'
-    Plugin 'chase/vim-ansible-yaml'
-    
-    Plugin 'jiangmiao/auto-pairs'
-    Plugin 'std_c.zip'
-    Plugin 'Shougo/neocomplcache.vim'
-    Plugin 'taglist.vim'
-    Plugin 'TxtBrowser'
-    Plugin 'Mark--Karkat'
-    Plugin 'msanders/snipmate.vim'
-    Plugin 'OmniCppComplete'
-    Plugin 'repeat.vim'
-    Plugin 'vim-javacompleteex'
-    Plugin 'wesleyche/SrcExpl'
-    Plugin 'ZoomWin'
-    Plugin 'jeroenbourgois/vim-actionscript'
-
-" {{{ Adding plugins for nodejs
-" -----------------------------
-"   Require npm install -g js-beautify
-    Plugin 'maksimr/vim-jsbeautify'
-    Plugin 'einars/js-beautify'
-   " Plugin 'walm/jshint'
-" }}}
-
-    " full screen the window
-"    Plugin 'derekmcloughlin/gvimfullscreen_win32'
-    " Plugin 'jistr/vim-nerdtree-tabs'
-    " Plugin 'EditPlus.git'   " a color scheme
-    call vundle#end()           " required
-    filetype plugin indent on   " required
-" }
-
-
-"  < 0x03 >. General settins for code writing and file editing. 
-" =============================================================
+"  0x02. General Display And Actions.
+" ===================================
 " set nocompatible          showmode showcmd
 " set shortmess=atI
 
-" Edit Interface {{
-" -----------------
+" {{{ Editing Interface 
+" --------------------
     set number
     set ruler
-    "set laststatus=2
+    set laststatus=2        " always display statusline like airline
     set cmdheight=1
     set cursorline
     hi CursorLine term=underline cterm=underline guibg=#3A3A3A
@@ -187,33 +99,39 @@
     endif
    
     set background=dark
-   
+    
     if g:isWindows
         if g:isGUI
             colorscheme rainbow_neon
-        else
+            set guifont=Terminus:h12
+            set guifontwide=Yahei\ Mono:h10.5
+        elseif g:isConsole
+            set t_Co=256
             colorscheme desert
-        endif
-        set guifont=Terminus:h12
-        "set guifont=gohufont-14:h12
-        set guifontwide=Yahei\ Mono:h10.5
-    else
-        if g:isGUI
+        else
             set t_Co=256
         endif
-        colorscheme rainbow_neon
-        set guifont=Terminus\ 10
+    elseif g:isMsys
+        if g:isGUI
+            set t_Co=256
+            set guifont=Terminus\ 12
+            colorscheme rainbow_neon
+        else
+            colorscheme rainbow_neon
+        endif
+    elseif g:isMac
+        if g:isGUI
+            colorscheme rainbow_neon
+            set guifont=Meslo\ LG\ S\ Regular\ for\ Powerline:h11
+        else
+        endif
+    elseif g:isLinux
+    else
     endif
     
     set lazyredraw       " Fix the problems for scrolling slowly
     set modifiable       " Fix E21: in NerdTree
-
-    " REF: http://vim.wikia.com/wiki/The_perfect_programming_font
-    " set guifont=ProggyCleanTT\ 12
-    " set guifont=ProggyClean
-    " set guifont=YaHei\ Consolas\ Hybrid, h12
-    " set guifont=Source\ Code\ Pro\ 11:h11
-" }}
+" }}}
 
 " {{{ tabs and indent 
 " -------------------
@@ -251,13 +169,22 @@
     "set termencoding=utf-8
     let &termencoding=&encoding
     set fileencodings=utf-8,cp936,default,latin-1,GB232,GBK,GB8030,ucs-bom
+
     if g:isWindows
         set fileformat=dos
-        set fileformats=dos,unix
-    else
+        set fileformats=dos,unix,mac
+    elseif g:isMsys
         set fileformat=unix
-        set fileformats=unix,dos
+        set fileformats=unix,dos,mac
+    elseif g:isMac
+        set fileformat=mac
+        set fileformats=mac,dos,unix
+    elseif g:isLinux
+        set fileformat=unix
+        set fileformats=unix,mac,dos
+    else
     endif
+
     set formatoptions=croql
     set backspace=indent,eol,start
 " }}} 
@@ -350,22 +277,134 @@ if has("autocmd")
 endif
 " refering from link http://vim.wikia.com/wiki/Improved_Hex_editing
 
+" < 0x02 >. VUNDLE THE VIM PLUGIN SYSTEM. 
+" =======================================
+" 
+" BRIEF:  see :h vundle for more details
+" :PluginList      - list configured plugins
+" :PluginInstall   - installs plugins; append '!' to update
+" :PluginUpdate    - equal :PluginInstall!
+" :PluginClean     - confirms removal of unused plugins; append '!' to 
+"                    auto-appove
+" Plugin 'XXXX' equals Plugin 'https://github.com/vim-scrips/XXXX.git'
+"
+    filetype off
+    if g:isWindows 
+        set rtp+=$HOME/vimfiles/bundle/Vundle.vim/
+        call vundle#begin('$USERPROFILE/vimfiles/bundle/')
+    elseif g:isMsys
+        set rtp+=~/vimfiles/bundle/Vundle.vim
+        call vundle#begin()
+    elseif g:isMac
+        set rtp+=~/.vim/bundle/Vundle.vim
+        call vundle#begin()
+    elseif g:isLinux
+        set rtp+=~/.vim/bundle/Vundle.vim
+        call vundle#begin()
+    else
+        set rtp+=~/.vim/bundle/Vundle.vim
+        call vundle#begin()
+    endif
+
+    Plugin 'VundleVim/Vundle.vim'
+    Plugin 'vim-airline/vim-airline'
+    Plugin 'ctrlpvim/ctrlp.vim'
+    Plugin 'Shougo/unite.vim'
+    Plugin 'majutsushi/tagbar'
+    Plugin 'chrisbra/csv.vim'
+    Plugin 'airblade/vim-gitgutter'
+    Plugin 'jmcantrell/vim-virtualenv'
+    Plugin 'mbbill/fencview'
+
+    Plugin 'mhinz/vim-startify'
+    Plugin 'mhinz/vim-tmuxify'
+    Plugin 'mhinz/vim-signify'
+
+    Plugin 'mattn/vimtweak'
+    Plugin 'mattn/transparency-windows-vim'
+    Plugin 'mattn/emmet-vim'
+    
+    Plugin 'edkolev/tmuxline.vim'
+    Plugin 'edkolev/promptline.vim'
+
+    Plugin 'scrooloose/nerdtree'
+    Plugin 'scrooloose/nerdcommenter'
+    Plugin 'scrooloose/syntastic'
+   
+    Plugin 'tpope/vim-fugitive'
+    Plugin 'tpope/vim-surround'
+    Plugin 'tpope/vim-commentary'
+
+    Plugin 'xolox/vim-shell'
+    Plugin 'xolox/vim-misc'
+
+"   markdown plugins
+   Plugin 'godlygeek/tabular'
+"   Plugin 'plasticboy/vim-markdown'
+    Plugin 'vim-pandoc/vim-pandoc'
+    Plugin 'vim-pandoc/vim-pandoc-syntax'
+    Plugin 'vim-pandoc/vim-pandoc-after'
+
+    Plugin 'Yggdroot/indentLine'
+    Plugin 'a.vim'
+    Plugin 'Align'
+    Plugin 'bufexplorer.zip'
+    Plugin 'ccvext.vim'
+    Plugin 'cSyntaxAfter'
+    Plugin 'chase/vim-ansible-yaml'
+    
+    Plugin 'jiangmiao/auto-pairs'
+    Plugin 'std_c.zip'
+    Plugin 'Shougo/neocomplcache.vim'
+    Plugin 'taglist.vim'
+    Plugin 'TxtBrowser'
+    Plugin 'Mark--Karkat'
+    Plugin 'msanders/snipmate.vim'
+    Plugin 'OmniCppComplete'
+    Plugin 'repeat.vim'
+    Plugin 'vim-javacompleteex'
+    Plugin 'wesleyche/SrcExpl'
+    Plugin 'ZoomWin'
+    Plugin 'jeroenbourgois/vim-actionscript'
+
+" {{{ Adding plugins for nodejs
+" -----------------------------
+"   Require npm install -g js-beautify
+    Plugin 'maksimr/vim-jsbeautify'
+    Plugin 'einars/js-beautify'
+   " Plugin 'walm/jshint'
+" }}}
+
+    " full screen the window
+"    Plugin 'derekmcloughlin/gvimfullscreen_win32'
+    " Plugin 'jistr/vim-nerdtree-tabs'
+    call vundle#end()           " required
+    filetype plugin indent on   " required
+" }
+
+
+
 
 "  < 0x04 >. SETTINGS FOR PLUGINS.
 " ================================
 
-" {{{ plugins.bling/vim-airline
+" {{{ plugins.vim-airline/vim-airline
 " -----------------------------
+    let g:airline_theme = 'powerlineish'
+    let g:airline#extensions#tabline#enabled = 1
+    let g:airline#extensions#tabline#buffer_nr_show = 1
     let g:Powerline_symbols = 'fancy'
     set t_Co=256
     set fillchars+=stl:\ ,stlnc:\
     set laststatus=2
-    let g:airline#extensions#tabline#enabled = 1
-    let g:airline_theme             = 'powerlineish'
 
+    let g:airline_powerline_fonts = 1
     if !exists('g:airline_symbols')
         let g:airline_symbols = {}
     endif
+
+    nnoremap <C-N> :bn<CR>
+    nnoremap <C-P> :bp<CR>
 " }}}
 
 " {{{ plugins.yggdroot/indentline 
@@ -432,7 +471,11 @@ endif
 
 " {{{
 " --------
-    let g:editorconfig_Beautifier=expand('$HOME/vimfiles/.editorconfig')
+    if g:isWindows
+        let g:editorconfig_Beautifier=expand('$HOME/vimfiles/.editorconfig')
+    else
+        let g:editorconfig_Beautifier=expand('$HOME/.vim/.editorconfig')
+    endif
 " }}}
 
 
@@ -564,4 +607,5 @@ map <leader> <Esc>:w<CR><Esc>:so $HOME/_vimrc<CR><Esc>:PluginUpdate<CR>
 
 
 
-" vim: se ai si et ts=4 sw=4 ff=unix:
+" vim: se ai si et ts=4 sw=4 ft=vim :
+" EOF

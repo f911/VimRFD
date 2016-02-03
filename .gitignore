@@ -1,8 +1,1 @@
-*
-!.gitignore
-!.gitconfig
-!.bashrc
-!.bash_alias
-!.dircolors
-!_vimrc
-
+.DS_Store.DS_Store?*.swp.Spotlight-V100.TrashesIcon?ehthumbs.dbThumbs.db*.7z*.dmg*.gz*.iso*.jar*.rar*.tar*.zip
