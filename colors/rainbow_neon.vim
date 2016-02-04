@@ -3,10 +3,6 @@
 " Last Change: 2002/10/25 Fri 16:23.
 "     version: 1.2
 " This color scheme uses a dark background.
-" ========================================
-"  Maintainer: nick
-"     Created:  2014-01-01
-"  LastModify:  2016-02-03
 
 set background=dark
 hi clear

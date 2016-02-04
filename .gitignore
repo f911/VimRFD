@@ -1,7 +1,4 @@
-*
-!.gitignore
-!.gitconfig
-!.bashrc
-!.bash_alias
-!.dircolors
-!_vimrc
+**/DS_Store*
+**/*.exe
+**/*.dll
+**/*.7z
