@@ -111,6 +111,7 @@
 
     Plugin 'VundleVim/Vundle.vim'
     Plugin 'vim-airline/vim-airline'
+    Plugin 'vim-airline/vim-airline-themes'
     Plugin 'ctrlpvim/ctrlp.vim'
     Plugin 'Shougo/unite.vim'
     Plugin 'majutsushi/tagbar'
@@ -390,7 +391,7 @@ endif
 
 " {{{ plugins.vim-airline/vim-airline
 " -----------------------------
-    let g:airline_theme = 'powerlineish'
+    let g:airline_theme ='cool'   " 'powerlineish'
     let g:airline#extensions#tabline#enabled = 1
     let g:airline#extensions#tabline#buffer_nr_show = 1
     let g:Powerline_symbols = 'fancy'
