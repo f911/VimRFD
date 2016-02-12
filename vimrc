@@ -143,7 +143,7 @@
     Plugin 'xolox/vim-misc'
 
 "   markdown plugins
-   Plugin 'godlygeek/tabular'
+    Plugin 'godlygeek/tabular'
 "   Plugin 'plasticboy/vim-markdown'
     Plugin 'vim-pandoc/vim-pandoc'
     Plugin 'vim-pandoc/vim-pandoc-syntax'
@@ -198,9 +198,14 @@
     set ruler
     set laststatus=2        " always display statusline like airline
     set cmdheight=1
+
     set cursorline
     hi CursorLine term=underline cterm=underline guibg=#3A3A3A
     hi CursorLine ctermbg=darkgrey guibg=gray13
+
+    "set colorcolumn=120
+    "hi 
+
     if g:isGUI
         " au GUIEnter * simalt ~x
         winpos 100 20
