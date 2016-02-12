@@ -1,4 +1,8 @@
+bundle/
+
 **/DS_Store*
 **/*.exe
 **/*.dll
 **/*.7z
+
+
