@@ -203,7 +203,7 @@
     hi CursorLine term=underline cterm=underline guibg=#3A3A3A
     hi CursorLine ctermbg=darkgrey guibg=gray13
 
-    "set colorcolumn=120
+    set colorcolumn=100
     "hi 
 
     if g:isGUI
@@ -600,15 +600,17 @@ else
 endif
 nmap <leader>t :tabnew<CR>
 nmap <leader>nl <ESC>:nohl<CR>
+map <leader>up <Esc>:PluginUpdate<CR>
+
 nmap <C-Tab> <Esc>gt
 nmap <C-S-Tab> <Esc>gT
 imap <C-Tab> <Esc>gt
 imap <C-S-Tab> <Esc>gT
 nnoremap K i<CR><Esc>
 map  <leader>w <Esc><C-W><C-W>
-map <F9> <Esc>:w<CR>:!start cmd /c %<CR>
-map <leader>up <Esc>:PluginUpdate<CR>
-map <leader> <Esc>:w<CR><Esc>:so $HOME/_vimrc<CR><Esc>:PluginUpdate<CR>
+map <F9> <Esc>:w<CR>:!node %<CR>
+
+"map <leader> <Esc>:w<CR><Esc>:so $HOME/_vimrc<CR><Esc>:PluginUpdate<CR>
 "nnoremap <leader>gq :%!pandoc -f html -t markdown <bar> pandoc -f markdown -t html<CR>
 "vnoremap <leader>gq :!pandoc -f html -t markdown <bar> pandoc -f markdown -t html<CR>
 
