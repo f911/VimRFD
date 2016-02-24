@@ -179,6 +179,7 @@
    " Plugin 'walm/jshint'
 " }}}
 
+    Plugin 'Valloric/YouCompleteMe'
     " full screen the window
 "    Plugin 'derekmcloughlin/gvimfullscreen_win32'
     " Plugin 'jistr/vim-nerdtree-tabs'
