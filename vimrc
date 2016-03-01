@@ -5,7 +5,7 @@
 "
 "        Maintainer:  nick
 "           Created:  2014-10-04
-"        LastModify:  2016-02-03
+"        LastModify:  2016-03-01
 "           Version:  v1.2
 " =============================================================================
 " 
@@ -240,6 +240,13 @@
         else
         endif
     elseif g:isLinux
+        set t_Co=256
+        if g:isGUI
+            colorscheme rainbow_neon
+            set guifont=Terminus\ 12
+        else
+            colorscheme rainbow_neon
+        endif
     else
     endif
     
