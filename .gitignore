@@ -1,5 +1,7 @@
 bundle/
-
+ftplugin/
+indent/
+syntax/
 **/DS_Store*
 **/*.exe
 **/*.dll

@@ -45,8 +45,8 @@
 " - http://www.oschina.net/code/snippet_574132_13357
 
 
-" 0x01. Global Variable Definitions.
-" ==================================
+" {{{ 0x01. Global Variable Definitions.
+" ======================================
 "
 " +-----------+-----------+--------+-------+---------+
 " |           | isWindows | isMsys | isMac | isLinux |
@@ -80,7 +80,7 @@
     else
         let g:isConsole = 1
     endif
-" }
+" }}}
 
 
 " < 0x02 >. VUNDLE THE VIM PLUGIN SYSTEM. 
@@ -248,6 +248,13 @@
         else
         endif
     elseif g:isLinux
+        set t_Co=256
+        if g:isGUI
+            colorscheme rainbow_neon
+            set guifont=Terminus\ 12
+        else
+            colorscheme rainbow_neon
+        endif
     else
     endif
     
@@ -612,7 +619,7 @@ let g:ycm_confirm_extra_conf = 0
     let g:startify_custom_header = [
             \ '  +--------------------------------------------------------------------------+   ',
             \ ' /               --=  NICK''s PERSIONAL DEVELOPMENT STUDIO  =--                \  ',
-            \ ' |                          fatework@arch.team                                | ',
+            \ ' |                          fatework@f911.rock                                | ',
             \ ' |                                         ________  __ __                    | ',
             \ ' |                   __                   /\_____  \/\ \\ \                   |',
             \ ' |           __  __ /\_\    ___ ___       \/___//''/''\ \ \\ \                  | ',
@@ -626,7 +633,7 @@ let g:ycm_confirm_extra_conf = 0
             \ ]
     let g:startify_custom_footer = [
             \ ' |                                                                            | ',
-            \ ' |                          fatework@arch.team                                | ',
+            \ ' |                          fatework@f911.rock                                | ',
             \ ' \               --=  NICK''s PERSIONAL DEVELOPMENT STUDIO  =--                / ',
             \ '  +--------------------------------------------------------------------------+ ',
             \ '',
