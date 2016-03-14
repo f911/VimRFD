@@ -5,45 +5,48 @@
 "
 "        Maintainer:  nick
 "           Created:  2014-10-04
-"        LastModify:  2016-03-01
-"           Version:  v1.2
+"        LastModify:  2016-03-10
+"           Version:  v1.3
 " =============================================================================
-" 
-"          Sections:
+
+"           Platforms:
+"
+" - Windows / MSYS
+" - Linux: test on CentOS / Unbuntu
+" - Mac OS X
+
+"           Sections:
 "
 " - 0x01. Global Variable Definitions.
 " - 0x02. Vundle Plugins' List.
 " - 0x03. General Display And Actions.
 " - 0x04. Vundle Plugins' Configuration. 
 " - 0x05. Key Mappings.
-"
-"          Features:
+
+"           Features:
 "
 " - c/c++/bash
 " - vbscript 
 " - actionscript
 " - markdown
 " - nodejs
+" - YouCompleteMe 
+
+"           Changes:
 "
-"         Platforms:
-"
-" - Windows / MSYS
-" - Linux: test on CentOS / Unbuntu
-" - Mac OS X
-"
-"         TODO_List:
+"   Adding YouCompleteMe Supports on Mac
+
+"           TODO_List:
 "
 " - js's plugins configuration.
-"
-"         Reference:
+
+"           Reference:
 "
 " - http://www.oschina.net/code/snippet_574132_13357
-" 0x01. Global Variable Definitions.
-" ==================================
-"
 
-" 0x01. Global Variable Definitions.
-" ==================================
+
+" {{{ 0x01. Global Variable Definitions.
+" ======================================
 "
 " +-----------+-----------+--------+-------+---------+
 " |           | isWindows | isMsys | isMac | isLinux |
@@ -77,7 +80,7 @@
     else
         let g:isConsole = 1
     endif
-" }
+" }}}
 
 
 " < 0x02 >. VUNDLE THE VIM PLUGIN SYSTEM. 
@@ -163,7 +166,7 @@
     Plugin 'taglist.vim'
     Plugin 'TxtBrowser'
     Plugin 'Mark--Karkat'
-    Plugin 'msanders/snipmate.vim'
+"    Plugin 'msanders/snipmate.vim' deprecated for compatible reasons with YCM
     Plugin 'OmniCppComplete'
     Plugin 'repeat.vim'
     Plugin 'vim-javacompleteex'
@@ -184,7 +187,12 @@
    " Plugin 'walm/jshint'
 " }}}
 
+" {{{ auto code complete 
+"    Plugin 'ervandew/supertab'
     Plugin 'Valloric/YouCompleteMe'
+"    Plugin 'SirVer/ultisnips'
+"    Plugin 'honza/vim-snippets'
+" }}}
     " full screen the window
 "    Plugin 'derekmcloughlin/gvimfullscreen_win32'
     " Plugin 'jistr/vim-nerdtree-tabs'
@@ -488,8 +496,8 @@ endif
 " }}}
 
 
-" {{{
-" --------
+" {{{ plugins.maksimr/vim-jsbeautify
+" ----------------------------------
     if (g:isWindows || g:isMsys)
         let g:editorconfig_Beautifier=expand('$HOME/vimfiles/.editorconfig')
 	elseif (g:isMac || g:isLinux)
@@ -500,10 +508,10 @@ endif
 
 
 
-" plugins.for.markdown
-"    - plasticboy/vim-markdown 
-"    - 
-" {
+" {{{ plugins.for.markdown
+" - plasticboy/vim-markdown 
+" - 
+" -------------------------
   "  au BufNewFile,BufFilePre,BufRead *.md setf markdown
     au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown.pandoc
     let g:vim_markdown_folding_disabled=1 " Markdown
@@ -561,12 +569,62 @@ endif
 "   let g:ctrlp_user_command = 'dir %s /-n /b /s /a-d'  " Windows
 " }}}
 
+" {{{ plugins.Valloric/YouCompleteMe
+" ----------------------------------
+
+let g:ycm_complete_in_comments = 1
+let g:ycm_complete_in_strings = 1
+let g:ycm_seed_identifiers_with_syntax = 1
+let g:ycm_autoclose_preview_window_after_completion=1
+let g:ycm_key_list_select_completion = ['<tab>', '<c-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
+let g:ycm_confirm_extra_conf = 0
+
+
+
+" make YCM compatible with UltiSnips (using supertab)
+"let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+"let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+"let g:SuperTabDefaultCompletionType = '<C-n>'
+"
+"" better key bindings for UltiSnipsExpandTrigger
+"let g:UltiSnipsExpandTrigger = "<tab>"
+"let g:UltiSnipsJumpForwardTrigger = "<tab>"
+"let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+
+"    set completeopt=longest,menu
+"    autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+"    inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
+"    inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
+"    inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
+"    inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<PageDown>"
+"    inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
+"
+"    "youcompleteme  default tab  s-tab is comfict with vim autocomplete
+"    "let g:ycm_key_list_select_completion=['<c-n>']
+"    let g:ycm_key_list_select_completion = ['<Tab>']
+"    "let g:ycm_key_list_previous_completion=['<c-p>']
+"    let g:ycm_key_list_previous_completion = ['<Up>']
+"    let g:ycm_confirm_extra_conf=0   " close load .ycm_extra_conf.py notice
+"
+"    let g:ycm_collect_identifiers_from_tags_files=1 
+"    let g:ycm_min_num_of_chars_for_completion=2 
+"    let g:ycm_cache_omnifunc=0  
+"    let g:ycm_seed_identifiers_with_syntax=1    
+"     nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>    "force recomile with syntastic
+"    nnoremap <leader>lo :lopen<CR> "open locationlist
+" }}}
+
+
+
+
+
 " {{{ plugins.mhinz/vim-startify
 " ------------------------------
     let g:startify_custom_header = [
             \ '  +--------------------------------------------------------------------------+   ',
             \ ' /               --=  NICK''s PERSIONAL DEVELOPMENT STUDIO  =--                \  ',
-            \ ' |                          fatework@arch.team                                | ',
+            \ ' |                          fatework@f911.rock                                | ',
             \ ' |                                         ________  __ __                    | ',
             \ ' |                   __                   /\_____  \/\ \\ \                   |',
             \ ' |           __  __ /\_\    ___ ___       \/___//''/''\ \ \\ \                  | ',
@@ -580,7 +638,7 @@ endif
             \ ]
     let g:startify_custom_footer = [
             \ ' |                                                                            | ',
-            \ ' |                          fatework@arch.team                                | ',
+            \ ' |                          fatework@f911.rock                                | ',
             \ ' \               --=  NICK''s PERSIONAL DEVELOPMENT STUDIO  =--                / ',
             \ '  +--------------------------------------------------------------------------+ ',
             \ '',
@@ -631,3 +689,4 @@ map <F9> <Esc>:w<CR>:!node %<CR>
 
 " vim: se ai si et ts=4 sw=4 ft=vim :
 " EOF
+
