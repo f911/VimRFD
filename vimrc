@@ -170,6 +170,11 @@
     Plugin 'wesleyche/SrcExpl'
     Plugin 'ZoomWin'
     Plugin 'jeroenbourgois/vim-actionscript'
+" {{{ color themes
+" ----------------
+    Plugin 'jonathanfilip/lucius'
+    Plugin 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
+" }}}
 
 " {{{ Adding plugins for nodejs
 " -----------------------------
