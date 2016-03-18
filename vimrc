@@ -5,7 +5,7 @@
 "
 "        Maintainer:  nick
 "           Created:  2014-10-04
-"        LastModify:  2016-03-10
+"        LastModify:  2016-03-18
 "           Version:  v1.3
 " =============================================================================
 
@@ -686,6 +686,10 @@ map <F9> <Esc>:w<CR>:!node %<CR>
 "nnoremap <leader>gq :%!pandoc -f html -t markdown <bar> pandoc -f markdown -t html<CR>
 "vnoremap <leader>gq :!pandoc -f html -t markdown <bar> pandoc -f markdown -t html<CR>
 
+set langmenu=en_US.UTF-8
+let $LANG='en_US.utf-8'
+source $VIMRUNTIME/delmenu.vim
+source $VIMRUNTIME/menu.vim
 
 
 " vim: se ai si et ts=4 sw=4 ft=vim :
