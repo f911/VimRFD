@@ -244,13 +244,14 @@
             set t_Co=256
             set guifont=Terminus\ 12
         else
-            colorscheme rainbow_neon
+            colorscheme Tomorrow-Night
         endif
     elseif g:isMac
         if g:isGUI
             colorscheme rainbow_neon
             set guifont=Meslo\ LG\ S\ Regular\ for\ Powerline:h11
         else
+            colorscheme Tomorrow-Night
         endif
     elseif g:isLinux
         set t_Co=256
@@ -258,7 +259,7 @@
             colorscheme rainbow_neon
             set guifont=Terminus\ 12
         else
-            colorscheme rainbow_neon
+            colorscheme Tomorrow-Night
         endif
     else
     endif
