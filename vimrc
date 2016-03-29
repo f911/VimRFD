@@ -120,7 +120,7 @@
     Plugin 'majutsushi/tagbar'
     Plugin 'chrisbra/csv.vim'
     Plugin 'airblade/vim-gitgutter'
-    Plugin 'jmcantrell/vim-virtualenv'
+"    Plugin 'jmcantrell/vim-virtualenv'
     Plugin 'mbbill/fencview'
 
     Plugin 'mhinz/vim-startify'
@@ -128,7 +128,7 @@
     Plugin 'mhinz/vim-signify'
 
     Plugin 'mattn/vimtweak'
-    Plugin 'mattn/transparency-windows-vim'
+"    Plugin 'mattn/transparency-windows-vim'
     Plugin 'mattn/emmet-vim'
     
     Plugin 'edkolev/tmuxline.vim'
@@ -474,14 +474,19 @@ endif
 " {{{ plugins.mattn/vimtweak
 " --------------------------
     if g:isWindows && g:isGUI
-        function! s:Transparency(v)
-            call libcallnr('vimtweak.dll', 'SetAlpha', 255-a:v) 
-        endfunction
-        augroup transparency_windows
-          autocmd!
-          autocmd FocusGained * call s:Transparency(12)
-          autocmd FocusLost * call s:Transparency(60)
-        augroup END
+    "    call libcallnr("vimtweak.dll", "SetAlpha", 235)
+    "    call libcallnr("vimtweak.dll", "EnableMaximize", 0)
+    "    call libcallnr("vimtweak.dll", "EnableCaption", 1)
+    "    call libcallnr("vimtweak.dll", "EnableTopMost", 0)
+
+        autocmd FocusGained * call libcallnr("vimtweak.dll", "SetAlpha", 235)
+        autocmd FocusLost * call libcallnr("vimtweak.dll", "SetAlpha", 166)
+    "    function! s:Transparency(v)
+    "        call libcallnr('vimtweak.dll', 'SetAlpha', 235) 
+    "    endfunction
+    "    augroup transparency_windows
+    "      autocmd!
+    "    augroup END
     endif
     map <F10> <Esc>:call libcallnr('vimtweak.dll', 
                 \ 'SetAlpha', 166)<CR>
