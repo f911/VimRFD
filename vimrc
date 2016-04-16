@@ -1,22 +1,19 @@
 " ============================================================================
 " Copyright (C) 2014 nick All Rights Reserved
 "
-" VIM RESOURCE FILE:  .vimrc / _vimrc
-"
-"        Maintainer:  nick
-"           Created:  2014-10-04
-"        LastModify:  2016-03-18
-"           Version:  v1.3
+" VIM RESOURCE FILE :  .vim/vimrc or vimfiles/vimrc
+" Creator           :  nick
+" Created           :  2014-10-04
+" LastModify        :  2016-04-16
+" Version           :  v1.3
 " =============================================================================
 
 "           Platforms:
-"
 " - Windows / MSYS
 " - Linux: test on CentOS / Unbuntu
 " - Mac OS X
 
 "           Sections:
-"
 " - 0x01. Global Variable Definitions.
 " - 0x02. Vundle Plugins' List.
 " - 0x03. General Display And Actions.
@@ -24,24 +21,21 @@
 " - 0x05. Key Mappings.
 
 "           Features:
-"
 " - c/c++/bash
 " - vbscript 
 " - actionscript
 " - markdown
 " - nodejs
-" - YouCompleteMe 
+" - YouCompleteMe
+" - NerdFonts
 
 "           Changes:
-"
 "   Adding YouCompleteMe Supports on Mac
 
 "           TODO_List:
-"
 " - js's plugins configuration.
 
 "           Reference:
-"
 " - http://www.oschina.net/code/snippet_574132_13357
 
 
@@ -187,15 +181,17 @@
    " Plugin 'walm/jshint'
 " }}}
 
-" {{{ auto code complete 
-"    Plugin 'ervandew/supertab'
+" {{{ auto code completion 
+" ------------------------
     Plugin 'Valloric/YouCompleteMe'
-"    Plugin 'SirVer/ultisnips'
-"    Plugin 'honza/vim-snippets'
+    Plugin 'SirVer/ultisnips'
+    Plugin 'honza/vim-snippets'
 " }}}
+
     " full screen the window
 "    Plugin 'derekmcloughlin/gvimfullscreen_win32'
     " Plugin 'jistr/vim-nerdtree-tabs'
+    Plugin 'ryanoasis/vim-devicons'
     call vundle#end()           " required
     filetype plugin indent on   " required
 " }
@@ -232,11 +228,14 @@
     if g:isWindows
         if g:isGUI
             colorscheme rainbow_neon
-            set guifont=Terminus:h12
-            set guifontwide=Yahei\ Mono:h10.5
+            set guifont=Bitstream_Vera_Sans_Mono:h10.5
+        "    set guifont=Terminus:h12
+        "    set guifontwide=PowerlineSymbols:h10
+            set guifontwide=Meslo\ LG\ S\ for\ Powerline:h12
         else
             set t_Co=256
-            colorscheme desert
+            colorscheme industry
+            set guifont=Bitstream_Vera_Sans_Mono:h10.5
         endif
     elseif g:isMsys
         if g:isGUI
@@ -578,13 +577,13 @@ endif
 " {{{ plugins.Valloric/YouCompleteMe
 " ----------------------------------
 
-let g:ycm_complete_in_comments = 1
-let g:ycm_complete_in_strings = 1
-let g:ycm_seed_identifiers_with_syntax = 1
-let g:ycm_autoclose_preview_window_after_completion=1
-let g:ycm_key_list_select_completion = ['<tab>', '<c-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
-let g:ycm_confirm_extra_conf = 0
+    let g:ycm_complete_in_comments = 1
+    let g:ycm_complete_in_strings = 1
+    let g:ycm_seed_identifiers_with_syntax = 1
+    let g:ycm_autoclose_preview_window_after_completion=1
+    let g:ycm_key_list_select_completion = ['<tab>', '<c-n>', '<Down>']
+    let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
+    let g:ycm_confirm_extra_conf = 0
 
 
 
@@ -593,10 +592,11 @@ let g:ycm_confirm_extra_conf = 0
 "let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 "let g:SuperTabDefaultCompletionType = '<C-n>'
 "
-"" better key bindings for UltiSnipsExpandTrigger
-"let g:UltiSnipsExpandTrigger = "<tab>"
-"let g:UltiSnipsJumpForwardTrigger = "<tab>"
-"let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+" better key bindings for UltiSnipsExpandTrigger
+    let g:UltiSnipsExpandTrigger = "<tab>"
+    let g:UltiSnipsJumpForwardTrigger = "<c-b>"
+    let g:UltiSnipsJumpBackwardTrigger = "<c-z>"
+    let g:UltiSnipsEditSplit="vertical"
 
 "    set completeopt=longest,menu
 "    autocmd InsertLeave * if pumvisible() == 0|pclose|endif
