@@ -228,7 +228,7 @@
     if g:isWindows
         if g:isGUI
             colorscheme rainbow_neon
-            set guifont=Bitstream_Vera_Sans_Mono:h10.5
+            set guifont=Bitstream_Vera_Sans_Mono:h9.5
         "    set guifont=Terminus:h12
         "    set guifontwide=PowerlineSymbols:h10
             set guifontwide=Meslo\ LG\ S\ for\ Powerline:h12
