@@ -1,7 +1,7 @@
-# .gitignore git ignore file for .vim folder
+# .gitignore git ignore file for .vim / vimfiles folder
 # 
 
-
+.netrwhist
 bundle/
 ftplugin/
 indent/
@@ -13,3 +13,4 @@ syntax/
 
 # vim: se ai si et ts=4 sw=4 ft=conf
 # EOF
+
