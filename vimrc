@@ -4,7 +4,7 @@
 " VIM RESOURCE FILE :  .vim/vimrc or vimfiles/vimrc
 " Creator           :  nick
 " Created           :  2014-10-04
-" LastModify        :  2016-04-16
+" LastModify        :  2016-04-19
 " Version           :  v1.3
 " =============================================================================
 
@@ -670,11 +670,15 @@ vmap <S-Insert> "+gP
 nmap <C-c> "+yy
 vmap <C-x> "+d
 map <C-s> :w
+
 if g:isWindows
     nmap <leader>e :tabnew $HOME/vimfiles/vimrc<CR>
+elseif g:isMsys
+    nmap <leader>e :tabnew ~/vimfiles/vimrc<CR>
 else
-    nmap <leader>e :tabnew $HOME/.vim/vimrc<CR>
+    nmap <leader>e :tabnew ~/.vim/vimrc<CR>
 endif
+
 nmap <leader>t :tabnew<CR>
 nmap <leader>nl <ESC>:nohl<CR>
 map <leader>up <Esc>:PluginUpdate<CR>
