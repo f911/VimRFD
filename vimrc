@@ -4,7 +4,7 @@
 " VIM RESOURCE FILE :  .vim/vimrc or vimfiles/vimrc
 " Creator           :  nick
 " Created           :  2014-10-04
-" LastModify        :  2016-04-19
+" LastModify        :  2016-05-16
 " Version           :  v1.3
 " =============================================================================
 
@@ -181,16 +181,16 @@
    " Plugin 'walm/jshint'
 " }}}
 
-" {{{ auto code completion 
-" ------------------------
+"" {{{ auto code completion 
+"" ------------------------
     Plugin 'Valloric/YouCompleteMe'
     Plugin 'SirVer/ultisnips'
     Plugin 'honza/vim-snippets'
-" }}}
+"" }}}
 
     " full screen the window
-"    Plugin 'derekmcloughlin/gvimfullscreen_win32'
-    " Plugin 'jistr/vim-nerdtree-tabs'
+    Plugin 'derekmcloughlin/gvimfullscreen_win32'
+    Plugin 'jistr/vim-nerdtree-tabs'
     Plugin 'ryanoasis/vim-devicons'
     call vundle#end()           " required
     filetype plugin indent on   " required
@@ -228,10 +228,11 @@
     if g:isWindows
         if g:isGUI
             colorscheme rainbow_neon
-            set guifont=Bitstream_Vera_Sans_Mono:h9.5
+            set guifont=Meslo\ LG\ S\ for\ Powerline:h9
+        "    set guifont=Bitstream_Vera_Sans_Mono:h9.5
         "    set guifont=Terminus:h12
         "    set guifontwide=PowerlineSymbols:h10
-            set guifontwide=Meslo\ LG\ S\ for\ Powerline:h12
+            set guifontwide=Meslo\ LG\ S\ for\ Powerline:h9
         else
             set t_Co=256
             colorscheme industry
