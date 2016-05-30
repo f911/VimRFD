@@ -4,7 +4,7 @@
 " VIM RESOURCE FILE :  .vim/vimrc or vimfiles/vimrc
 " Creator           :  nick
 " Created           :  2014-10-04
-" LastModify        :  2016-05-16
+" LastModify        :  2016-05-31
 " Version           :  v1.3
 " =============================================================================
 
@@ -30,7 +30,10 @@
 " - NerdFonts
 
 "           Changes:
-"   Adding YouCompleteMe Supports on Mac
+" - Adding YouCompleteMe Supports on Windows
+" - Can self compile the gvim-x64 using vs2015
+" - Add $HOME=GitRepos\f911\vim_home to user environment variable
+" - Accordingly change the user $PATH to right vimfiles\bin
 
 "           TODO_List:
 " - js's plugins configuration.
@@ -75,7 +78,6 @@
         let g:isConsole = 1
     endif
 " }}}
-
 
 " < 0x02 >. VUNDLE THE VIM PLUGIN SYSTEM. 
 " =======================================
@@ -498,7 +500,7 @@ endif
 " {{{ Modify the window size
 " --------------------------
     map <F12>   <Esc>:set columns=100<CR><Esc>:set lines=32<CR>
-    map <S-F12> <Esc>:set columns=200<CR><Esc>:set lines=60<CR>
+    map <S-F12> <Esc>:set columns=160<CR><Esc>:set lines=48<CR>
 " }}}
 
 
