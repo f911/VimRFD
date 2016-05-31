@@ -95,7 +95,7 @@
         set rtp+=$HOME/vimfiles/bundle/Vundle.vim/
         call vundle#begin('$HOME/vimfiles/bundle/')
     elseif g:isMsys
-        set rtp+=~/vimfiles/bundle/Vundle.vim
+        set rtp+=$HOME/vimfiles/bundle/Vundle.vim
         call vundle#begin('~/vimfiles/bundle/')
     elseif g:isMac
         set rtp+=~/.vim/bundle/Vundle.vim
@@ -170,13 +170,11 @@
     Plugin 'ZoomWin'
     Plugin 'jeroenbourgois/vim-actionscript'
 " {{{ color themes
-" ----------------
     Plugin 'jonathanfilip/lucius'
     Plugin 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
 " }}}
 
 " {{{ Adding plugins for nodejs
-" -----------------------------
 "   Require npm install -g js-beautify
     Plugin 'maksimr/vim-jsbeautify'
     Plugin 'einars/js-beautify'
@@ -184,7 +182,6 @@
 " }}}
 
 "" {{{ auto code completion 
-"" ------------------------
     Plugin 'Valloric/YouCompleteMe'
     Plugin 'SirVer/ultisnips'
     Plugin 'honza/vim-snippets'
@@ -201,7 +198,6 @@
 
 "  0x02. General Display And Actions.
 " ===================================
-" set nocompatible          showmode showcmd
 " set shortmess=atI
 
 " {{{ Editing Interface 
@@ -221,8 +217,8 @@
     if g:isGUI
         " au GUIEnter * simalt ~x
         winpos 100 20
-        set columns=200
-        set lines=60
+        set columns=160
+        set lines=48
         " set guioptions-=T
     endif
    
