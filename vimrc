@@ -96,7 +96,7 @@
         call vundle#begin('$HOME/vimfiles/bundle/')
     elseif g:isMsys
         set rtp+=$HOME/vimfiles/bundle/Vundle.vim
-        call vundle#begin('~/vimfiles/bundle/')
+        call vundle#begin('$HOME/vimfiles/bundle/')
     elseif g:isMac
         set rtp+=~/.vim/bundle/Vundle.vim
         call vundle#begin()
@@ -472,13 +472,32 @@ endif
 " {{{ plugins.mattn/vimtweak
 " --------------------------
     if g:isWindows && g:isGUI
-    "    call libcallnr("vimtweak.dll", "SetAlpha", 235)
-    "    call libcallnr("vimtweak.dll", "EnableMaximize", 0)
-    "    call libcallnr("vimtweak.dll", "EnableCaption", 1)
-    "    call libcallnr("vimtweak.dll", "EnableTopMost", 0)
+        "let g:alpha_value=242
+        "call libcallnr("vimtweak.dll", "SetAlpha", 235)
+        "call libcallnr("vimtweak.dll", "EnableMaximize", 1)
+        "call libcallnr("vimtweak.dll", "EnableCaption", 1)
+        "call libcallnr("vimtweak.dll", "EnableTopMost", 0)
 
-        autocmd FocusGained * call libcallnr("vimtweak.dll", "SetAlpha", 235)
+        "autocmd FocusGained * call libcallnr("vimtweak.dll", "SetAlpha", 235)
+        autocmd FocusGained * call libcallnr("vimtweak.dll", "SetAlpha", 242)
         autocmd FocusLost * call libcallnr("vimtweak.dll", "SetAlpha", 166)
+        
+        "function TweakWindowAlphaM(alpha_mod, sign)
+        "    if sign == 1
+        "        let g:alpha_value=g:alpha_value + alpha_mod
+        "    elseif sign == 0
+        "        let g:alpha_value=g:alpha_value - alpha_mod
+        "    else
+        "    endif
+        "    if g:alpha_value<200
+        "        let g:alpha_value=200
+        "    endif
+        "    if g:alpha_value>255
+        "        let g:alpah_value=255
+        "    endif
+        "    call libcallnr('vimtweak.dll', 'SetAlpha', g:alpha_value)
+        "endfunction
+
     "    function! s:Transparency(v)
     "        call libcallnr('vimtweak.dll', 'SetAlpha', 235) 
     "    endfunction
@@ -486,10 +505,11 @@ endif
     "      autocmd!
     "    augroup END
     endif
-    map <F10> <Esc>:call libcallnr('vimtweak.dll', 
-                \ 'SetAlpha', 166)<CR>
-    map <S-F10> <Esc>:call libcallnr('vimtweak.dll',
-                \ 'SetAlpha', 235)<CR>
+    map <F10> <Esc>:call libcallnr('vimtweak.dll', 'SetAlpha', 200)<CR>
+    "map <F10> <Esc>:call TweakWindowAlphaM(10,1)<CR>
+    map <S-F10> <Esc>:call libcallnr('vimtweak.dll', 'SetAlpha', 242)<CR>
+    "map <S-F10> <Esc>:call TweakWindowAlphaM(10, 0)<CR>
+	map <C-S-F10> <Esc>:call libcallnr('vimtweak.dll', 'SetAlpha', 255)<CR>
 " }}}
 
 
@@ -673,7 +693,7 @@ map <C-s> :w
 if g:isWindows
     nmap <leader>e :tabnew $HOME/vimfiles/vimrc<CR>
 elseif g:isMsys
-    nmap <leader>e :tabnew ~/vimfiles/vimrc<CR>
+    nmap <leader>e :tabnew $HOME/vimfiles/vimrc<CR>
 else
     nmap <leader>e :tabnew ~/.vim/vimrc<CR>
 endif
