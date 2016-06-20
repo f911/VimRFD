@@ -176,7 +176,7 @@
 " {{{ Adding plugins for nodejs
 " -----------------------------
 "   Require npm install -g js-beautify
-    Plugin 'maksimr/vim-jsbeautify'
+"    Plugin 'maksimr/vim-jsbeautify'
     Plugin 'einars/js-beautify'
    " Plugin 'walm/jshint'
 " }}}

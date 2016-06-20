@@ -11,6 +11,8 @@ sudo apt-get install ctags
 sudo apt-get install cmake  # for ycm plugin
 
 
+git config --global core.editor vim
+
 # vim: se ai si sw=4 ts=4 ft=sh :
 # EOF
 
