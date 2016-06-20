@@ -508,6 +508,7 @@ endif
 	elseif (g:isMac || g:isLinux)
         let g:editorconfig_Beautifier=expand('$HOME/.vim/.editorconfig')
 	else
+        let g:editorconfig_Beautifier=expand('$HOME/.vim/.editorconfig')
     endif
 " }}}
 

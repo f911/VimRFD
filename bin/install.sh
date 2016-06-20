@@ -6,6 +6,11 @@ git clone https://github.com/VundleVim/Vundle.vim.git ~/vimfile/bundle/Vundle.vi
 # sysnc between gvim-on-windows and vim-on-msysy
 mkdir ~/.vim && cp ~/vimfiles/vimrc ~/.vim/vimrc
 
+
+sudo apt-get install ctags
+sudo apt-get install cmake  # for ycm plugin
+
+
 # vim: se ai si sw=4 ts=4 ft=sh :
 # EOF
 
