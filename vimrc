@@ -4,7 +4,7 @@
 " VIM RESOURCE FILE :  .vim/vimrc or vimfiles/vimrc
 " Creator           :  nick
 " Created           :  2014-10-04
-" LastModify        :  2016-04-16
+" LastModify        :  2016-06-21
 " Version           :  v1.3
 " =============================================================================
 
