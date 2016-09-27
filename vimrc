@@ -222,6 +222,10 @@
         set columns=200
         set lines=60
         " set guioptions-=T
+        set guioptions-=m
+        set guioptions-=T
+        set guioptions-=r
+        set guioptions-=L
     endif
    
     set background=dark
@@ -584,6 +588,7 @@ endif
     let g:ycm_key_list_select_completion = ['<tab>', '<c-n>', '<Down>']
     let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
     let g:ycm_confirm_extra_conf = 0
+    "let g:ycm_server_python_interpreter = 'C:\\Program Files\\Python35'
 
 
 
