@@ -588,8 +588,8 @@ endif
     let g:ycm_key_list_select_completion = ['<tab>', '<c-n>', '<Down>']
     let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
     let g:ycm_confirm_extra_conf = 0
-    "let g:ycm_server_python_interpreter = 'C:\\Program Files\\Python35'
-
+    let g:ycm_server_python_interpreter = 'C:\Python35\python.exe'
+    "let $PYTHONPATH = "C:\\Program\ Files\\Python35\\Lib;C:\\Program\ Files\\Python35\\DLLs"
 
 
 " make YCM compatible with UltiSnips (using supertab)
