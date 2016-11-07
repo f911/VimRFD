@@ -11,6 +11,19 @@ syntax/
 **/*.dll
 **/*.7z
 
+
+# -----------------------------------------------
+#   binary files needed for gvim x64 on windows
+# -----------------------------------------------
+
+!cscope.exe
+!ctags.exe
+!diff.exe
+!gvimfullscreen.dll
+!iconv.dll
+!vimtweak.dll
+
+
 # vim: se ai si et ts=4 sw=4 ft=conf
 # EOF
 
