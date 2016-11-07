@@ -193,7 +193,7 @@
 
     " full screen the window
     Plugin 'derekmcloughlin/gvimfullscreen_win32'
-    Plugin 'jistr/vim-nerdtree-tabs'
+   " Plugin 'jistr/vim-nerdtree-tabs'
     Plugin 'ryanoasis/vim-devicons'
     Plugin 'vim-nginx'
 
@@ -539,7 +539,7 @@ endif
 " }
 
 
-" { 4.6. plugins.maksimr/vim-jsbeautify
+" { 4.7. plugins.maksimr/vim-jsbeautify
 " ----------------------------------
     if (g:isWindows || g:isMsys)
         let g:editorconfig_Beautifier=expand('$HOME/vimfiles/.editorconfig')
@@ -551,10 +551,10 @@ endif
 
 
 
-" {{{ plugins.for.markdown
+" { 4.8. plugins.for.markdown
+" ---------------------------
 " - plasticboy/vim-markdown 
 " - 
-" -------------------------
   "  au BufNewFile,BufFilePre,BufRead *.md setf markdown
     au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown.pandoc
     let g:vim_markdown_folding_disabled=1 " Markdown
@@ -571,8 +571,8 @@ endif
 " }
 
 
-" { Plugins.scrooloose/syntastic 
-" --------------------------------
+" { 4.9. Plugins.scrooloose/syntastic 
+" -----------------------------------
     set statusline+=%#warningmsg#
     if g:isWindows
         set statusline+=%{SyntasticStatuslineFlag()}
@@ -591,8 +591,8 @@ endif
 " }
 
 
-" {{{ plugins.kien/ctrlp 
-" ----------------------
+" { 4.10. plugins.kien/ctrlp 
+" --------------------------
     let g:ctrlp_map = '<c-p>'
     let g:ctrlp_cmd = 'CtrlP'
     if exists("g:ctrl_user_command")
@@ -612,11 +612,11 @@ endif
 "       \ 'file': '\v\.(exe|so|dll)$', 'link': 'some_bad_symbolic_links'}
 "   let g:ctrlp_user_command = 'find %s -type f'        " MacOSX/Linux
 "   let g:ctrlp_user_command = 'dir %s /-n /b /s /a-d'  " Windows
-" }}}
+" }
 
 
-" {{{ plugins.Valloric/YouCompleteMe
-" ----------------------------------
+" { 4.11. plugins.Valloric/YouCompleteMe
+" --------------------------------------
 
     let g:ycm_complete_in_comments = 1
     let g:ycm_complete_in_strings = 1
@@ -662,21 +662,21 @@ endif
 "    let g:ycm_seed_identifiers_with_syntax=1    
 "     nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>    "force recomile with syntastic
 "    nnoremap <leader>lo :lopen<CR> "open locationlist
-" }}}
+" }
 
 
 
 
 
-" {{{ plugins.mhinz/vim-startify
-" ------------------------------
+" { 4.12. plugins.mhinz/vim-startify
+" ----------------------------------
     let g:startify_custom_header = [
             \ '  +--------------------------------------------------------------------------+   ',
             \ ' /             --= NICK''s RESEARCH AND DEVELOPMENT STUDIO  =--                \  ',
             \ ' |                          f911@fatework.io                                  | ',
-            \ ' |                          _            ___   ___                            | '
+            \ ' |                          _            ___   ___                            | ',
             \ ' |                   __   _(_)_ __ ___  ( _ ) / _ \                           | ',
-            \ ' |                   \ \ / / | '_ ` _ \ / _ \| | | |                          | ',
+            \ ' |                   \ \ / / | ''_ ` _ \ / _ \| | | |                          | ',
             \ ' |                    \ V /| | | | | | | (_) | |_| |                          | ',
             \ ' |                     \_/ |_|_| |_| |_|\___(_)___/                           | ',
             \ ' |                                                                            | ',
@@ -692,57 +692,59 @@ endif
             \ '',
             \ ]
     map <leader>st <Esc>:Startify<CR>
-" }}}
-/usr/bin/bash: figlet: command not found
+" }
 
 
-"  < 0x05 >. Map common keyboard shortcuts. 
-" =============================================================================
+" { - 0x05. Map Common Keyboard Shortcuts. 
+" ========================================
 
-imap <C-a> <Esc>I
-imap <C-e> <ESC>A
-"map <C-Tab> <C-W>w
-"imap <C-Tab> <C-O><C-W>w
-"imap <C-Tab> <C-C><C-Tab>
-map <kMinus> :cp<C-M>
-map - :cp<C-M>
-map <kPlus> :cn<C-M>
-map + :cn<C-M>
-vmap <C-c> "+y
-vmap <S-Insert> "+gP
-nmap <C-c> "+yy
-vmap <C-x> "+d
-map <C-s> :w
+    imap <C-a> <Esc>I
+    imap <C-e> <ESC>A
+    "map <C-Tab> <C-W>w
+    "imap <C-Tab> <C-O><C-W>w
+    "imap <C-Tab> <C-C><C-Tab>
+    map <kMinus> :cp<C-M>
+    map - :cp<C-M>
+    map <kPlus> :cn<C-M>
+    map + :cn<C-M>
+    vmap <C-c> "+y
+    vmap <S-Insert> "+gP
+    nmap <C-c> "+yy
+    vmap <C-x> "+d
+    map <C-s> :w
+    
+    if g:isWindows
+        nmap <leader>e :tabnew $HOME/vimfiles/vimrc<CR>
+    elseif g:isMsys
+        nmap <leader>e :tabnew $HOME/vimfiles/vimrc<CR>
+    else
+        nmap <leader>e :tabnew ~/.vim/vimrc<CR>
+    endif
+    
+    nmap <leader>t :tabnew<CR>
+    nmap <leader>nl <ESC>:nohl<CR>
+    map <leader>up <Esc>:PluginUpdate<CR>
+    
+    nmap <C-Tab> <Esc>gt
+    nmap <C-S-Tab> <Esc>gT
+    imap <C-Tab> <Esc>gt
+    imap <C-S-Tab> <Esc>gT
+    nnoremap K i<CR><Esc>
+    map  <leader>w <Esc><C-W><C-W>
+    map <F9> <Esc>:w<CR>:!node %<CR>
+    
+    "map <leader> <Esc>:w<CR><Esc>:so $HOME/_vimrc<CR><Esc>:PluginUpdate<CR>
+    "nnoremap <leader>gq :%!pandoc -f html -t markdown <bar> pandoc -f markdown -t html<CR>
+    "vnoremap <leader>gq :!pandoc -f html -t markdown <bar> pandoc -f markdown -t html<CR>
+" }
 
-if g:isWindows
-    nmap <leader>e :tabnew $HOME/vimfiles/vimrc<CR>
-elseif g:isMsys
-    nmap <leader>e :tabnew $HOME/vimfiles/vimrc<CR>
-else
-    nmap <leader>e :tabnew ~/.vim/vimrc<CR>
-endif
-
-nmap <leader>t :tabnew<CR>
-nmap <leader>nl <ESC>:nohl<CR>
-map <leader>up <Esc>:PluginUpdate<CR>
-
-nmap <C-Tab> <Esc>gt
-nmap <C-S-Tab> <Esc>gT
-imap <C-Tab> <Esc>gt
-imap <C-S-Tab> <Esc>gT
-nnoremap K i<CR><Esc>
-map  <leader>w <Esc><C-W><C-W>
-map <F9> <Esc>:w<CR>:!node %<CR>
-
-"map <leader> <Esc>:w<CR><Esc>:so $HOME/_vimrc<CR><Esc>:PluginUpdate<CR>
-"nnoremap <leader>gq :%!pandoc -f html -t markdown <bar> pandoc -f markdown -t html<CR>
-"vnoremap <leader>gq :!pandoc -f html -t markdown <bar> pandoc -f markdown -t html<CR>
-
-set langmenu=en_US.UTF-8
-let $LANG='en_US.utf-8'
-source $VIMRUNTIME/delmenu.vim
-source $VIMRUNTIME/menu.vim
-
+" { fix messy code problem
+" ------------------------
+    set langmenu=en_US.UTF-8
+    let $LANG='en_US.utf-8'
+    source $VIMRUNTIME/delmenu.vim
+    source $VIMRUNTIME/menu.vim
+" }
 
 " vim: se ai si et ts=4 sw=4 ft=vim :
 " EOF
