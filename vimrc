@@ -191,6 +191,7 @@
     Plugin 'derekmcloughlin/gvimfullscreen_win32'
     Plugin 'jistr/vim-nerdtree-tabs'
     Plugin 'ryanoasis/vim-devicons'
+    Plugin 'vim-nginx'
     call vundle#end()           " required
     filetype plugin indent on   " required
 " }
@@ -219,18 +220,22 @@
         winpos 100 20
         set columns=160
         set lines=48
-        " set guioptions-=T
+        set guioptions-=m
+        set guioptions-=T
     endif
    
     set background=dark
     if g:isWindows
         if g:isGUI
             colorscheme rainbow_neon
-            set guifont=Meslo\ LG\ S\ for\ Powerline:h9
+        "   set guifont=Meslo\ LG\ S\ for\ Powerline:h9
+            set guifont=MesloLGS_NF:h9:cANSI:qDRAFT
+        "
         "    set guifont=Bitstream_Vera_Sans_Mono:h9.5
         "    set guifont=Terminus:h12
         "    set guifontwide=PowerlineSymbols:h10
-            set guifontwide=Meslo\ LG\ S\ for\ Powerline:h9
+        "    set guifontwide=Meslo\ LG\ S\ for\ Powerline:h9
+            set guifontwide=MesloLGS_NF:h9:cANSI:qDRAFT
         else
             set t_Co=256
             colorscheme industry
