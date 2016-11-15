@@ -179,7 +179,7 @@
 " { Adding plugins for nodejs
 " ---------------------------
 "   Require npm install -g js-beautify
-    Plugin 'maksimr/vim-jsbeautify'
+"    Plugin 'maksimr/vim-jsbeautify'
     Plugin 'einars/js-beautify'
    " Plugin 'walm/jshint'
 " }
@@ -546,6 +546,7 @@ endif
 	elseif (g:isMac || g:isLinux)
         let g:editorconfig_Beautifier=expand('$HOME/.vim/.editorconfig')
 	else
+        let g:editorconfig_Beautifier=expand('$HOME/.vim/.editorconfig')
     endif
 " }
 
