@@ -225,7 +225,7 @@
         winpos 100 20
         set columns=200
         set lines=60
-        set guioptions-=m
+        "set guioptions-=m
         set guioptions-=T
         set guioptions-=r
         set guioptions-=L
@@ -679,7 +679,6 @@ endif
             \ ' |                   \ \ / / | ''_ ` _ \ / _ \| | | |                          | ',
             \ ' |                    \ V /| | | | | | | (_) | |_| |                          | ',
             \ ' |                     \_/ |_|_| |_| |_|\___(_)___/                           | ',
-            \ ' |                                                                            | ',
             \ ' +----------------------------------------------------------------------------+ ',
             \ ' |                                                                            |',
             \ '',
@@ -687,7 +686,7 @@ endif
     let g:startify_custom_footer = [
             \ ' |                                                                            | ',
             \ ' |                          f911@fatework.io                                  | ',
-            \ ' /             --=  NICK''s RESEARCH AND DEVELOPMENT STUDIO  =--               \  ',
+            \ ' \             --=  NICK''s RESEARCH AND DEVELOPMENT STUDIO  =--               /  ',
             \ '  +--------------------------------------------------------------------------+ ',
             \ '',
             \ ]
