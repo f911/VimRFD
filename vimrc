@@ -4,8 +4,8 @@
 " VIM RESOURCE FILE :  .vim/vimrc or vimfiles/vimrc
 " Creator           :  nick
 " Created           :  2014-10-04
-" LastModify        :  2016-04-19
-" Version           :  v1.3
+" LastModify        :  2016-11-08
+" Version           :  v1.4
 " =============================================================================
 
 "           Platforms:
@@ -26,11 +26,14 @@
 " - actionscript
 " - markdown
 " - nodejs
-" - YouCompleteMe
+" - YouCompleteMe (BugsFixed:python_interpreter_path:2016-11-07)
 " - NerdFonts
 
 "           Changes:
-"   Adding YouCompleteMe Supports on Mac
+" - Adding YouCompleteMe Supports on Windows
+" - Can self compile the gvim-x64 using vs2015
+" - Add $HOME=X:\home to user environment variable, and $HOME\vimfiles\bin to PATH
+" - Accordingly change the user $PATH to right vimfiles\bin
 
 "           TODO_List:
 " - js's plugins configuration.
@@ -39,8 +42,8 @@
 " - http://www.oschina.net/code/snippet_574132_13357
 
 
-" {{{ 0x01. Global Variable Definitions.
-" ======================================
+" { - 0x01. Global Variable Definitions.
+" ====================================
 "
 " +-----------+-----------+--------+-------+---------+
 " |           | isWindows | isMsys | isMac | isLinux |
@@ -74,10 +77,9 @@
     else
         let g:isConsole = 1
     endif
-" }}}
+" }
 
-
-" < 0x02 >. VUNDLE THE VIM PLUGIN SYSTEM. 
+" { - 0x02. Vundle The Vim Plugin System. 
 " =======================================
 " 
 " BRIEF:  see :h vundle for more details
@@ -93,8 +95,8 @@
         set rtp+=$HOME/vimfiles/bundle/Vundle.vim/
         call vundle#begin('$HOME/vimfiles/bundle/')
     elseif g:isMsys
-        set rtp+=~/vimfiles/bundle/Vundle.vim
-        call vundle#begin('~/vimfiles/bundle/')
+        set rtp+=$HOME/vimfiles/bundle/Vundle.vim
+        call vundle#begin('$HOME/vimfiles/bundle/')
     elseif g:isMac
         set rtp+=~/.vim/bundle/Vundle.vim
         call vundle#begin()
@@ -114,7 +116,7 @@
     Plugin 'majutsushi/tagbar'
     Plugin 'chrisbra/csv.vim'
     Plugin 'airblade/vim-gitgutter'
-"    Plugin 'jmcantrell/vim-virtualenv'
+"   Plugin 'jmcantrell/vim-virtualenv'
     Plugin 'mbbill/fencview'
 
     Plugin 'mhinz/vim-startify'
@@ -122,7 +124,7 @@
     Plugin 'mhinz/vim-signify'
 
     Plugin 'mattn/vimtweak'
-"    Plugin 'mattn/transparency-windows-vim'
+"   Plugin 'mattn/transparency-windows-vim'
     Plugin 'mattn/emmet-vim'
     
     Plugin 'edkolev/tmuxline.vim'
@@ -139,13 +141,14 @@
     Plugin 'xolox/vim-shell'
     Plugin 'xolox/vim-misc'
 
-"   markdown plugins
+" { markdown plugins
+" ------------------
     Plugin 'godlygeek/tabular'
 "   Plugin 'plasticboy/vim-markdown'
     Plugin 'vim-pandoc/vim-pandoc'
     Plugin 'vim-pandoc/vim-pandoc-syntax'
     Plugin 'vim-pandoc/vim-pandoc-after'
-
+" }
     Plugin 'Yggdroot/indentLine'
     Plugin 'a.vim'
     Plugin 'Align'
@@ -167,44 +170,45 @@
     Plugin 'wesleyche/SrcExpl'
     Plugin 'ZoomWin'
     Plugin 'jeroenbourgois/vim-actionscript'
-" {{{ color themes
-" ----------------
+" { color themes
+" --------------
     Plugin 'jonathanfilip/lucius'
     Plugin 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
-" }}}
+" }
 
-" {{{ Adding plugins for nodejs
-" -----------------------------
+" { Adding plugins for nodejs
+" ---------------------------
 "   Require npm install -g js-beautify
     Plugin 'editorconfig/editorconfig-vim'
-    Plugin 'maksimr/vim-jsbeautify'
+    "Plugin 'maksimr/vim-jsbeautify'
     Plugin 'einars/js-beautify'
    " Plugin 'walm/jshint'
-" }}}
+" }
 
-" {{{ auto code completion 
-" ------------------------
+" { auto code completion 
+" ----------------------
     Plugin 'Valloric/YouCompleteMe'
     Plugin 'SirVer/ultisnips'
     Plugin 'honza/vim-snippets'
-" }}}
+" }
 
     " full screen the window
-"    Plugin 'derekmcloughlin/gvimfullscreen_win32'
-    " Plugin 'jistr/vim-nerdtree-tabs'
+    Plugin 'derekmcloughlin/gvimfullscreen_win32'
+   " Plugin 'jistr/vim-nerdtree-tabs'
     Plugin 'ryanoasis/vim-devicons'
+    Plugin 'vim-nginx'
+
     call vundle#end()           " required
     filetype plugin indent on   " required
 " }
 
 
-"  0x02. General Display And Actions.
-" ===================================
-" set nocompatible          showmode showcmd
+" { - 0x03. General Display And Actions.
+" ======================================
 " set shortmess=atI
 
-" {{{ Editing Interface 
-" --------------------
+" { 3.1. Editing Interface 
+" ------------------------
     set number
     set ruler
     set laststatus=2        " always display statusline like airline
@@ -222,17 +226,24 @@
         winpos 100 20
         set columns=200
         set lines=60
-        " set guioptions-=T
+        "set guioptions-=m
+        set guioptions-=T
+        set guioptions-=r
+        set guioptions-=L
     endif
    
     set background=dark
     if g:isWindows
         if g:isGUI
             colorscheme rainbow_neon
-            set guifont=Bitstream_Vera_Sans_Mono:h9.5
+            set guifont=MesloLGS_NF:h9:cANSI:qDRAFT
+        "
+        "    set guifont=Bitstream_Vera_Sans_Mono:h9.5
         "    set guifont=Terminus:h12
         "    set guifontwide=PowerlineSymbols:h10
-            set guifontwide=Meslo\ LG\ S\ for\ Powerline:h12
+        "    set guifontwide=Meslo\ LG\ S\ for\ Powerline:h9
+        "
+            set guifontwide=MesloLGS_NF:h9:cANSI:qDRAFT
         else
             set t_Co=256
             colorscheme industry
@@ -249,7 +260,7 @@
     elseif g:isMac
         if g:isGUI
             colorscheme rainbow_neon
-            set guifont=Meslo\ LG\ S\ Regular\ for\ Powerline:h11
+            set guifont=MesloLGS_NF:h11
         else
             colorscheme Tomorrow-Night
             set guifont=Meslo\ LG\ S\ Regular\ for\ Powerline:h11
@@ -267,10 +278,11 @@
     
     set lazyredraw       " Fix the problems for scrolling slowly
     set modifiable       " Fix E21: in NerdTree
-" }}}
+" }
 
-" {{{ tabs and indent 
-" -------------------
+
+" { 3.2. Tabs and Indent 
+" ----------------------
     set shiftwidth=4
     set tabstop=4
     set expandtab
@@ -280,20 +292,21 @@
     " Except for Makefiles; hard tabs of width 2
     au FileType make set ts=2
     " And Markdown
-" }}}
+" }
 
 
-" {{{ search options 
-" ------------------
+" { 3.3. Search Options 
+" ---------------------
     set showmatch
     set incsearch
     set ignorecase
     set smartcase
     set hlsearch
-" }}}
+" }
 
-" {{{ file options 
-" ----------------
+
+" { 3.4. File Options 
+" -------------------
     syntax on
     filetype on
     filetype plugin on
@@ -323,10 +336,10 @@
 
     set formatoptions=croql
     set backspace=indent,eol,start
-" }}} 
+" } 
 
-" {{{ code folding
-" ----------------
+" { 3.5. Code Folding
+" -------------------
     set foldenable
     set foldmethod=indent    "/marker/syntax"
     set foldcolumn=1
@@ -341,11 +354,11 @@
     let xml_syntax_folding=1              " XML
     " use SPACE to unfold code, zR: open all folds zM: close all folds
     nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
-" }}}
+" }
 
 
-" {{{ text wrapping 
-" -----------------
+" { 3.6. Text Wrapping 
+" --------------------
     set writebackup
     set nobackup
     set noswapfile          " use version control insead
@@ -356,12 +369,13 @@
     endif
     set autoread
     set autochdir
-" }}}
+" }
 
 "au BufWinEnter * let w:m2=matchadd('Underlined', '\%>' . 80 . 'v.\+', -1)
 
 
-
+" { 3.7. Pretreatment
+" -------------------
 " autocmds to automatically enter hex mode and handle file writes properly
 if has("autocmd")
   " vim -b : edit binary using xxd-format!
@@ -412,13 +426,16 @@ if has("autocmd")
   augroup END
 endif
 " refering from link http://vim.wikia.com/wiki/Improved_Hex_editing
+" }
 
 
-"  < 0x04 >. SETTINGS FOR PLUGINS.
-" ================================
 
-" {{{ plugins.vim-airline/vim-airline
-" -----------------------------
+" { - 0x04. SETTINGS FOR PLUGINS.
+" ===============================
+
+
+" { 4.1. plugins.vim-airline/vim-airline
+" --------------------------------------
     let g:airline_theme ='cool'   " 'powerlineish'
     let g:airline#extensions#tabline#enabled = 1
     let g:airline#extensions#tabline#buffer_nr_show = 1
@@ -434,10 +451,11 @@ endif
 
     nnoremap <C-N> :bn<CR>
     nnoremap <C-P> :bp<CR>
-" }}}
+" }
 
-" {{{ plugins.yggdroot/indentline 
-" -------------------------------
+
+" { 4.2. plugins.yggdroot/indentline 
+" ----------------------------------
     nmap <leader>il :IndentLinesToggle<CR>
     let g:indentLine_enabled=1
     "let g:indentLine_char = '┊'
@@ -449,10 +467,10 @@ endif
     else
         let g:indentLine_color_term =239
     endif
-" }}}
+" }
 
-" {{{ plugins.scrooloose/nerdtree 
-" -------------------------------
+" { 4.3. plugins.scrooloose/nerdtree 
+" ----------------------------------
     autocmd bufenter * if (winnr("$") == 1 && 
                 \ exists("b:NERDTreeType") && 
                 \ b:NERDTreeType == "primary") | q | 
@@ -463,25 +481,44 @@ endif
         let g:NERDTreeCopyCmd= 'cp -r'
     endif
     nmap <F2> :NERDTreeToggle ..<CR>
-" }}}
+" }
 
 
-" {{{ plugins.derekmcloughlin/gvimfullscreen_win32 
-" ------------------------------------------------
+" { 4.4. plugins.derekmcloughlin/gvimfullscreen_win32 
+" ---------------------------------------------------
     map <F11> <Esc>:call libcallnr('gvimfullscreen.dll',
                 \ 'ToggleFullScreen', 0)<CR><C-L>
-" }}}
+" }
 
-" {{{ plugins.mattn/vimtweak
-" --------------------------
+" { 4.5. plugins.mattn/vimtweak
+" -----------------------------
     if g:isWindows && g:isGUI
-    "    call libcallnr("vimtweak.dll", "SetAlpha", 235)
-    "    call libcallnr("vimtweak.dll", "EnableMaximize", 0)
-    "    call libcallnr("vimtweak.dll", "EnableCaption", 1)
-    "    call libcallnr("vimtweak.dll", "EnableTopMost", 0)
+        "let g:alpha_value=242
+        "call libcallnr("vimtweak.dll", "SetAlpha", 235)
+        "call libcallnr("vimtweak.dll", "EnableMaximize", 1)
+        "call libcallnr("vimtweak.dll", "EnableCaption", 1)
+        "call libcallnr("vimtweak.dll", "EnableTopMost", 0)
 
-        autocmd FocusGained * call libcallnr("vimtweak.dll", "SetAlpha", 235)
+        "autocmd FocusGained * call libcallnr("vimtweak.dll", "SetAlpha", 235)
+        autocmd FocusGained * call libcallnr("vimtweak.dll", "SetAlpha", 242)
         autocmd FocusLost * call libcallnr("vimtweak.dll", "SetAlpha", 166)
+        
+        "function TweakWindowAlphaM(alpha_mod, sign)
+        "    if sign == 1
+        "        let g:alpha_value=g:alpha_value + alpha_mod
+        "    elseif sign == 0
+        "        let g:alpha_value=g:alpha_value - alpha_mod
+        "    else
+        "    endif
+        "    if g:alpha_value<200
+        "        let g:alpha_value=200
+        "    endif
+        "    if g:alpha_value>255
+        "        let g:alpah_value=255
+        "    endif
+        "    call libcallnr('vimtweak.dll', 'SetAlpha', g:alpha_value)
+        "endfunction
+
     "    function! s:Transparency(v)
     "        call libcallnr('vimtweak.dll', 'SetAlpha', 235) 
     "    endfunction
@@ -489,22 +526,23 @@ endif
     "      autocmd!
     "    augroup END
     endif
-    map <F10> <Esc>:call libcallnr('vimtweak.dll', 
-                \ 'SetAlpha', 166)<CR>
-    map <S-F10> <Esc>:call libcallnr('vimtweak.dll',
-                \ 'SetAlpha', 235)<CR>
-" }}}
+    map <F10> <Esc>:call libcallnr('vimtweak.dll', 'SetAlpha', 200)<CR>
+    "map <F10> <Esc>:call TweakWindowAlphaM(10,1)<CR>
+    map <S-F10> <Esc>:call libcallnr('vimtweak.dll', 'SetAlpha', 242)<CR>
+    "map <S-F10> <Esc>:call TweakWindowAlphaM(10, 0)<CR>
+	map <C-S-F10> <Esc>:call libcallnr('vimtweak.dll', 'SetAlpha', 255)<CR>
+" }
 
 
-" {{{ Modify the window size
-" --------------------------
+" { 4.6. Modify the Window Size
+" -----------------------------
     map <F12>   <Esc>:set columns=100<CR><Esc>:set lines=32<CR>
-    map <S-F12> <Esc>:set columns=200<CR><Esc>:set lines=60<CR>
-" }}}
+    map <S-F12> <Esc>:set columns=160<CR><Esc>:set lines=48<CR>
+" }
 
 
 
-" {{{ plugins.maksimr/vim-jsbeautify
+" { 4.7. plugins.maksimr/vim-jsbeautify
 " ----------------------------------
     if (g:isWindows || g:isMsys)
         let g:editorconfig_Beautifier=expand('$HOME/vimfiles/.editorconfig')
@@ -512,14 +550,14 @@ endif
         let g:editorconfig_Beautifier=expand('$HOME/.vim/.editorconfig')
 	else
     endif
-" }}}
+" }
 
 
 
-" {{{ plugins.for.markdown
+" { 4.8. plugins.for.markdown
+" ---------------------------
 " - plasticboy/vim-markdown 
 " - 
-" -------------------------
   "  au BufNewFile,BufFilePre,BufRead *.md setf markdown
     au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown.pandoc
     let g:vim_markdown_folding_disabled=1 " Markdown
@@ -535,8 +573,9 @@ endif
     let g:pandoc#after#modules#enabled = ["nrrwrgn", "ultisnips"]
 " }
 
-" {{{ Plugins.scrooloose/syntastic 
-" --------------------------------
+
+" { 4.9. Plugins.scrooloose/syntastic 
+" -----------------------------------
     set statusline+=%#warningmsg#
     if g:isWindows
         set statusline+=%{SyntasticStatuslineFlag()}
@@ -552,10 +591,11 @@ endif
     endif
 
     let g:syntastic_javascript_checkers = ['jshint']
-" }}}
+" }
 
-" {{{ plugins.kien/ctrlp 
-" ----------------------
+
+" { 4.10. plugins.kien/ctrlp 
+" --------------------------
     let g:ctrlp_map = '<c-p>'
     let g:ctrlp_cmd = 'CtrlP'
     if exists("g:ctrl_user_command")
@@ -575,10 +615,11 @@ endif
 "       \ 'file': '\v\.(exe|so|dll)$', 'link': 'some_bad_symbolic_links'}
 "   let g:ctrlp_user_command = 'find %s -type f'        " MacOSX/Linux
 "   let g:ctrlp_user_command = 'dir %s /-n /b /s /a-d'  " Windows
-" }}}
+" }
 
-" {{{ plugins.Valloric/YouCompleteMe
-" ----------------------------------
+
+" { 4.11. plugins.Valloric/YouCompleteMe
+" --------------------------------------
 
     let g:ycm_complete_in_comments = 1
     let g:ycm_complete_in_strings = 1
@@ -587,15 +628,19 @@ endif
     let g:ycm_key_list_select_completion = ['<tab>', '<c-n>', '<Down>']
     let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
     let g:ycm_confirm_extra_conf = 0
+    if (g:isWindows || g:isMsys)
+        let g:ycm_server_python_interpreter = 'C:\Python35\python.exe'
+    endif
+    "let $PYTHONPATH = "C:\\Program\ Files\\Python35\\Lib;C:\\Program\ Files\\Python35\\DLLs"
 
 
 
-" make YCM compatible with UltiSnips (using supertab)
-"let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-"let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-"let g:SuperTabDefaultCompletionType = '<C-n>'
+"   make YCM compatible with UltiSnips (using supertab)
+"   let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+"   let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+"   let g:SuperTabDefaultCompletionType = '<C-n>'
 "
-" better key bindings for UltiSnipsExpandTrigger
+"   better key bindings for UltiSnipsExpandTrigger
     let g:UltiSnipsExpandTrigger = "<tab>"
     let g:UltiSnipsJumpForwardTrigger = "<c-b>"
     let g:UltiSnipsJumpBackwardTrigger = "<c-z>"
@@ -622,88 +667,88 @@ endif
 "    let g:ycm_seed_identifiers_with_syntax=1    
 "     nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>    "force recomile with syntastic
 "    nnoremap <leader>lo :lopen<CR> "open locationlist
-" }}}
+" }
 
 
 
 
 
-" {{{ plugins.mhinz/vim-startify
-" ------------------------------
+" { 4.12. plugins.mhinz/vim-startify
+" ----------------------------------
     let g:startify_custom_header = [
             \ '  +--------------------------------------------------------------------------+   ',
-            \ ' /               --=  NICK''s PERSIONAL DEVELOPMENT STUDIO  =--                \  ',
-            \ ' |                          fatework@f911.rock                                | ',
-            \ ' |                                         ________  __ __                    | ',
-            \ ' |                   __                   /\_____  \/\ \\ \                   |',
-            \ ' |           __  __ /\_\    ___ ___       \/___//''/''\ \ \\ \                  | ',
-            \ ' |          /\ \/\ \\/\ \ /'' __` __`\         /'' /''  \ \ \\ \_                | ',
-            \ ' |          \ \ \_/ |\ \ \/\ \/\ \/\ \       /'' /''__  \ \__ ,__\              | ',
-            \ ' |           \ \___/  \ \_\ \_\ \_\ \_\     /\_/ /\_\  \/_/\_\_/              | ',
-            \ ' |            \/__/    \/_/\/_/\/_/\/_/     \//  \/_/     \/_/                | ',
+            \ ' /             --= NICK''s RESEARCH AND DEVELOPMENT STUDIO  =--                \  ',
+            \ ' |                          f911@fatework.io                                  | ',
+            \ ' |                          _            ___   ___                            | ',
+            \ ' |                   __   _(_)_ __ ___  ( _ ) / _ \                           | ',
+            \ ' |                   \ \ / / | ''_ ` _ \ / _ \| | | |                          | ',
+            \ ' |                    \ V /| | | | | | | (_) | |_| |                          | ',
+            \ ' |                     \_/ |_|_| |_| |_|\___(_)___/                           | ',
             \ ' +----------------------------------------------------------------------------+ ',
             \ ' |                                                                            |',
             \ '',
             \ ]
     let g:startify_custom_footer = [
             \ ' |                                                                            | ',
-            \ ' |                          fatework@f911.rock                                | ',
-            \ ' \               --=  NICK''s PERSIONAL DEVELOPMENT STUDIO  =--                / ',
+            \ ' |                          f911@fatework.io                                  | ',
+            \ ' \             --=  NICK''s RESEARCH AND DEVELOPMENT STUDIO  =--               /  ',
             \ '  +--------------------------------------------------------------------------+ ',
             \ '',
             \ ]
     map <leader>st <Esc>:Startify<CR>
-" }}}
+" }
 
 
-"  < 0x05 >. Map common keyboard shortcuts. 
-" =============================================================================
+" { - 0x05. Map Common Keyboard Shortcuts. 
+" ========================================
 
-imap <C-a> <Esc>I
-imap <C-e> <ESC>A
-"map <C-Tab> <C-W>w
-"imap <C-Tab> <C-O><C-W>w
-"imap <C-Tab> <C-C><C-Tab>
-map <kMinus> :cp<C-M>
-map - :cp<C-M>
-map <kPlus> :cn<C-M>
-map + :cn<C-M>
-vmap <C-c> "+y
-vmap <S-Insert> "+gP
-nmap <C-c> "+yy
-vmap <C-x> "+d
-map <C-s> :w
+    imap <C-a> <Esc>I
+    imap <C-e> <ESC>A
+    "map <C-Tab> <C-W>w
+    "imap <C-Tab> <C-O><C-W>w
+    "imap <C-Tab> <C-C><C-Tab>
+    map <kMinus> :cp<C-M>
+    map - :cp<C-M>
+    map <kPlus> :cn<C-M>
+    map + :cn<C-M>
+    vmap <C-c> "+y
+    vmap <S-Insert> "+gP
+    nmap <C-c> "+yy
+    vmap <C-x> "+d
+    map <C-s> :w
+    
+    if g:isWindows
+        nmap <leader>e :tabnew $HOME/vimfiles/vimrc<CR>
+    elseif g:isMsys
+        nmap <leader>e :tabnew $HOME/vimfiles/vimrc<CR>
+    else
+        nmap <leader>e :tabnew ~/.vim/vimrc<CR>
+    endif
+    
+    nmap <leader>t :tabnew<CR>
+    nmap <leader>nl <ESC>:nohl<CR>
+    map <leader>up <Esc>:PluginUpdate<CR>
+    
+    nmap <C-Tab> <Esc>gt
+    nmap <C-S-Tab> <Esc>gT
+    imap <C-Tab> <Esc>gt
+    imap <C-S-Tab> <Esc>gT
+    nnoremap K i<CR><Esc>
+    map  <leader>w <Esc><C-W><C-W>
+    map <F9> <Esc>:w<CR>:!node %<CR>
+    
+    "map <leader> <Esc>:w<CR><Esc>:so $HOME/_vimrc<CR><Esc>:PluginUpdate<CR>
+    "nnoremap <leader>gq :%!pandoc -f html -t markdown <bar> pandoc -f markdown -t html<CR>
+    "vnoremap <leader>gq :!pandoc -f html -t markdown <bar> pandoc -f markdown -t html<CR>
+" }
 
-if g:isWindows
-    nmap <leader>e :tabnew $HOME/vimfiles/vimrc<CR>
-elseif g:isMsys
-    nmap <leader>e :tabnew ~/vimfiles/vimrc<CR>
-else
-    nmap <leader>e :tabnew ~/.vim/vimrc<CR>
-endif
-
-nmap <leader>t :tabnew<CR>
-nmap <leader>nl <ESC>:nohl<CR>
-map <leader>up <Esc>:PluginUpdate<CR>
-
-nmap <C-Tab> <Esc>gt
-nmap <C-S-Tab> <Esc>gT
-imap <C-Tab> <Esc>gt
-imap <C-S-Tab> <Esc>gT
-nnoremap K i<CR><Esc>
-map  <leader>w <Esc><C-W><C-W>
-map <F9> <Esc>:w<CR>:!node %<CR>
-
-"map <leader> <Esc>:w<CR><Esc>:so $HOME/_vimrc<CR><Esc>:PluginUpdate<CR>
-"nnoremap <leader>gq :%!pandoc -f html -t markdown <bar> pandoc -f markdown -t html<CR>
-"vnoremap <leader>gq :!pandoc -f html -t markdown <bar> pandoc -f markdown -t html<CR>
-
-set langmenu=en_US.UTF-8
-let $LANG='en_US.utf-8'
-source $VIMRUNTIME/delmenu.vim
-source $VIMRUNTIME/menu.vim
-
+" { fix messy code problem
+" ------------------------
+    set langmenu=en_US.UTF-8
+    let $LANG='en_US.utf-8'
+    source $VIMRUNTIME/delmenu.vim
+    source $VIMRUNTIME/menu.vim
+" }
 
 " vim: se ai si et ts=4 sw=4 ft=vim :
 " EOF
-
