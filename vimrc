@@ -176,6 +176,7 @@
 " {{{ Adding plugins for nodejs
 " -----------------------------
 "   Require npm install -g js-beautify
+    Plugin 'editorconfig/editorconfig-vim'
     Plugin 'maksimr/vim-jsbeautify'
     Plugin 'einars/js-beautify'
    " Plugin 'walm/jshint'
@@ -251,6 +252,7 @@
             set guifont=Meslo\ LG\ S\ Regular\ for\ Powerline:h11
         else
             colorscheme Tomorrow-Night
+            set guifont=Meslo\ LG\ S\ Regular\ for\ Powerline:h11
         endif
     elseif g:isLinux
         set t_Co=256
@@ -499,6 +501,7 @@ endif
     map <F12>   <Esc>:set columns=100<CR><Esc>:set lines=32<CR>
     map <S-F12> <Esc>:set columns=200<CR><Esc>:set lines=60<CR>
 " }}}
+
 
 
 " {{{ plugins.maksimr/vim-jsbeautify
