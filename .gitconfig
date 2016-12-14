@@ -1,8 +1,8 @@
 [user]
 	name = shiki
-	email = 
+	email = shiki@fatework.io
 [core]
 	autocrlf = false
-	excludesfile = C:\\Users\\shiki\\Documents\\gitignore_global.txt
+	excludesfile = $HOME\\gitignore_global.txt
 [push]
 	default = simple

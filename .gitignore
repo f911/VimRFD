@@ -1,3 +1,4 @@
+#
 # .gitignore git ignore file for .vim / vimfiles folder
 # 
 
@@ -6,6 +7,9 @@ bundle/
 ftplugin/
 indent/
 syntax/
+colors/
+doc/
+
 **/DS_Store*
 **/*.exe
 **/*.dll
@@ -21,7 +25,7 @@ syntax/
 !diff.exe
 !gvimfullscreen.dll
 !iconv.dll
-!vimtweak.dll
+!vimtweak64.dll
 
 
 # vim: se ai si et ts=4 sw=4 ft=conf

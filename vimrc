@@ -4,8 +4,8 @@
 " VIM RESOURCE FILE :  .vim/vimrc or vimfiles/vimrc
 " Creator           :  nick
 " Created           :  2014-10-04
-" LastModify        :  2016-12-14
-" Version           :  v1.4.2
+" LastModify        :  2016-12-15
+" Version           :  v1.4.3
 " =============================================================================
 
 "           Platforms:
@@ -35,6 +35,7 @@
 " - Add $HOME=X:\home to user environment variable, and $HOME\vimfiles\bin to PATH
 " - Accordingly change the user $PATH to right vimfiles\bin
 " - Update for vimtweak, 64 / 32
+" - [Disable beeping](http://vim.wikia.com/wiki/Disable_beeping)
 
 "           TODO_List:
 " - js's plugins configuration. and .editorconfig missing error.
@@ -372,6 +373,11 @@
 
 "au BufWinEnter * let w:m2=matchadd('Underlined', '\%>' . 80 . 'v.\+', -1)
 
+" { 3.7. Disable Beeping
+" ----------------------
+    set noerrorbells visualbell t_vb=
+    autocmd GUIEnter * set visualbell t_vb=
+" }
 
 " { 3.7. Pretreatment
 " -------------------
