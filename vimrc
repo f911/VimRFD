@@ -4,8 +4,8 @@
 " VIM RESOURCE FILE :  .vim/vimrc or vimfiles/vimrc
 " Creator           :  nick
 " Created           :  2014-10-04
-" LastModify        :  2016-11-08
-" Version           :  v1.4
+" LastModify        :  2016-12-14
+" Version           :  v1.4.2
 " =============================================================================
 
 "           Platforms:
@@ -34,9 +34,10 @@
 " - Can self compile the gvim-x64 using vs2015
 " - Add $HOME=X:\home to user environment variable, and $HOME\vimfiles\bin to PATH
 " - Accordingly change the user $PATH to right vimfiles\bin
+" - Update for vimtweak, 64 / 32
 
 "           TODO_List:
-" - js's plugins configuration.
+" - js's plugins configuration. and .editorconfig missing error.
 
 "           Reference:
 " - http://www.oschina.net/code/snippet_574132_13357
@@ -493,13 +494,13 @@ endif
     if g:isWindows && g:isGUI
         "let g:alpha_value=242
         "call libcallnr("vimtweak.dll", "SetAlpha", 235)
-        "call libcallnr("vimtweak.dll", "EnableMaximize", 1)
+        " call libcallnr("vimtweak64.dll", "EnableMaximize", 1)
         "call libcallnr("vimtweak.dll", "EnableCaption", 1)
         "call libcallnr("vimtweak.dll", "EnableTopMost", 0)
 
         "autocmd FocusGained * call libcallnr("vimtweak.dll", "SetAlpha", 235)
-        autocmd FocusGained * call libcallnr("vimtweak.dll", "SetAlpha", 242)
-        autocmd FocusLost * call libcallnr("vimtweak.dll", "SetAlpha", 166)
+        autocmd FocusGained * call libcallnr("vimtweak64.dll", "SetAlpha", 242)
+        autocmd FocusLost * call libcallnr("vimtweak64.dll", "SetAlpha", 166)
         
         "function TweakWindowAlphaM(alpha_mod, sign)
         "    if sign == 1
@@ -524,11 +525,11 @@ endif
     "      autocmd!
     "    augroup END
     endif
-    map <F10> <Esc>:call libcallnr('vimtweak.dll', 'SetAlpha', 200)<CR>
+    map <F10> <Esc>:call libcallnr('vimtweak64.dll', 'SetAlpha', 200)<CR>
     "map <F10> <Esc>:call TweakWindowAlphaM(10,1)<CR>
-    map <S-F10> <Esc>:call libcallnr('vimtweak.dll', 'SetAlpha', 242)<CR>
+    map <S-F10> <Esc>:call libcallnr('vimtweak64.dll', 'SetAlpha', 242)<CR>
     "map <S-F10> <Esc>:call TweakWindowAlphaM(10, 0)<CR>
-	map <C-S-F10> <Esc>:call libcallnr('vimtweak.dll', 'SetAlpha', 255)<CR>
+	map <C-S-F10> <Esc>:call libcallnr('vimtweak64.dll', 'SetAlpha', 255)<CR>
 " }
 
 
