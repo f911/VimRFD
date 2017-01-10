@@ -90,3 +90,11 @@ alias gll="git pull"
 alias gsh="git push"
 alias gcm="git commit -a"
 
+alias dps="sudo docker ps"
+alias dim="sudo docker images"
+alias drun="sudo docker run"
+alias dexe="sudo docker run"
+
+alias dup="sudo service docker start && echo -e '\033[33m [+] service docker started! \033[0m'"
+alias ddn="sudo service docker stop && echo -e '\033[33m [+] service docker stopped! \033[0m'"
+alias din="sudo docker info"
