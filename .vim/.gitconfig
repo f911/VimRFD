@@ -1,0 +1,8 @@
+[user]
+	name = shiki
+	email = 
+[core]
+	autocrlf = false
+	excludesfile = C:\\Users\\shiki\\Documents\\gitignore_global.txt
+[push]
+	default = simple
