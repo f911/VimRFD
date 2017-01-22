@@ -7,7 +7,9 @@
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+# ZSH_THEME="robbyrussell"
+ZSH_THEME="agnoster"
+# ZSH_THEME="aussiegeek"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -51,7 +53,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git autojump web-content zsh-syntax-highlighting colored-man)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -83,3 +85,21 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias gs="git status -s"
+alias gll="git pull"
+alias gsh="git push"
+alias gci="git commit -a"
+
+alias dps="sudo docker ps"
+alias dim="sudo docker images"
+alias dup="sudo service docker start && echo -e '\n\033[33m [+] service docker started! \033[0m\n'"
+alias ddw="sudo service docker stop && echo -e '\n\033[33m [+] service docker stopped! \033[0m\n'"
+alias din="sudo docker info"
+
+alias drun="sudo docker run"
+alias dexec="sudo docker exec"
+alias dstart="sudo docker start"
+alias dstop="sudo docker stop"
+alias drestart="sudo docker restart"
+
+
