@@ -97,11 +97,11 @@ alias glg="git log --graph"
 
 # alias about docker operations
 alias dps="sudo docker ps"
-alias dim="sudo docker images"
 alias dup="sudo service docker start && echo -e '\n\033[33m [+] service docker started! \033[0m\n'"
-alias ddw="sudo service docker stop && echo -e '\n\033[33m [+] service docker stopped! \033[0m\n'"
-alias din="sudo docker info"
-
+alias ddn="sudo service docker stop && echo -e '\n\033[33m [+] service docker stopped! \033[0m\n'"
+alias dimg="sudo docker images"
+alias dinf="sudo docker info"
+alias dins="sudo docker inspect"
 alias drun="sudo docker run"
 alias dexec="sudo docker exec"
 alias dstart="sudo docker start"
