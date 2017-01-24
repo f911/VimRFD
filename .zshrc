@@ -86,6 +86,8 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+export TERM=xterm-256color
+eval `dircolors ~/.dir_colors`
 # alias about git operations
 alias gs="git status -s"
 alias gll="git pull"
@@ -104,4 +106,7 @@ alias dexec="sudo docker exec"
 alias dstart="sudo docker start"
 alias dstop="sudo docker stop"
 alias drestart="sudo docker restart"
+alias dsearch="sudo docker search"
+alias dci="sudo docker commit"
+
 
