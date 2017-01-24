@@ -89,10 +89,11 @@ source $ZSH/oh-my-zsh.sh
 export TERM=xterm-256color
 eval `dircolors ~/.dir_colors`
 # alias about git operations
-alias gs="git status -s"
+alias gss="git status -s"
 alias gll="git pull"
 alias gsh="git push"
 alias gci="git commit -a"
+alias glg="git log --graph"
 
 # alias about docker operations
 alias dps="sudo docker ps"
