@@ -4,8 +4,8 @@
 " VIM RESOURCE FILE :  .vim/vimrc or vimfiles/vimrc
 " Creator           :  nick
 " Created           :  2014-10-04
-" LastModify        :  2016-11-08
-" Version           :  v1.4
+" LastModify        :  2017-01-25
+" Version           :  v1.5
 " =============================================================================
 
 "           Platforms:
@@ -267,7 +267,8 @@
         set t_Co=256
         if g:isGUI
             colorscheme rainbow_neon
-            set guifont=Terminus\ 12
+            "set guifont=Terminus\ 12
+            set guifont=Terminess\ Powerline\ 12
         else
             colorscheme Tomorrow-Night
         endif
@@ -672,23 +673,24 @@ endif
 " { 4.12. plugins.mhinz/vim-startify
 " ----------------------------------
     let g:startify_custom_header = [
-            \ '  +--------------------------------------------------------------------------+   ',
-            \ ' /             --= NICK''s RESEARCH AND DEVELOPMENT STUDIO  =--                \  ',
+            \ ' +----------------------------------------------------------------------------+   ',
+            \ ' |             --= NICK''s RESEARCH AND DEVELOPMENT STUDIO  =--                |  ',
             \ ' |                          f911@fatework.io                                  | ',
-            \ ' |                          _            ___   ___                            | ',
-            \ ' |                   __   _(_)_ __ ___  ( _ ) / _ \                           | ',
-            \ ' |                   \ \ / / | ''_ ` _ \ / _ \| | | |                          | ',
-            \ ' |                    \ V /| | | | | | | (_) | |_| |                          | ',
-            \ ' |                     \_/ |_|_| |_| |_|\___(_)___/                           | ',
-            \ ' +----------------------------------------------------------------------------+ ',
+            \ ' |                      .__            ______     _______                     | ', 
+            \ ' |                ___  _|__| _____    /  __  \    \   _  \                    | ', 
+            \ ' |                \  \/ /  |/     \   >      <    /  /_\  \                   | ', 
+            \ ' |                 \   /|  |  Y Y  \ /   --   \   \  \_/   \                  | ',
+            \ ' |                  \_/ |__|__|_|  / \______  / /\ \_____  /                  | ',
+            \ ' |                               \/         \/  \/       \/                   | ', 
+            \ ' +- - * - - * - - * - - * - - * - - * - - * - - * - - * - - * - - * - - * - - + ',
             \ ' |                                                                            |',
             \ '',
             \ ]
     let g:startify_custom_footer = [
             \ ' |                                                                            | ',
             \ ' |                          f911@fatework.io                                  | ',
-            \ ' \             --=  NICK''s RESEARCH AND DEVELOPMENT STUDIO  =--               /  ',
-            \ '  +--------------------------------------------------------------------------+ ',
+            \ ' |             --=  NICK''s RESEARCH AND DEVELOPMENT STUDIO  =--               |  ',
+            \ ' +----------------------------------------------------------------------------+ ',
             \ '',
             \ ]
     map <leader>st <Esc>:Startify<CR>
