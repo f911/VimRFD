@@ -4,8 +4,8 @@
 " VIM RESOURCE FILE :  .vim/vimrc or vimfiles/vimrc
 " Creator           :  nick
 " Created           :  2014-10-04
-" LastModify        :  2016-12-15
-" Version           :  v1.4.3
+" LastModify        :  2017-05-09
+" Version           :  v1.4.4
 " =============================================================================
 
 "           Platforms:
@@ -189,7 +189,8 @@
 " { auto code completion 
 " ----------------------
     Plugin 'Valloric/YouCompleteMe'
-    Plugin 'SirVer/ultisnips'
+"    Plugin 'SirVer/ultisnips'o
+
     Plugin 'honza/vim-snippets'
 " }
 
@@ -244,7 +245,7 @@
         "    set guifontwide=PowerlineSymbols:h10
         "    set guifontwide=Meslo\ LG\ S\ for\ Powerline:h9
         "
-            set guifontwide=MesloLGS_NF:h9:cANSI:qDRAFT
+            "set guifontwide=MesloLGS_NF:h9:cANSI:qDRAFT
         else
             set t_Co=256
             colorscheme industry
@@ -632,7 +633,7 @@ endif
     let g:ycm_key_list_select_completion = ['<tab>', '<c-n>', '<Down>']
     let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
     let g:ycm_confirm_extra_conf = 0
-    let g:ycm_server_python_interpreter = 'C:\Python35\python.exe'
+    let g:ycm_server_python_interpreter = 'C:\Python36\python.exe'
     "let $PYTHONPATH = "C:\\Program\ Files\\Python35\\Lib;C:\\Program\ Files\\Python35\\DLLs"
 
 
