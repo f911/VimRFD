@@ -1,16 +1,16 @@
 " ============================================================================
 " Copyright (C) 2014 nick All Rights Reserved
 "
-" VIM RESOURCE FILE :  .vim/vimrc or vimfiles/vimrc
+" VIM RESOURCE FILE :  ~\.vim\vimrc or %HOME%/vimfiles/vimrc
 " Creator           :  nick
 " Created           :  2014-10-04
-" LastModify        :  2017-05-09
-" Version           :  v1.4.4
+" LastModified      :  2017-05-19
+" Version           :  v1.4.5
 " =============================================================================
 
 "           Platforms:
 " - Windows / MSYS
-" - Linux: test on CentOS / Unbuntu
+" - Linux: test on CentOS / Unbuntu / Kali
 " - Mac OS X
 
 "           Sections:
@@ -43,9 +43,9 @@
 "           Reference:
 " - http://www.oschina.net/code/snippet_574132_13357
 
-
-" { - 0x01. Global Variable Definitions.
-" ====================================
+" ==============================================================================
+"   - 0x01. Global Variable Definitions. -
+" ==============================================================================
 "
 " +-----------+-----------+--------+-------+---------+
 " |           | isWindows | isMsys | isMac | isLinux |
@@ -79,11 +79,10 @@
     else
         let g:isConsole = 1
     endif
-" }
 
-" { - 0x02. Vundle The Vim Plugin System. 
-" =======================================
-" 
+" ==============================================================================
+"   - 0x02. Vundle The Vim Plugin System. -
+" ==============================================================================
 " BRIEF:  see :h vundle for more details
 " :PluginList      - list configured plugins
 " :PluginInstall   - installs plugins; append '!' to update
@@ -111,6 +110,8 @@
     endif
 
     Plugin 'VundleVim/Vundle.vim'
+" * looks and productivity {
+" --------------------------
     Plugin 'vim-airline/vim-airline'
     Plugin 'vim-airline/vim-airline-themes'
     Plugin 'ctrlpvim/ctrlp.vim'
@@ -120,7 +121,8 @@
     Plugin 'airblade/vim-gitgutter'
 "   Plugin 'jmcantrell/vim-virtualenv'
     Plugin 'mbbill/fencview'
-
+" }
+ 
     Plugin 'mhinz/vim-startify'
     Plugin 'mhinz/vim-tmuxify'
     Plugin 'mhinz/vim-signify'
@@ -143,13 +145,15 @@
     Plugin 'xolox/vim-shell'
     Plugin 'xolox/vim-misc'
 
-" { markdown plugins
-" ------------------
+" * markdown plugins {
+" --------------------
     Plugin 'godlygeek/tabular'
 "   Plugin 'plasticboy/vim-markdown'
     Plugin 'vim-pandoc/vim-pandoc'
     Plugin 'vim-pandoc/vim-pandoc-syntax'
     Plugin 'vim-pandoc/vim-pandoc-after'
+    Plugin 'iamcco/mathjax-support-for-mkdp'
+    Plugin 'iamcco/markdown-preview.vim'
 " }
     Plugin 'Yggdroot/indentLine'
     Plugin 'a.vim'
@@ -172,14 +176,15 @@
     Plugin 'wesleyche/SrcExpl'
     Plugin 'ZoomWin'
     Plugin 'jeroenbourgois/vim-actionscript'
-" { color themes
-" --------------
+
+" * color themes {
+" ----------------
     Plugin 'jonathanfilip/lucius'
     Plugin 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
 " }
 
-" { Adding plugins for nodejs
-" ---------------------------
+" * Adding plugins for nodejs {
+" -----------------------------
 "   Require npm install -g js-beautify
     Plugin 'maksimr/vim-jsbeautify'
     Plugin 'einars/js-beautify'
@@ -204,9 +209,10 @@
     filetype plugin indent on   " required
 " }
 
+" ============================================================================== 
+"   - 0x03. General Display And Actions. -
+" ============================================================================== 
 
-" { - 0x03. General Display And Actions.
-" ======================================
 " set shortmess=atI
 
 " { 3.1. Editing Interface 
@@ -225,13 +231,22 @@
 
     if g:isGUI
         " au GUIEnter * simalt ~x
-        winpos 100 20
+        " winpos 100 20
         set columns=200
         set lines=60
-        "set guioptions-=m
+        set guioptions-=m
         set guioptions-=T
         set guioptions-=r
         set guioptions-=L
+
+        augroup VCenterCursor
+            au!
+            au BufEnter,WinEnter,WinNew,VimResized *,*.*
+                        \ let &scrolloff=winheight(win_getid())/2
+        augroup END
+
+        au! VCenterCursor
+        au VimEnter * normal zz
     endif
    
     set background=dark
@@ -282,7 +297,7 @@
 " }
 
 
-" { 3.2. Tabs and Indent 
+" 3.2. Tabs and Indent {
 " ----------------------
     set shiftwidth=4
     set tabstop=4
@@ -296,7 +311,7 @@
 " }
 
 
-" { 3.3. Search Options 
+" 3.3. Search Options {
 " ---------------------
     set showmatch
     set incsearch
@@ -306,7 +321,7 @@
 " }
 
 
-" { 3.4. File Options 
+" 3.4. File Options {
 " -------------------
     syntax on
     filetype on
@@ -339,7 +354,7 @@
     set backspace=indent,eol,start
 " } 
 
-" { 3.5. Code Folding
+" 3.5. Code Folding {
 " -------------------
     set foldenable
     set foldmethod=indent    "/marker/syntax"
@@ -358,7 +373,7 @@
 " }
 
 
-" { 3.6. Text Wrapping 
+" 3.6. Text Wrapping {
 " --------------------
     set writebackup
     set nobackup
@@ -374,13 +389,13 @@
 
 "au BufWinEnter * let w:m2=matchadd('Underlined', '\%>' . 80 . 'v.\+', -1)
 
-" { 3.7. Disable Beeping
+" 3.7. Disable Beeping {
 " ----------------------
     set noerrorbells visualbell t_vb=
     autocmd GUIEnter * set visualbell t_vb=
 " }
 
-" { 3.7. Pretreatment
+" 3.8. Pretreatment {
 " -------------------
 " autocmds to automatically enter hex mode and handle file writes properly
 if has("autocmd")
@@ -434,14 +449,24 @@ endif
 " refering from link http://vim.wikia.com/wiki/Improved_Hex_editing
 " }
 
+" 3.9. Make And Build {
+" ---------------------
+if has("autocmd") 
+    autocmd FileType python setlocal makeprg=python\ % 
+    if g:isWindows
+     "   autocmd FileType markdown setlocal makeprg=start "$ProgramFiles/Typora/Typora.exe"\ %
+     autocmd FileType markdown nmap <leader>mk :!start "C:/Program Files/Typora/Typora.exe"\ %<cr>
+    endif
+endif
+" }
+
+" ==============================================================================
+"   - 0x04. SETTINGS FOR PLUGINS. -
+" ==============================================================================
 
 
-" { - 0x04. SETTINGS FOR PLUGINS.
-" ===============================
-
-
-" { 4.1. plugins.vim-airline/vim-airline
-" --------------------------------------
+" { 4.1 plugins.vim-airline/vim-airline
+" ----------------------------------------
     let g:airline_theme ='cool'   " 'powerlineish'
     let g:airline#extensions#tabline#enabled = 1
     let g:airline#extensions#tabline#buffer_nr_show = 1
@@ -680,8 +705,8 @@ endif
 " ----------------------------------
     let g:startify_custom_header = [
             \ '  +--------------------------------------------------------------------------+   ',
-            \ ' /             --= NICK''s RESEARCH AND DEVELOPMENT STUDIO  =--                \  ',
-            \ ' |                          f911@fatework.io                                  | ',
+            \ ' /             --= F911''s RESEARCH AND DEVELOPMENT STUDIO  =--                \  ',
+            \ ' |                          0xf911@gmail.com                                  | ',
             \ ' |                          _            ___   ___                            | ',
             \ ' |                   __   _(_)_ __ ___  ( _ ) / _ \                           | ',
             \ ' |                   \ \ / / | ''_ ` _ \ / _ \| | | |                          | ',
@@ -693,8 +718,8 @@ endif
             \ ]
     let g:startify_custom_footer = [
             \ ' |                                                                            | ',
-            \ ' |                          f911@fatework.io                                  | ',
-            \ ' \             --=  NICK''s RESEARCH AND DEVELOPMENT STUDIO  =--               /  ',
+            \ ' |                          0xf911@gmail.com                                  | ',
+            \ ' \             --=  F911''s RESEARCH AND DEVELOPMENT STUDIO  =--               /  ',
             \ '  +--------------------------------------------------------------------------+ ',
             \ '',
             \ ]
@@ -702,8 +727,8 @@ endif
 " }
 
 
-" { - 0x05. Map Common Keyboard Shortcuts. 
-" ========================================
+" { - 0x05. Map Common Keyboard Shortcuts. -
+" ==========================================
 
     imap <C-a> <Esc>I
     imap <C-e> <ESC>A
