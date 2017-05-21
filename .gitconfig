@@ -1,8 +1,8 @@
 [user]
-	name = shiki
-	email = 
+	name = F911
+	email = 0xF911@gmail.com
 [core]
 	autocrlf = false
-	excludesfile = C:\\Users\\shiki\\Documents\\gitignore_global.txt
+	excludesfile = $HOME\\gitignore_global.txt
 [push]
 	default = simple
