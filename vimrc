@@ -4,8 +4,13 @@
 " VIM RESOURCE FILE :  ~\.vim\vimrc or %HOME%/vimfiles/vimrc
 " Creator           :  nick
 " Created           :  2014-10-04
+<<<<<<< HEAD
 " LastModified      :  2017-05-23
 " Version           :  v1.4.6
+=======
+" LastModified      :  2017-05-19
+" Version           :  v1.4.5
+>>>>>>> cb66eb2c97a93a37ff03b0c3c535974b1400e451
 " =============================================================================
 
 "           Platforms:
@@ -186,7 +191,7 @@
 " * Adding plugins for nodejs {
 " -----------------------------
 "   Require npm install -g js-beautify
-    Plugin 'maksimr/vim-jsbeautify'
+"    Plugin 'maksimr/vim-jsbeautify'
     Plugin 'einars/js-beautify'
    " Plugin 'walm/jshint'
 " }
@@ -245,6 +250,7 @@
                         \ let &scrolloff=winheight(win_getid())/2
         augroup END
 
+<<<<<<< HEAD
 
 
         function WindowCenterInScreen()
@@ -266,6 +272,8 @@
         endfunc
         au GUIEnter * call WindowCenterInScreen()
 
+=======
+>>>>>>> cb66eb2c97a93a37ff03b0c3c535974b1400e451
         au! VCenterCursor
         au VimEnter * normal zz
     endif
@@ -306,7 +314,8 @@
         set t_Co=256
         if g:isGUI
             colorscheme rainbow_neon
-            set guifont=Terminus\ 12
+            "set guifont=Terminus\ 12
+            set guifont=Terminess\ Powerline\ 12
         else
             colorscheme Tomorrow-Night
         endif
@@ -600,6 +609,7 @@ endif
 	elseif (g:isMac || g:isLinux)
         let g:editorconfig_Beautifier=expand('$HOME/.vim/.editorconfig')
 	else
+        let g:editorconfig_Beautifier=expand('$HOME/.vim/.editorconfig')
     endif
 " }
 
@@ -638,7 +648,7 @@ endif
     let g:syntastic_check_on_open = 1
     let g:syntastic_check_on_wq = 0
     if g:isWindows
-        let g:syntastic_python_python_exec = 'C:/Python27/'
+        let g:syntastic_python_python_exec = 'C:/Python36/'
     endif
 
     let g:syntastic_javascript_checkers = ['jshint']
@@ -679,7 +689,13 @@ endif
     let g:ycm_key_list_select_completion = ['<tab>', '<c-n>', '<Down>']
     let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
     let g:ycm_confirm_extra_conf = 0
+<<<<<<< HEAD
     let g:ycm_server_python_interpreter = 'C:\Python36\python.exe'
+=======
+    if g:isWindows
+        let g:ycm_server_python_interpreter = 'C:/Python36/python.exe'
+    endif
+>>>>>>> cb66eb2c97a93a37ff03b0c3c535974b1400e451
     "let $PYTHONPATH = "C:\\Program\ Files\\Python35\\Lib;C:\\Program\ Files\\Python35\\DLLs"
 
 
