@@ -9,6 +9,7 @@ indent/
 syntax/
 colors/
 doc/
+fonts/
 
 **/DS_Store*
 **/*.exe
