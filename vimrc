@@ -4,8 +4,8 @@
 " VIM RESOURCE FILE :  ~\.vim\vimrc or %HOME%/vimfiles/vimrc
 " Creator           :  nick
 " Created           :  2014-10-04
-" LastModified      :  2017-05-23
-" Version           :  v1.4.6
+" LastModified      :  2017-06-14
+" Version           :  v1.4.7
 " =============================================================================
 
 "           Platforms:
@@ -121,6 +121,7 @@
     Plugin 'airblade/vim-gitgutter'
 "   Plugin 'jmcantrell/vim-virtualenv'
     Plugin 'mbbill/fencview'
+    Plugin 'mbbill/undotree'
 " }
  
     Plugin 'mhinz/vim-startify'
@@ -144,6 +145,26 @@
 
     Plugin 'xolox/vim-shell'
     Plugin 'xolox/vim-misc'
+
+" * color themes {
+" ----------------
+    Plugin 'jonathanfilip/lucius'
+    Plugin 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
+" }
+
+    Plugin 'idanarye/vim-vebugger'
+
+" { auto code completion 
+" ----------------------
+    Plugin 'Valloric/YouCompleteMe'
+"   Plugin 'SirVer/ultisnips'o
+    Plugin 'honza/vim-snippets'
+" }
+
+"   full screen the window
+    Plugin 'derekmcloughlin/gvimfullscreen_win32'
+"   Plugin 'jistr/vim-nerdtree-tabs'
+    Plugin 'ryanoasis/vim-devicons'
 
 " * markdown plugins {
 " --------------------
@@ -177,11 +198,6 @@
     Plugin 'ZoomWin'
     Plugin 'jeroenbourgois/vim-actionscript'
 
-" * color themes {
-" ----------------
-    Plugin 'jonathanfilip/lucius'
-    Plugin 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
-" }
 
 " * Adding plugins for nodejs {
 " -----------------------------
@@ -191,19 +207,7 @@
    " Plugin 'walm/jshint'
 " }
 
-" { auto code completion 
-" ----------------------
-    Plugin 'Valloric/YouCompleteMe'
-"    Plugin 'SirVer/ultisnips'o
-
-    Plugin 'honza/vim-snippets'
-" }
-
-    " full screen the window
-    Plugin 'derekmcloughlin/gvimfullscreen_win32'
-   " Plugin 'jistr/vim-nerdtree-tabs'
-    Plugin 'ryanoasis/vim-devicons'
-    Plugin 'vim-nginx'
+    Plugin 'vim-nginx' " copy from nginx
 
     call vundle#end()           " required
     filetype plugin indent on   " required
@@ -585,12 +589,22 @@ endif
 " }
 
 
-" { 4.6. Modify the Window Size
+" 4.6. Modify the Window Size {
 " -----------------------------
     map <F12>   <Esc>:set columns=100<CR><Esc>:set lines=32<CR>
     map <S-F12> <Esc>:set columns=160<CR><Esc>:set lines=48<CR>
 " }
 
+
+
+" 4.x. plugins.mbbill/undotree {
+" ------------------------------
+    if has("persistent_undo")
+        set undodir=$HOME/.undo/
+        set undofile
+    endif
+    nnoremap <F5> :UndotreeToggle<CR>
+" }
 
 " { 4.7. plugins.maksimr/vim-jsbeautify
 " ----------------------------------
