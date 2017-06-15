@@ -15,7 +15,7 @@
 
 "           Sections:
 " - 0x01. Global Variable Definitions.
-" - 0x02. Vundle Plugins' List.
+" - 0x02. vim-plug Plugins' List.
 " - 0x03. General Display And Actions.
 " - 0x04. Vundle Plugins' Configuration. 
 " - 0x05. Key Mappings.
@@ -93,123 +93,124 @@
 "
     filetype off
     if g:isWindows 
-        set rtp+=$HOME/vimfiles/bundle/Vundle.vim/
-        call vundle#begin('$HOME/vimfiles/bundle/')
+        "set rtp+=$HOME/vimfiles/bundle/Vundle.vim/
+        "call vundle#begin('$HOME/vimfiles/bundle/')
+        call plug#begin('$HOME/vimfiles/plugged')
     elseif g:isMsys
-        set rtp+=$HOME/vimfiles/bundle/Vundle.vim
-        call vundle#begin('$HOME/vimfiles/bundle/')
+        "set rtp+=$HOME/vimfiles/bundle/Vundle.vim
+        "call vundle#begin('$HOME/vimfiles/bundle/')
     elseif g:isMac
-        set rtp+=~/.vim/bundle/Vundle.vim
-        call vundle#begin()
+        "set rtp+=~/.vim/bundle/Vundle.vim
+        "call vundle#begin()
     elseif g:isLinux
-        set rtp+=~/.vim/bundle/Vundle.vim
-        call vundle#begin()
+        "set rtp+=~/.vim/bundle/Vundle.vim
+        "call vundle#begin()
     else
-        set rtp+=~/.vim/bundle/Vundle.vim
-        call vundle#begin()
+        "set rtp+=~/.vim/bundle/Vundle.vim
+        "call vundle#begin()
     endif
 
-    Plugin 'VundleVim/Vundle.vim'
+"   Plugin 'VundleVim/Vundle.vim'o
 " * looks and productivity {
 " --------------------------
-    Plugin 'vim-airline/vim-airline'
-    Plugin 'vim-airline/vim-airline-themes'
-    Plugin 'ctrlpvim/ctrlp.vim'
-    Plugin 'Shougo/unite.vim'
-    Plugin 'majutsushi/tagbar'
-    Plugin 'chrisbra/csv.vim'
-    Plugin 'airblade/vim-gitgutter'
-"   Plugin 'jmcantrell/vim-virtualenv'
-    Plugin 'mbbill/fencview'
-    Plugin 'mbbill/undotree'
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
+    Plug 'ctrlpvim/ctrlp.vim'
+    Plug 'Shougo/unite.vim'
+    Plug 'majutsushi/tagbar'
+    Plug 'chrisbra/csv.vim'
+    Plug 'airblade/vim-gitgutter'
+"   Plug 'jmcantrell/vim-virtualenv'
+    Plug 'mbbill/fencview'
+    Plug 'mbbill/undotree'
 " }
  
-    Plugin 'mhinz/vim-startify'
-    Plugin 'mhinz/vim-tmuxify'
-    Plugin 'mhinz/vim-signify'
+    Plug 'mhinz/vim-startify'
+    Plug 'mhinz/vim-tmuxify'
+    Plug 'mhinz/vim-signify'
 
-    Plugin 'mattn/vimtweak'
-"   Plugin 'mattn/transparency-windows-vim'
-    Plugin 'mattn/emmet-vim'
+    Plug 'mattn/vimtweak'
+"   Plug 'mattn/transparency-windows-vim'
+    Plug 'mattn/emmet-vim'
     
-    Plugin 'edkolev/tmuxline.vim'
-    Plugin 'edkolev/promptline.vim'
+    Plug 'edkolev/tmuxline.vim'
+    Plug 'edkolev/promptline.vim'
 
-    Plugin 'scrooloose/nerdtree'
-    Plugin 'scrooloose/nerdcommenter'
-    Plugin 'scrooloose/syntastic'
+    Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
+    Plug 'scrooloose/nerdcommenter'
+    Plug 'scrooloose/syntastic'
    
-    Plugin 'tpope/vim-fugitive'
-    Plugin 'tpope/vim-surround'
-    Plugin 'tpope/vim-commentary'
+    Plug 'tpope/vim-fugitive'
+    Plug 'tpope/vim-surround'
+    Plug 'tpope/vim-commentary'
 
-    Plugin 'xolox/vim-shell'
-    Plugin 'xolox/vim-misc'
+    Plug 'xolox/vim-shell'
+    Plug 'xolox/vim-misc'
 
 " * color themes {
 " ----------------
-    Plugin 'jonathanfilip/lucius'
-    Plugin 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
+    Plug 'jonathanfilip/lucius'
+    Plug 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
 " }
 
-    Plugin 'idanarye/vim-vebugger'
+    Plug 'idanarye/vim-vebugger'
 
 " { auto code completion 
 " ----------------------
-    Plugin 'Valloric/YouCompleteMe'
-"   Plugin 'SirVer/ultisnips'o
-    Plugin 'honza/vim-snippets'
+    Plug 'Valloric/YouCompleteMe', {'do': './install.py --all'}
+"   Plug 'SirVer/ultisnips'o
+    Plug 'honza/vim-snippets'
 " }
 
 "   full screen the window
-    Plugin 'derekmcloughlin/gvimfullscreen_win32'
-"   Plugin 'jistr/vim-nerdtree-tabs'
-    Plugin 'ryanoasis/vim-devicons'
+    Plug 'derekmcloughlin/gvimfullscreen_win32'
+"   Plug 'jistr/vim-nerdtree-tabs'
+    Plug 'ryanoasis/vim-devicons'
 
 " * markdown plugins {
 " --------------------
-    Plugin 'godlygeek/tabular'
-"   Plugin 'plasticboy/vim-markdown'
-    Plugin 'vim-pandoc/vim-pandoc'
-    Plugin 'vim-pandoc/vim-pandoc-syntax'
-    Plugin 'vim-pandoc/vim-pandoc-after'
-    Plugin 'iamcco/mathjax-support-for-mkdp'
-    Plugin 'iamcco/markdown-preview.vim'
+    Plug 'godlygeek/tabular'
+"   Plug 'plasticboy/vim-markdown'
+    Plug 'vim-pandoc/vim-pandoc', {'for': 'markdown'}
+    Plug 'vim-pandoc/vim-pandoc-syntax', {'for': 'markdown'} 
+    Plug 'vim-pandoc/vim-pandoc-after', {'for': 'markdown'}
+    Plug 'iamcco/mathjax-support-for-mkdp', {'for': 'markdown'}
+    Plug 'iamcco/markdown-preview.vim', {'for': 'markdown'}
 " }
-    Plugin 'Yggdroot/indentLine'
-    Plugin 'a.vim'
-    Plugin 'Align'
-    Plugin 'bufexplorer.zip'
-    Plugin 'ccvext.vim'
-    Plugin 'cSyntaxAfter'
-    Plugin 'chase/vim-ansible-yaml'
+    Plug 'Yggdroot/indentLine'
+"   Plug 'a.vim'o
+    Plug 'vim-scripts/Align'
+    Plug 'vim-scripts/bufexplorer.zip'
+    Plug 'vim-scripts/ccvext.vim'
+    Plug 'vim-scripts/cSyntaxAfter'
+    Plug 'chase/vim-ansible-yaml'
     
-    Plugin 'jiangmiao/auto-pairs'
-    Plugin 'std_c.zip'
-    Plugin 'Shougo/neocomplcache.vim'
-    Plugin 'taglist.vim'
-    Plugin 'TxtBrowser'
-    Plugin 'Mark--Karkat'
-"    Plugin 'msanders/snipmate.vim' deprecated for compatible reasons with YCM
-    Plugin 'OmniCppComplete'
-    Plugin 'repeat.vim'
-    Plugin 'vim-javacompleteex'
-    Plugin 'wesleyche/SrcExpl'
-    Plugin 'ZoomWin'
-    Plugin 'jeroenbourgois/vim-actionscript'
+    Plug 'jiangmiao/auto-pairs'
+    Plug 'vim-scripts/std_c.zip'
+    Plug 'Shougo/neocomplcache.vim'
+    Plug 'vim-scripts/taglist.vim'
+    Plug 'vim-scripts/TxtBrowser'
+    Plug 'vim-scripts/Mark--Karkat'
+"   Plugin 'msanders/snipmate.vim' deprecated for compatible reasons with YCM
+    Plug 'vim-scripts/OmniCppComplete'
+    Plug 'vim-scripts/repeat.vim'
+    Plug 'artur-shaik/vim-javacomplete2'
+    Plug 'wesleyche/SrcExpl'
+    Plug 'vim-scripts/ZoomWin'
+    Plug 'jeroenbourgois/vim-actionscript'
 
 
 " * Adding plugins for nodejs {
 " -----------------------------
 "   Require npm install -g js-beautify
 "    Plugin 'maksimr/vim-jsbeautify'
-    Plugin 'einars/js-beautify'
+    Plug 'einars/js-beautify'
    " Plugin 'walm/jshint'
 " }
 
-    Plugin 'vim-nginx' " copy from nginx
+    Plug 'nginx/nginx', {'for': 'nginx', 'rtp': 'contrib/vim/'} 
 
-    call vundle#end()           " required
+    call plug#end()
     filetype plugin indent on   " required
 " }
 
