@@ -3,13 +3,14 @@
 # 
 
 .netrwhist
-bundle/
 ftplugin/
 indent/
 syntax/
 colors/
 doc/
 fonts/
+bundle/
+plugged/
 
 **/DS_Store*
 **/*.exe
