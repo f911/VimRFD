@@ -136,7 +136,8 @@
     Plug 'edkolev/tmuxline.vim'
     Plug 'edkolev/promptline.vim'
 
-    Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
+    Plug 'scrooloose/nerdtree'
+    Plug 'Xuyuanp/nerdtree-git-plugin'
     Plug 'scrooloose/nerdcommenter'
     Plug 'scrooloose/syntastic'
    
@@ -510,7 +511,7 @@ endif
 " }
 
 
-" { 4.2. plugins.yggdroot/indentline 
+" 4.2. plugins.yggdroot/indentline {
 " ----------------------------------
     nmap <leader>il :IndentLinesToggle<CR>
     let g:indentLine_enabled=1
@@ -525,28 +526,33 @@ endif
     endif
 " }
 
-" { 4.3. plugins.scrooloose/nerdtree 
+" 4.3. plugins.scrooloose/nerdtree {
 " ----------------------------------
     autocmd bufenter * if (winnr("$") == 1 && 
                 \ exists("b:NERDTreeType") && 
                 \ b:NERDTreeType == "primary") | q | 
                 \ endif
     if g:isWindows
-        let g:NERDTreeCopyCmd= 'copy '
+        let g:NERDTreeCopyCmd = 'copy '
     else
-        let g:NERDTreeCopyCmd= 'cp -r'
+        let g:NERDTreeCopyCmd = 'cp -r'
     endif
-    nmap <F2> :NERDTreeToggle ..<CR>
+    let g:NERDTreeMouseMode = 2
+    let g:NERDTreeWinSize   = 40
+    let g:NERDTreeMinimalUI = 1
+    let g:NERDTreeIgnore    = ['\*NTUSER*','\*ntuser*','\NTUSER.DAT','\ntuser.ini']
+
+    nmap <F2> :NERDTreeToggle .<CR>
 " }
 
 
-" { 4.4. plugins.derekmcloughlin/gvimfullscreen_win32 
+" 4.4. plugins.derekmcloughlin/gvimfullscreen_win32 {
 " ---------------------------------------------------
     map <F11> <Esc>:call libcallnr('gvimfullscreen.dll',
                 \ 'ToggleFullScreen', 0)<CR><C-L>
 " }
 
-" { 4.5. plugins.mattn/vimtweak
+" 4.5. plugins.mattn/vimtweak { 
 " -----------------------------
     if g:isWindows && g:isGUI
         "let g:alpha_value=242
@@ -817,5 +823,5 @@ endif
     source $VIMRUNTIME/menu.vim
 " }
 
-" vim: se ai si et ts=4 sw=4 ft=vim :
+" vim: se ai si et norl ts=4 sw=4 ft=vim ff=unix
 " EOF
