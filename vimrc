@@ -158,7 +158,7 @@
 
 " { auto code completion 
 " ----------------------
-    Plug 'Valloric/YouCompleteMe', {'do': './install.py --all'}
+    Plug 'Valloric/YouCompleteMe', {'do': 'install.py --all'}
 "   Plug 'SirVer/ultisnips'o
     Plug 'honza/vim-snippets'
 " }
@@ -210,6 +210,8 @@
 " }
 
     Plug 'nginx/nginx', {'for': 'nginx', 'rtp': 'contrib/vim/'} 
+
+    Plug 'asins/vimcdoc'
 
     call plug#end()
     filetype plugin indent on   " required
