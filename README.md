@@ -1,4 +1,46 @@
-# Vim A Real Big Game For Coder
+![vim-see-you](http://orig02.deviantart.net/a1f5/f/2009/363/1/8/vim_with_cleansing_action_by_carsonfire.jpg)
+============================
+
+The Big Vim Brother Is Watching You 
+
+usage
+-----
+
+* checkout corresponding branch, like Mac OS X is vim-on-mac
+
+```sh
+cd .vim
+git init
+git commit -a -m "first commit and prepare for merging"
+git remote add origin https://github.com/f911/vimfiles.git
+git pull 
+```
+
+after some merge you can push to your own forks
+
+* update submodules and install vim-plug
+
+You can use choose [Vundle](http://github.com/VundleVim/Vundle.Vim) instead, which is also a greate vim
+plugin manager. But vim-plug is seems to be a better choice by now, with faster speed and more update.
+
+
+```sh
+git submodule update --init --recursive
+cd ~/.vim/vim-plug
+ln plug.vim ../autoload/plug.vim
+```
+
+* update plugins
+
+open vim / gvim / mvim 
+
+```vim
+:PlugUpdate
+```
+
+
+Vim A Real Big Game For Coder
+----------------------------
 
 It seems that the "vim" could turns out to be a big game with endless adventures and tasks 
 for us, rather than a simple text editor. But the "vim" is in essence a simple text editor.
