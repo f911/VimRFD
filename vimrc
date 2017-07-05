@@ -1,49 +1,75 @@
 " ============================================================================
 " Copyright (C) 2014 nick All Rights Reserved
 "
-" VIM RESOURCE FILE :  .vim/vimrc or vimfiles/vimrc
-" Creator           :  nick
-" Created           :  2014-10-04
-" LastModify        :  2016-12-02
-" Version           :  v1.4
+"  
+" VIMRC:    This file contains optional runtime configuration settings to
+"           initialize Vim when it starts. It can customize the way vim run as. 
+"           The location usually comes to:
+"
+"               ~/.vim/vimrc on Linux / Mac OS X or
+"               %HOME%/vimfiles/vimrc on Windows
+"
+" Creator:  nick
+" Created:  2014-10-04
+" LastMod:  2017-07-05
+" Version:  v1.4.9
 " =============================================================================
 
 "           Platforms:
-" - Windows / MSYS
-" - Linux: test on CentOS / Unbuntu
-" - Mac OS X
+" + Windows / MSYS
+" + Linux: test on CentOS / Ubuntu / Kali
+" + Mac OS X
 
 "           Sections:
-" - 0x01. Global Variable Definitions.
-" - 0x02. Vundle Plugins' List.
-" - 0x03. General Display And Actions.
-" - 0x04. Vundle Plugins' Configuration. 
-" - 0x05. Key Mappings.
+" + 0x01. Global Variable Definitions.
+" + 0x02. vim-plug Plugin List.
+" + 0x03. General Display And Actions.
+" + 0x04. Plugins' Configuration. 
+" + 0x05. Key Mappings.
 
 "           Features:
-" - c/c++/bash
-" - vbscript 
-" - actionscript
-" - markdown
-" - nodejs
-" - YouCompleteMe (BugsFixed:python_interpreter_path:2016-11-07)
-" - NerdFonts
+" + c/c++/bash
+" + vbscript 
+" + actionscript
+" + markdown
+" + nodejs
+" + YouCompleteMe (BugsFixed:python_interpreter_path:2016-11-07)
+" + NerdFonts
 
 "           Changes:
-" - Adding YouCompleteMe Supports on Windows
-" - Can self compile the gvim-x64 using vs2015
-" - Add $HOME=X:\home to user environment variable, and $HOME\vimfiles\bin to PATH
-" - Accordingly change the user $PATH to right vimfiles\bin
+" + Adding YouCompleteMe Supports on Windows
+" + Can self compile the gvim-x64 using vs2015
+" + Add $HOME=X:\home to user environment variable, and $HOME\vimfiles\bin to PATH
+" + Accordingly change the user $PATH to right vimfiles\bin
+" + Update for vimtweak, 64 / 32
+" + [Disable beeping](http://vim.wikia.com/wiki/Disable_beeping)
 
 "           TODO_List:
-" - js's plugins configuration.
+" + js's plugins configuration. and .editorconfig missing error.
 
 "           Reference:
-" - http://www.oschina.net/code/snippet_574132_13357
+" + [first inspired by oschina](http://www.oschina.net/code/snippet_574132_13357)
+
+"           Debug:
+" + feature:
+"   - use `:help feature-list` to see all feature list, 
+"   - and `:version` to show which has clear about `options` and `features` 
+"   - use has({feature}) function like `:echo has("unix")` in vim-script's 
+"     program.
+" + option:
+"   - use `:se OPTION` like `se ft` to show current vim options set
+" + variable:
+"   - use `:echo VAR` like `echo g:isMac` or `echo $HOME` to show vim-script's
+"     variable value or environment variables' value
+" + unknowns
+"   - use [vim-wikia](http://vim.wikia.com/wiki/Vim_Tips_Wiki) for more tips
+"   - and [sof](https://stackoverflow.com/tags/vim/info) for community help
 
 
-" { - 0x01. Global Variable Definitions.
-" ====================================
+
+" ==============================================================================
+"   * 0x01. Global Variable Definitions. *
+" ==============================================================================
 "
 " +-----------+-----------+--------+-------+---------+
 " |           | isWindows | isMsys | isMac | isLinux |
@@ -60,8 +86,6 @@
     let g:isLinux   = 0
     let g:isGUI     = 0  " else isConsole
     
-"   use `:help feature-list` to see all feature list, and `:version` to show which has
-"   clear about `options` and `features` 
     if(has("win16") || has("win32") || has("win64") || has("win95"))
         let g:isWindows = 1
     elseif (has("win32unix") && $OS=="Windows_NT")
@@ -77,11 +101,10 @@
     else
         let g:isConsole = 1
     endif
-" }
 
-" { - 0x02. Vundle The Vim Plugin System. 
-" =======================================
-" 
+" ==============================================================================
+"   * 0x02. Vundle The Vim Plugin System. *
+" ==============================================================================
 " BRIEF:  see :h vundle for more details
 " :PluginList      - list configured plugins
 " :PluginInstall   - installs plugins; append '!' to update
@@ -92,123 +115,142 @@
 "
     filetype off
     if g:isWindows 
-        set rtp+=$HOME/vimfiles/bundle/Vundle.vim/
-        call vundle#begin('$HOME/vimfiles/bundle/')
+        "set rtp+=$HOME/vimfiles/bundle/Vundle.vim/
+        "call vundle#begin('$HOME/vimfiles/bundle/')
+        call plug#begin('$HOME/vimfiles/plugged')
     elseif g:isMsys
-        set rtp+=$HOME/vimfiles/bundle/Vundle.vim
-        call vundle#begin('$HOME/vimfiles/bundle/')
+        "set rtp+=$HOME/vimfiles/bundle/Vundle.vim
+        "call vundle#begin('$HOME/vimfiles/bundle/')
+        call plug#begin('$HOME/vimfiles/plugged')
     elseif g:isMac
-        set rtp+=~/.vim/bundle/Vundle.vim
-        call vundle#begin()
+        "set rtp+=~/.vim/bundle/Vundle.vim
+        "call vundle#begin()
+        call plug#begin('~/.vim/plugged')
     elseif g:isLinux
-        set rtp+=~/.vim/bundle/Vundle.vim
-        call vundle#begin()
+        "set rtp+=~/.vim/bundle/Vundle.vim
+        "call vundle#begin()
+        call plug#begin('~/.vim/plugged')
     else
-        set rtp+=~/.vim/bundle/Vundle.vim
-        call vundle#begin()
+        "set rtp+=~/.vim/bundle/Vundle.vim
+        "call vundle#begin()
+        call plug#begin('~/.vim/plugged')
     endif
 
-    Plugin 'VundleVim/Vundle.vim'
-    Plugin 'vim-airline/vim-airline'
-    Plugin 'vim-airline/vim-airline-themes'
-    Plugin 'ctrlpvim/ctrlp.vim'
-    Plugin 'Shougo/unite.vim'
-    Plugin 'majutsushi/tagbar'
-    Plugin 'chrisbra/csv.vim'
-    Plugin 'airblade/vim-gitgutter'
-"   Plugin 'jmcantrell/vim-virtualenv'
-    Plugin 'mbbill/fencview'
+"   Plugin 'VundleVim/Vundle.vim'o
+" + looks and productivity {
+" --------------------------
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
+    Plug 'ctrlpvim/ctrlp.vim'
+    Plug 'Shougo/unite.vim'
+    Plug 'majutsushi/tagbar'
+    Plug 'chrisbra/csv.vim'
+    Plug 'airblade/vim-gitgutter'
+"   Plug 'jmcantrell/vim-virtualenv'
+    Plug 'mbbill/fencview'
+    Plug 'mbbill/undotree'
+" }
+ 
+    Plug 'mhinz/vim-startify'
+    Plug 'mhinz/vim-tmuxify'
+    Plug 'mhinz/vim-signify'
 
-    Plugin 'mhinz/vim-startify'
-    Plugin 'mhinz/vim-tmuxify'
-    Plugin 'mhinz/vim-signify'
-
-    Plugin 'mattn/vimtweak'
-"   Plugin 'mattn/transparency-windows-vim'
-    Plugin 'mattn/emmet-vim'
+    Plug 'mattn/vimtweak'
+"   Plug 'mattn/transparency-windows-vim'
+    Plug 'mattn/emmet-vim'
     
-    Plugin 'edkolev/tmuxline.vim'
-    Plugin 'edkolev/promptline.vim'
+    Plug 'edkolev/tmuxline.vim'
+    Plug 'edkolev/promptline.vim'
 
-    Plugin 'scrooloose/nerdtree'
-    Plugin 'scrooloose/nerdcommenter'
-    Plugin 'scrooloose/syntastic'
+    Plug 'scrooloose/nerdtree'
+    Plug 'Xuyuanp/nerdtree-git-plugin'
+    Plug 'scrooloose/nerdcommenter'
+    Plug 'scrooloose/syntastic'
    
-    Plugin 'tpope/vim-fugitive'
-    Plugin 'tpope/vim-surround'
-    Plugin 'tpope/vim-commentary'
+    Plug 'tpope/vim-fugitive'
+    Plug 'tpope/vim-surround'
+    Plug 'tpope/vim-commentary'
 
-    Plugin 'xolox/vim-shell'
-    Plugin 'xolox/vim-misc'
+    Plug 'xolox/vim-shell'
+    Plug 'xolox/vim-misc'
 
-" { markdown plugins
-" ------------------
-    Plugin 'godlygeek/tabular'
-"   Plugin 'plasticboy/vim-markdown'
-    Plugin 'vim-pandoc/vim-pandoc'
-    Plugin 'vim-pandoc/vim-pandoc-syntax'
-    Plugin 'vim-pandoc/vim-pandoc-after'
+" + color themes {
+" ----------------
+    Plug 'jonathanfilip/lucius'
+    Plug 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
 " }
-    Plugin 'Yggdroot/indentLine'
-    Plugin 'a.vim'
-    Plugin 'Align'
-    Plugin 'bufexplorer.zip'
-    Plugin 'ccvext.vim'
-    Plugin 'cSyntaxAfter'
-    Plugin 'chase/vim-ansible-yaml'
+
+    Plug 'idanarye/vim-vebugger'
+
+" + auto code completion {
+" ------------------------
+    Plug 'Valloric/YouCompleteMe', {'do': 'install.py --all'}
+"   Plug 'SirVer/ultisnips'o
+    Plug 'honza/vim-snippets'
+" }
+
+"   full screen the window
+    Plug 'derekmcloughlin/gvimfullscreen_win32'
+"   Plug 'jistr/vim-nerdtree-tabs'
+    Plug 'ryanoasis/vim-devicons'
+
+" + markdown plugins {
+" --------------------
+    Plug 'godlygeek/tabular'
+"   Plug 'plasticboy/vim-markdown'
+    Plug 'vim-pandoc/vim-pandoc', {'for': 'markdown'}
+    Plug 'vim-pandoc/vim-pandoc-syntax', {'for': 'markdown'} 
+    Plug 'vim-pandoc/vim-pandoc-after', {'for': 'markdown'}
+    Plug 'iamcco/mathjax-support-for-mkdp', {'for': 'markdown'}
+    Plug 'iamcco/markdown-preview.vim', {'for': 'markdown'}
+" }
+    Plug 'Yggdroot/indentLine'
+"   Plug 'a.vim'o
+    Plug 'vim-scripts/Align'
+    Plug 'vim-scripts/bufexplorer.zip'
+    Plug 'vim-scripts/ccvext.vim'
+    Plug 'vim-scripts/cSyntaxAfter'
+    Plug 'chase/vim-ansible-yaml'
     
-    Plugin 'jiangmiao/auto-pairs'
-    Plugin 'std_c.zip'
-    Plugin 'Shougo/neocomplcache.vim'
-    Plugin 'taglist.vim'
-    Plugin 'TxtBrowser'
-    Plugin 'Mark--Karkat'
-"    Plugin 'msanders/snipmate.vim' deprecated for compatible reasons with YCM
-    Plugin 'OmniCppComplete'
-    Plugin 'repeat.vim'
-    Plugin 'vim-javacompleteex'
-    Plugin 'wesleyche/SrcExpl'
-    Plugin 'ZoomWin'
-    Plugin 'jeroenbourgois/vim-actionscript'
-" { color themes
-" --------------
-    Plugin 'jonathanfilip/lucius'
-    Plugin 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
-" }
+    Plug 'jiangmiao/auto-pairs'
+    Plug 'vim-scripts/std_c.zip'
+    Plug 'Shougo/neocomplcache.vim'
+    Plug 'vim-scripts/taglist.vim'
+    Plug 'vim-scripts/TxtBrowser'
+    Plug 'vim-scripts/Mark--Karkat'
+"   Plugin 'msanders/snipmate.vim' deprecated for compatible reasons with YCM
+    Plug 'vim-scripts/OmniCppComplete'
+    Plug 'vim-scripts/repeat.vim'
+    Plug 'artur-shaik/vim-javacomplete2'
+    Plug 'wesleyche/SrcExpl'
+    Plug 'vim-scripts/ZoomWin'
+    Plug 'jeroenbourgois/vim-actionscript'
 
-" { Adding plugins for nodejs
-" ---------------------------
+
+" + Adding plugins for nodejs {
+" -----------------------------
 "   Require npm install -g js-beautify
-    Plugin 'editorconfig/editorconfig-vim'
-    "Plugin 'maksimr/vim-jsbeautify'
-    Plugin 'einars/js-beautify'
+"    Plugin 'maksimr/vim-jsbeautify'
+    Plug 'einars/js-beautify'
    " Plugin 'walm/jshint'
 " }
 
-" { auto code completion 
-" ----------------------
-    Plugin 'Valloric/YouCompleteMe'
-    Plugin 'SirVer/ultisnips'
-    Plugin 'honza/vim-snippets'
-" }
+    Plug 'nginx/nginx', {'for': 'nginx', 'rtp': 'contrib/vim/'} 
 
-    " full screen the window
-    Plugin 'derekmcloughlin/gvimfullscreen_win32'
-   " Plugin 'jistr/vim-nerdtree-tabs'
-    Plugin 'ryanoasis/vim-devicons'
-    Plugin 'vim-nginx'
+    Plug 'asins/vimcdoc'
 
-    call vundle#end()           " required
+    call plug#end()
     filetype plugin indent on   " required
 " }
 
+" ============================================================================== 
+"   * 0x03. General Display And Actions. *
+" ============================================================================== 
 
-" { - 0x03. General Display And Actions.
-" ======================================
 " set shortmess=atI
 
-" { 3.1. Editing Interface 
-" ------------------------
+" + 3.1. Editing Interface {
+" --------------------------
     set number
     set ruler
     set laststatus=2        " always display statusline like airline
@@ -223,13 +265,41 @@
 
     if g:isGUI
         " au GUIEnter * simalt ~x
-        winpos 100 20
+        " winpos 100 20
         set columns=200
         set lines=60
-        "set guioptions-=m
+        set guioptions-=m
         set guioptions-=T
         set guioptions-=r
         set guioptions-=L
+
+        augroup VCenterCursor
+            au!
+            au BufEnter,WinEnter,WinNew,VimResized *,*.*
+                        \ let &scrolloff=winheight(win_getid())/2
+        augroup END
+
+        function WindowCenterInScreen()
+            set lines=9999 columns=9999
+            let g:windowsSizeFixX = 58
+            let g:windowsSizeFixY = 118
+            let g:windowsScaleX = 7.75
+            let g:windowsScaleY = 17.0
+            let g:windowsPosOldX = getwinposx()
+            let g:windowsPosOldY = getwinposy()
+            let g:windowsScreenWidth = float2nr(winwidth(0) * g:windowsScaleX) + g:windowsPosOldX + g:windowsSizeFixX
+            let g:windowsScreenHeight = float2nr(winheight(0) * g:windowsScaleY) + g:windowsPosOldY + g:windowsSizeFixY
+            set lines=50 columns=168
+            let g:windowsSizeWidth = float2nr(winwidth(0) * g:windowsScaleX) + g:windowsSizeFixX
+            let g:windowsSizeHeight = float2nr(winheight(0) * g:windowsScaleY) + g:windowsSizeFixY
+            let g:windowsPosX = ((g:windowsScreenWidth - g:windowsSizeWidth) / 2)
+            let g:windowsPosY = ((g:windowsScreenHeight - g:windowsSizeHeight) / 2)
+            exec ':winpos ' . g:windowsPosX . ' ' . g:windowsPosY
+        endfunc
+        au GUIEnter * call WindowCenterInScreen()
+
+        au! VCenterCursor
+        au VimEnter * normal zz
     endif
    
     set background=dark
@@ -243,7 +313,7 @@
         "    set guifontwide=PowerlineSymbols:h10
         "    set guifontwide=Meslo\ LG\ S\ for\ Powerline:h9
         "
-            set guifontwide=MesloLGS_NF:h9:cANSI:qDRAFT
+            "set guifontwide=MesloLGS_NF:h9:cANSI:qDRAFT
         else
             set t_Co=256
             colorscheme industry
@@ -269,7 +339,8 @@
         set t_Co=256
         if g:isGUI
             colorscheme rainbow_neon
-            set guifont=Terminus\ 12
+            "set guifont=Terminus\ 12
+            set guifont=Terminess\ Powerline\ 12
         else
             colorscheme Tomorrow-Night
         endif
@@ -281,7 +352,7 @@
 " }
 
 
-" { 3.2. Tabs and Indent 
+" 3.2. Tabs and Indent {
 " ----------------------
     set shiftwidth=4
     set tabstop=4
@@ -295,7 +366,7 @@
 " }
 
 
-" { 3.3. Search Options 
+" 3.3. Search Options {
 " ---------------------
     set showmatch
     set incsearch
@@ -305,7 +376,7 @@
 " }
 
 
-" { 3.4. File Options 
+" 3.4. File Options {
 " -------------------
     syntax on
     filetype on
@@ -338,7 +409,7 @@
     set backspace=indent,eol,start
 " } 
 
-" { 3.5. Code Folding
+" 3.5. Code Folding {
 " -------------------
     set foldenable
     set foldmethod=indent    "/marker/syntax"
@@ -357,7 +428,7 @@
 " }
 
 
-" { 3.6. Text Wrapping 
+" 3.6. Text Wrapping {
 " --------------------
     set writebackup
     set nobackup
@@ -373,8 +444,13 @@
 
 "au BufWinEnter * let w:m2=matchadd('Underlined', '\%>' . 80 . 'v.\+', -1)
 
+" 3.7. Disable Beeping {
+" ----------------------
+    set noerrorbells visualbell t_vb=
+    autocmd GUIEnter * set visualbell t_vb=
+" }
 
-" { 3.7. Pretreatment
+" 3.8. Pretreatment {
 " -------------------
 " autocmds to automatically enter hex mode and handle file writes properly
 if has("autocmd")
@@ -428,14 +504,24 @@ endif
 " refering from link http://vim.wikia.com/wiki/Improved_Hex_editing
 " }
 
+" 3.9. Make And Build {
+" ---------------------
+if has("autocmd") 
+    autocmd FileType python setlocal makeprg=python\ % 
+    if g:isWindows
+     "   autocmd FileType markdown setlocal makeprg=start "$ProgramFiles/Typora/Typora.exe"\ %
+     autocmd FileType markdown nmap <leader>mk :!start "C:/Program Files/Typora/Typora.exe"\ %<cr>
+    endif
+endif
+" }
+
+" ==============================================================================
+"   * 0x04. SETTINGS FOR PLUGINS. *
+" ==============================================================================
 
 
-" { - 0x04. SETTINGS FOR PLUGINS.
-" ===============================
-
-
-" { 4.1. plugins.vim-airline/vim-airline
-" --------------------------------------
+" + 4.1 plugins.vim-airline/vim-airline {
+" ---------------------------------------
     let g:airline_theme ='cool'   " 'powerlineish'
     let g:airline#extensions#tabline#enabled = 1
     let g:airline#extensions#tabline#buffer_nr_show = 1
@@ -454,8 +540,8 @@ endif
 " }
 
 
-" { 4.2. plugins.yggdroot/indentline 
-" ----------------------------------
+" + 4.2. plugins.yggdroot/indentline {
+" ------------------------------------
     nmap <leader>il :IndentLinesToggle<CR>
     let g:indentLine_enabled=1
     "let g:indentLine_char = '┊'
@@ -469,39 +555,46 @@ endif
     endif
 " }
 
-" { 4.3. plugins.scrooloose/nerdtree 
-" ----------------------------------
+" + 4.3. plugins.scrooloose/nerdtree {
+" ------------------------------------
     autocmd bufenter * if (winnr("$") == 1 && 
                 \ exists("b:NERDTreeType") && 
                 \ b:NERDTreeType == "primary") | q | 
                 \ endif
     if g:isWindows
-        let g:NERDTreeCopyCmd= 'copy '
+        let g:NERDTreeCopyCmd = 'copy '
     else
-        let g:NERDTreeCopyCmd= 'cp -r'
+        let g:NERDTreeCopyCmd = 'cp -r'
     endif
-    nmap <F2> :NERDTreeToggle ..<CR>
+    let g:NERDTreeMouseMode = 2
+    let g:NERDTreeWinSize   = 40
+    let g:NERDTreeMinimalUI = 1
+    let g:NERDTreeIgnore    = ['\*NTUSER*','\*ntuser*','\NTUSER.DAT','\ntuser.ini']
+
+    nmap <F2> :NERDTreeToggle .<CR>
 " }
 
 
-" { 4.4. plugins.derekmcloughlin/gvimfullscreen_win32 
-" ---------------------------------------------------
-    map <F11> <Esc>:call libcallnr('gvimfullscreen.dll',
+" + 4.4. plugins.derekmcloughlin/gvimfullscreen_win32 {
+" -----------------------------------------------------
+    if g:isWindows && g:isGUI
+        map <F11> <Esc>:call libcallnr('gvimfullscreen.dll',
                 \ 'ToggleFullScreen', 0)<CR><C-L>
+    endif
 " }
 
-" { 4.5. plugins.mattn/vimtweak
-" -----------------------------
+" + 4.5. plugins.mattn/vimtweak { 
+" -------------------------------
     if g:isWindows && g:isGUI
         "let g:alpha_value=242
         "call libcallnr("vimtweak.dll", "SetAlpha", 235)
-        "call libcallnr("vimtweak.dll", "EnableMaximize", 1)
+        " call libcallnr("vimtweak64.dll", "EnableMaximize", 1)
         "call libcallnr("vimtweak.dll", "EnableCaption", 1)
         "call libcallnr("vimtweak.dll", "EnableTopMost", 0)
 
         "autocmd FocusGained * call libcallnr("vimtweak.dll", "SetAlpha", 235)
-        autocmd FocusGained * call libcallnr("vimtweak.dll", "SetAlpha", 242)
-        autocmd FocusLost * call libcallnr("vimtweak.dll", "SetAlpha", 166)
+        autocmd FocusGained * call libcallnr("vimtweak64.dll", "SetAlpha", 242)
+        autocmd FocusLost * call libcallnr("vimtweak64.dll", "SetAlpha", 166)
         
         "function TweakWindowAlphaM(alpha_mod, sign)
         "    if sign == 1
@@ -525,22 +618,31 @@ endif
     "    augroup transparency_windows
     "      autocmd!
     "    augroup END
+        map <F10> <Esc>:call libcallnr('vimtweak64.dll', 'SetAlpha', 200)<CR>
+        "map <F10> <Esc>:call TweakWindowAlphaM(10,1)<CR>
+        map <S-F10> <Esc>:call libcallnr('vimtweak64.dll', 'SetAlpha', 242)<CR>
+        "map <S-F10> <Esc>:call TweakWindowAlphaM(10, 0)<CR>
+	    map <C-S-F10> <Esc>:call libcallnr('vimtweak64.dll', 'SetAlpha', 255)<CR>
     endif
-    map <F10> <Esc>:call libcallnr('vimtweak.dll', 'SetAlpha', 200)<CR>
-    "map <F10> <Esc>:call TweakWindowAlphaM(10,1)<CR>
-    map <S-F10> <Esc>:call libcallnr('vimtweak.dll', 'SetAlpha', 242)<CR>
-    "map <S-F10> <Esc>:call TweakWindowAlphaM(10, 0)<CR>
-	map <C-S-F10> <Esc>:call libcallnr('vimtweak.dll', 'SetAlpha', 255)<CR>
 " }
 
 
-" { 4.6. Modify the Window Size
-" -----------------------------
+" + 4.6. Modify the Window Size {
+" -------------------------------
     map <F12>   <Esc>:set columns=100<CR><Esc>:set lines=32<CR>
     map <S-F12> <Esc>:set columns=160<CR><Esc>:set lines=48<CR>
 " }
 
 
+
+" + 4.x. plugins.mbbill/undotree {
+" --------------------------------
+    if has("persistent_undo")
+        set undodir=$HOME/.undo/
+        set undofile
+        nnoremap <F5> :UndotreeToggle<CR>
+    endif
+" }
 
 " { 4.7. plugins.maksimr/vim-jsbeautify
 " ----------------------------------
@@ -549,13 +651,14 @@ endif
 	elseif (g:isMac || g:isLinux)
         let g:editorconfig_Beautifier=expand('$HOME/.vim/.editorconfig')
 	else
+        let g:editorconfig_Beautifier=expand('$HOME/.vim/.editorconfig')
     endif
 " }
 
 
 
-" { 4.8. plugins.for.markdown
-" ---------------------------
+" + 4.8. plugins.for.markdown {
+" -----------------------------
 " - plasticboy/vim-markdown 
 " - 
   "  au BufNewFile,BufFilePre,BufRead *.md setf markdown
@@ -574,8 +677,8 @@ endif
 " }
 
 
-" { 4.9. Plugins.scrooloose/syntastic 
-" -----------------------------------
+" + 4.9. Plugins.scrooloose/syntastic {
+" -------------------------------------
     set statusline+=%#warningmsg#
     if g:isWindows
         set statusline+=%{SyntasticStatuslineFlag()}
@@ -587,15 +690,15 @@ endif
     let g:syntastic_check_on_open = 1
     let g:syntastic_check_on_wq = 0
     if g:isWindows
-        let g:syntastic_python_python_exec = 'C:/Python27/'
+        let g:syntastic_python_python_exec = 'C:/Python36/'
     endif
 
     let g:syntastic_javascript_checkers = ['jshint']
 " }
 
 
-" { 4.10. plugins.kien/ctrlp 
-" --------------------------
+" + 4.10. plugins.kien/ctrlp {
+" ----------------------------
     let g:ctrlp_map = '<c-p>'
     let g:ctrlp_cmd = 'CtrlP'
     if exists("g:ctrl_user_command")
@@ -618,8 +721,8 @@ endif
 " }
 
 
-" { 4.11. plugins.Valloric/YouCompleteMe
-" --------------------------------------
+" + 4.11. plugins.Valloric/YouCompleteMe {
+" ----------------------------------------
 
     let g:ycm_complete_in_comments = 1
     let g:ycm_complete_in_strings = 1
@@ -628,8 +731,8 @@ endif
     let g:ycm_key_list_select_completion = ['<tab>', '<c-n>', '<Down>']
     let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
     let g:ycm_confirm_extra_conf = 0
-    if (g:isWindows || g:isMsys)
-        let g:ycm_server_python_interpreter = 'C:\Python35\python.exe'
+    if g:isWindows
+        let g:ycm_server_python_interpreter = 'C:/Python36/python.exe'
     endif
     "let $PYTHONPATH = "C:\\Program\ Files\\Python35\\Lib;C:\\Program\ Files\\Python35\\DLLs"
 
@@ -641,10 +744,10 @@ endif
 "   let g:SuperTabDefaultCompletionType = '<C-n>'
 "
 "   better key bindings for UltiSnipsExpandTrigger
-    let g:UltiSnipsExpandTrigger = "<tab>"
-    let g:UltiSnipsJumpForwardTrigger = "<c-b>"
-    let g:UltiSnipsJumpBackwardTrigger = "<c-z>"
-    let g:UltiSnipsEditSplit="vertical"
+"   let g:UltiSnipsExpandTrigger = "<tab>"
+"   let g:UltiSnipsJumpForwardTrigger = "<c-b>"
+"   let g:UltiSnipsJumpBackwardTrigger = "<c-z>"
+"   let g:UltiSnipsEditSplit="vertical"
 
 "    set completeopt=longest,menu
 "    autocmd InsertLeave * if pumvisible() == 0|pclose|endif
@@ -673,34 +776,35 @@ endif
 
 
 
-" { 4.12. plugins.mhinz/vim-startify
-" ----------------------------------
+" + 4.12. plugins.mhinz/vim-startify {
+" ------------------------------------
     let g:startify_custom_header = [
             \ '  +--------------------------------------------------------------------------+   ',
-            \ ' /             --= NICK''s RESEARCH AND DEVELOPMENT STUDIO  =--                \  ',
-            \ ' |                          f911@fatework.io                                  | ',
-            \ ' |                          _            ___   ___                            | ',
-            \ ' |                   __   _(_)_ __ ___  ( _ ) / _ \                           | ',
-            \ ' |                   \ \ / / | ''_ ` _ \ / _ \| | | |                          | ',
-            \ ' |                    \ V /| | | | | | | (_) | |_| |                          | ',
-            \ ' |                     \_/ |_|_| |_| |_|\___(_)___/                           | ',
+            \ ' /             --= F911''s RESEARCH AND DEVELOPMENT STUDIO  =--                \  ',
+            \ ' |                          0xf911@gmail.com                                  | ',
+            \ ' |                     .__            ______     _______                      | ',
+            \ ' |               ___  _|__| _____    /  __  \    \   _  \                     | ', 
+            \ ' |               \  \/ /  |/     \   >      <    /  /_\  \                    | ',
+            \ ' |                \   /|  |  Y Y  \ /   --   \   \  \_/   \                   | ',
+            \ ' |                 \_/ |__|__|_|  / \______  / /\ \_____  /                   | ',
+            \ ' |                              \/         \/  \/       \/                    | ',
             \ ' +----------------------------------------------------------------------------+ ',
             \ ' |                                                                            |',
             \ '',
             \ ]
     let g:startify_custom_footer = [
             \ ' |                                                                            | ',
-            \ ' |                          f911@fatework.io                                  | ',
-            \ ' \             --=  NICK''s RESEARCH AND DEVELOPMENT STUDIO  =--               /  ',
+            \ ' |                          0xf911@gmail.com                                  | ',
+            \ ' \             --=  F911''s RESEARCH AND DEVELOPMENT STUDIO  =--               /  ',
             \ '  +--------------------------------------------------------------------------+ ',
             \ '',
             \ ]
     map <leader>st <Esc>:Startify<CR>
 " }
 
-
-" { - 0x05. Map Common Keyboard Shortcuts. 
-" ========================================
+" ============================================================================== 
+"   * 0x05. Map Common Keyboard Shortcuts. *
+" ==============================================================================
 
     imap <C-a> <Esc>I
     imap <C-e> <ESC>A
@@ -742,13 +846,13 @@ endif
     "vnoremap <leader>gq :!pandoc -f html -t markdown <bar> pandoc -f markdown -t html<CR>
 " }
 
-" { fix messy code problem
-" ------------------------
+" + fix messy code problem {
+" --------------------------
     set langmenu=en_US.UTF-8
     let $LANG='en_US.utf-8'
     source $VIMRUNTIME/delmenu.vim
     source $VIMRUNTIME/menu.vim
 " }
 
-" vim: se ai si et ts=4 sw=4 ft=vim :
+" vim: se ai si et norl ts=4 sw=4 ft=vim ff=unix fenc=utf-8:
 " EOF

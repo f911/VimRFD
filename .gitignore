@@ -1,29 +1,37 @@
+#
 # .gitignore git ignore file for .vim / vimfiles folder
-# 
+# =====================================================
 
 .netrwhist
-bundle/
 ftplugin/
 indent/
 syntax/
+colors/
+doc/
+fonts/
+bundle/
+plugged/
+
 **/DS_Store*
 **/*.exe
 **/*.dll
 **/*.7z
+**.bak
 
 
-# -----------------------------------------------
-#   binary files needed for gvim x64 on windows
-# -----------------------------------------------
+# ---------------------------------------------------
+#   binary files needed for gvim x64 on windows, 
+#   which will be commented on Mac / Linux
+# ---------------------------------------------------
 
-#  !cscope.exe
-#  !ctags.exe
-#  !diff.exe
-#  !gvimfullscreen.dll
-#  !iconv.dll
-#  !vimtweak.dll
+# !cscope.exe
+# !ctags.exe
+# !diff.exe
+# !gvimfullscreen.dll
+# !iconv.dll
+# !vimtweak.dll
 
 
-# vim: se ai si et ts=4 sw=4 ft=conf
+# vim: se ai si et ts=4 sw=4 ft=conf ff=unix fenc=utf-8:
 # EOF
 
