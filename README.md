@@ -1,4 +1,26 @@
-# Vim A Real Big Game For Coder
+![vim-see-you](http://orig02.deviantart.net/a1f5/f/2009/363/1/8/vim_with_cleansing_action_by_carsonfire.jpg)
+============================
+
+The Big Vim Brother Is Watching You 
+
+usage
+-----
+
+* checkout corresponding branch, like Mac OS X is vim-on-mac
+
+* update submodules 
+
+    git submodule update --init --recursive
+	cd ~/.vim/vim-plug
+	ln plug.vim ../autoload/plug.vim
+
+* update plugins
+
+	:PlugUpdate
+
+
+Vim A Real Big Game For Coder
+----------------------------
 
 It seems that the "vim" could turns out to be a big game with endless adventures and tasks 
 for us, rather than a simple text editor. But the "vim" is in essence a simple text editor.
