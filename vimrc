@@ -268,7 +268,7 @@
         " winpos 100 20
         set columns=200
         set lines=60
-        set guioptions-=m
+        set guioptions-=m  " use :se go+=m to recall menu
         set guioptions-=T
         set guioptions-=r
         set guioptions-=L
@@ -305,7 +305,8 @@
     set background=dark
     if g:isWindows
         if g:isGUI
-            colorscheme rainbow_neon
+            "colorscheme rainbow_neon
+            colorscheme Tomorrow-Night-Eighties
             set guifont=MesloLGS_NF:h9:cANSI:qDRAFT
         "
         "    set guifont=Bitstream_Vera_Sans_Mono:h9.5
