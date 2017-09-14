@@ -184,7 +184,7 @@
 
 " + auto code completion {
 " ------------------------
-    Plug 'Valloric/YouCompleteMe', {'do': 'install.py --all'}
+    Plug 'Valloric/YouCompleteMe' 
 "   Plug 'SirVer/ultisnips'o
     Plug 'honza/vim-snippets'
 " }
@@ -241,6 +241,8 @@
 
     call plug#end()
     filetype plugin indent on   " required
+
+    map <leader>up <Esc>:PlugUpdate<CR>
 " }
 
 " ============================================================================== 
@@ -724,6 +726,15 @@ endif
 
 " + 4.11. plugins.Valloric/YouCompleteMe {
 " ----------------------------------------
+"   After vim-plug first install this plugin, you need to update submodules and install 
+"   required components, if you want to execute ./install.py --all satisfactorily. Of cause,
+"   different OS platform use different package manager. example commands may be bellow:
+" 
+"       cd ~/.vim/plugged/YouCompleteMe
+"       git submodule update --init --recursive
+"       sudo dnf install -y automake gcc gcc-c++ kernel-devel cmake \
+"                           python-devel python3-devel nodejs nodejs-devel \
+"                           go rust cargo cargo-devel
 
     let g:ycm_complete_in_comments = 1
     let g:ycm_complete_in_strings = 1
@@ -735,10 +746,9 @@ endif
     if g:isWindows
         let g:ycm_server_python_interpreter = 'C:/Python36/python.exe'
     endif
-    "let $PYTHONPATH = "C:\\Program\ Files\\Python35\\Lib;C:\\Program\ Files\\Python35\\DLLs"
 
-
-
+"   @deprecated:
+"   ------------
 "   make YCM compatible with UltiSnips (using supertab)
 "   let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 "   let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
@@ -750,27 +760,27 @@ endif
 "   let g:UltiSnipsJumpBackwardTrigger = "<c-z>"
 "   let g:UltiSnipsEditSplit="vertical"
 
-"    set completeopt=longest,menu
-"    autocmd InsertLeave * if pumvisible() == 0|pclose|endif
-"    inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
-"    inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
-"    inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
-"    inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<PageDown>"
-"    inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
+"   set completeopt=longest,menu
+"   autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+"   inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
+"   inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
+"   inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
+"   inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<PageDown>"
+"   inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
 "
-"    "youcompleteme  default tab  s-tab is comfict with vim autocomplete
-"    "let g:ycm_key_list_select_completion=['<c-n>']
-"    let g:ycm_key_list_select_completion = ['<Tab>']
-"    "let g:ycm_key_list_previous_completion=['<c-p>']
-"    let g:ycm_key_list_previous_completion = ['<Up>']
-"    let g:ycm_confirm_extra_conf=0   " close load .ycm_extra_conf.py notice
+"   "youcompleteme  default tab  s-tab is comfict with vim autocomplete
+"   "let g:ycm_key_list_select_completion=['<c-n>']
+"   let g:ycm_key_list_select_completion = ['<Tab>']
+"   "let g:ycm_key_list_previous_completion=['<c-p>']
+"   let g:ycm_key_list_previous_completion = ['<Up>']
+"   let g:ycm_confirm_extra_conf=0   " close load .ycm_extra_conf.py notice
 "
-"    let g:ycm_collect_identifiers_from_tags_files=1 
-"    let g:ycm_min_num_of_chars_for_completion=2 
-"    let g:ycm_cache_omnifunc=0  
-"    let g:ycm_seed_identifiers_with_syntax=1    
-"     nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>    "force recomile with syntastic
-"    nnoremap <leader>lo :lopen<CR> "open locationlist
+"   let g:ycm_collect_identifiers_from_tags_files=1 
+"   let g:ycm_min_num_of_chars_for_completion=2 
+"   let g:ycm_cache_omnifunc=0  
+"   let g:ycm_seed_identifiers_with_syntax=1    
+"    nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>    "force recomile with syntastic
+"   nnoremap <leader>lo :lopen<CR> "open locationlist
 " }
 
 
@@ -823,16 +833,15 @@ endif
     map <C-s> :w
     
     if g:isWindows
-        nmap <leader>e :tabnew $HOME/vimfiles/vimrc<CR>
+        nmap <leader>rc :tabnew $HOME/vimfiles/vimrc<CR>
     elseif g:isMsys
-        nmap <leader>e :tabnew $HOME/vimfiles/vimrc<CR>
-    else
-        nmap <leader>e :tabnew ~/.vim/vimrc<CR>
+        nmap <leader>rc :tabnew $HOME/vimfiles/vimrc<CR>
+    else " linux & Mac
+        nmap <leader>rc :vsplit ~/.vim/vimrc<CR>
     endif
     
     nmap <leader>t :tabnew<CR>
     nmap <leader>nl <ESC>:nohl<CR>
-    map <leader>up <Esc>:PluginUpdate<CR>
     
     nmap <C-Tab> <Esc>gt
     nmap <C-S-Tab> <Esc>gT
