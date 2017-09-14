@@ -1,18 +1,22 @@
-" ============================================================================
-" Copyright (C) 2014 nick All Rights Reserved
+" ==============================================================================
+" F911'S RESEARCH AND DEVELOPMENT STUDIO PRODUCED ( F911-R&D.SP )               
+" ------------------------------------------------------------------------------
 "
-"  
-" VIMRC:    This file contains optional runtime configuration settings to
+" Project:  vimfiles - vim resource files' directory
+
+" FileDes:  This file contains optional runtime configuration settings to
 "           initialize Vim when it starts. It can customize the way vim run as. 
 "           The location usually comes to:
 "
-"               ~/.vim/vimrc on Linux / Mac OS X or
-"               %HOME%/vimfiles/vimrc on Windows
+"           ~/.vim/vimrc on Linux and Mac OS X or \
+"           %HOME%/vimfiles/vimrc on Windows or \
+"           $HOME/vimfiles/vimrc on Msys
 "
-" Creator:  nick
+" Creator:  F911 <0xf911@gmail.com>
 " Created:  2014-10-04
-" LastMod:  2017-07-05
-" Version:  v1.4.9
+" LastMod:  2017-09-15
+" Version:  v1.5.0
+" License:  MIT (c) [@F911](https://github.com/f911)
 " =============================================================================
 
 "           Platforms:
@@ -22,9 +26,9 @@
 
 "           Sections:
 " + 0x01. Global Variable Definitions.
-" + 0x02. vim-plug Plugin List.
-" + 0x03. General Display And Actions.
-" + 0x04. Plugins' Configuration. 
+" + 0x02. VIM-PLUG The Vim Plugin System.
+" + 0x03. General Display And Action Styles.
+" + 0x04. Setting For Plugins.
 " + 0x05. Key Mappings.
 
 "           Features:
@@ -43,12 +47,22 @@
 " + Accordingly change the user $PATH to right vimfiles\bin
 " + Update for vimtweak, 64 / 32
 " + [Disable beeping](http://vim.wikia.com/wiki/Disable_beeping)
+" + Upgrade to VIM 8.0 by both source building and packge installation.
+" + Change plugin manager from Vundle to vim-plug, thanks Vundle, which still inspirational.
+" + Adding YouCompleteMe requirements illustruction, now ./install.py --all is OK.
+" + Change file header style, drop old Copyright hug new License and Banner for honour.
+" + Change comments' style to Markdown syntax like.
+
 
 "           TODO_List:
 " + js's plugins configuration. and .editorconfig missing error.
+" + An excellent README is needed for this project and others
+" + Key mappings need readjusments.
 
 "           Reference:
-" + [first inspired by oschina](http://www.oschina.net/code/snippet_574132_13357)
+" + [oschina](http://www.oschina.net/code/snippet_574132_13357)
+" + [github-dotfile-dotrc](https://github.com)
+" + [vim-wikia](http://vim.wikia.com/wiki/Vim_Tips_Wiki)
 
 "           Debug:
 " + feature:
@@ -66,10 +80,11 @@
 "   - and [sof](https://stackoverflow.com/tags/vim/info) for community help
 
 
-
-" ==============================================================================
-"   * 0x01. Global Variable Definitions. *
-" ==============================================================================
+" * **0x01. Global Variable Definitions.**
+" ========================================
+"
+" Detect OS type, GUI environment and set the base variables, this vim resource file support
+" platform can be bellow:
 "
 " +-----------+-----------+--------+-------+---------+
 " |           | isWindows | isMsys | isMac | isLinux |
@@ -78,7 +93,8 @@
 " +-----------+-----------+--------+-------+---------+
 " | isConsole |           |        |       |         |
 " +-----------+-----------+--------+-------+---------+
-
+"     _tab1-1:supported platforms_
+" "
     set nocompatible
     let g:isWindows = 0
     let g:isMsys    = 0
@@ -102,41 +118,52 @@
         let g:isConsole = 1
     endif
 
-" ==============================================================================
-"   * 0x02. Vundle The Vim Plugin System. *
-" ==============================================================================
-" BRIEF:  see :h vundle for more details
-" :PluginList      - list configured plugins
-" :PluginInstall   - installs plugins; append '!' to update
-" :PluginUpdate    - equal :PluginInstall!
-" :PluginClean     - confirms removal of unused plugins; append '!' to 
-"                    auto-appove
-" Plugin 'XXXX' equals Plugin 'https://github.com/vim-scrips/XXXX.git'
+" * ** 0x02. VIM-PLUG The Vim Plugin System.**
+" ==========================================
 "
+" see :h vim-plug for more details
+" useful commands from vim-plug README.md
+" +-------------------------------+---------------------------------------------+
+" | Command                       | Description                                 |
+" |-------------------------------+---------------------------------------------+
+" | PlugInstall [name] [#threads] | Install plugins                             |
+" | PlugUpdate [name] [#threads]  | Install or update plugins                   |
+" | PlugClean[!]                  | Remove unused directories \                 |
+" |                               | (bang version will clean without prompt)    |
+" | PlugUpgrade                   | Upgrade vim-plug itself                     |
+" | PlugStatus                    | Check the status of plugins                 |
+" | PlugDiff                      | Examine changes from the previous update \  |
+" |                               | and the pending changes                     |
+" | PlugSnapshot[!] [output path] | Generate script for restoring the current \ |
+" |                               | snapshot of the plugins                     |
+" +-------------------------------+---------------------------------------------+
+"     _tab2-1:vim-plug commands_
+" "
     filetype off
     if g:isWindows 
-        "set rtp+=$HOME/vimfiles/bundle/Vundle.vim/
-        "call vundle#begin('$HOME/vimfiles/bundle/')
+        "set rtp+=$HOME/vimfiles/bundle/Vundle.vim/ x
+        "call vundle#begin('$HOME/vimfiles/bundle/') x
         call plug#begin('$HOME/vimfiles/plugged')
     elseif g:isMsys
-        "set rtp+=$HOME/vimfiles/bundle/Vundle.vim
-        "call vundle#begin('$HOME/vimfiles/bundle/')
+        "set rtp+=$HOME/vimfiles/bundle/Vundle.vim x
+        "call vundle#begin('$HOME/vimfiles/bundle/') x
         call plug#begin('$HOME/vimfiles/plugged')
     elseif g:isMac
-        "set rtp+=~/.vim/bundle/Vundle.vim
-        "call vundle#begin()
+        "set rtp+=~/.vim/bundle/Vundle.vim x
+        "call vundle#begin() x
         call plug#begin('~/.vim/plugged')
     elseif g:isLinux
-        "set rtp+=~/.vim/bundle/Vundle.vim
-        "call vundle#begin()
+        "set rtp+=~/.vim/bundle/Vundle.vim x
+        "call vundle#begin() x
         call plug#begin('~/.vim/plugged')
     else
-        "set rtp+=~/.vim/bundle/Vundle.vim
-        "call vundle#begin()
+        "set rtp+=~/.vim/bundle/Vundle.vim x
+        "call vundle#begin() x
         call plug#begin('~/.vim/plugged')
     endif
 
-"   Plugin 'VundleVim/Vundle.vim'o
+"   Plugin 'VundleVim/Vundle.vim'x
+
 " + looks and productivity {
 " --------------------------
     Plug 'vim-airline/vim-airline'
@@ -230,9 +257,9 @@
 " + Adding plugins for nodejs {
 " -----------------------------
 "   Require npm install -g js-beautify
-"    Plugin 'maksimr/vim-jsbeautify'
+"   Plug 'maksimr/vim-jsbeautify'
     Plug 'einars/js-beautify'
-   " Plugin 'walm/jshint'
+"   Plug 'walm/jshint'
 " }
 
     Plug 'nginx/nginx', {'for': 'nginx', 'rtp': 'contrib/vim/'} 
@@ -245,9 +272,9 @@
     map <leader>up <Esc>:PlugUpdate<CR>
 " }
 
-" ============================================================================== 
-"   * 0x03. General Display And Actions. *
-" ============================================================================== 
+
+" * **0x03. General Display And Action Styles.**
+" ==============================================
 
 " set shortmess=atI
 
@@ -262,8 +289,7 @@
     hi CursorLine term=underline cterm=underline guibg=#3A3A3A
     hi CursorLine ctermbg=darkgrey guibg=gray13
 
-    set colorcolumn=100
-    "hi 
+    set colorcolumn=120
 
     if g:isGUI
         " au GUIEnter * simalt ~x
@@ -355,8 +381,8 @@
 " }
 
 
-" 3.2. Tabs and Indent {
-" ----------------------
+" + 3.2. Tabs and Indent {
+" ------------------------
     set shiftwidth=4
     set tabstop=4
     set expandtab
@@ -369,8 +395,8 @@
 " }
 
 
-" 3.3. Search Options {
-" ---------------------
+" + 3.3. Search Options {
+" -----------------------
     set showmatch
     set incsearch
     set ignorecase
@@ -379,8 +405,8 @@
 " }
 
 
-" 3.4. File Options {
-" -------------------
+" + 3.4. File Options {
+" ---------------------
     syntax on
     filetype on
     filetype plugin on
@@ -412,8 +438,8 @@
     set backspace=indent,eol,start
 " } 
 
-" 3.5. Code Folding {
-" -------------------
+" + 3.5. Code Folding {
+" ---------------------
     set foldenable
     set foldmethod=indent    "/marker/syntax"
     set foldcolumn=1
@@ -431,8 +457,8 @@
 " }
 
 
-" 3.6. Text Wrapping {
-" --------------------
+" + 3.6. Text Wrapping {
+" ----------------------
     set writebackup
     set nobackup
     set noswapfile          " use version control insead
@@ -445,83 +471,83 @@
     set autochdir
 " }
 
-"au BufWinEnter * let w:m2=matchadd('Underlined', '\%>' . 80 . 'v.\+', -1)
+" au BufWinEnter * let w:m2=matchadd('Underlined', '\%>' . 80 . 'v.\+', -1)
 
-" 3.7. Disable Beeping {
-" ----------------------
+" + 3.7. Disable Beeping {
+" ------------------------
     set noerrorbells visualbell t_vb=
     autocmd GUIEnter * set visualbell t_vb=
 " }
 
-" 3.8. Pretreatment {
-" -------------------
-" autocmds to automatically enter hex mode and handle file writes properly
-if has("autocmd")
-  " vim -b : edit binary using xxd-format!
-  augroup Binary
-    au!
-
-    " set binary option for all binary files before reading them
-    au BufReadPre *.bin,*.hex,*.exe,*.dll setlocal binary
-
-    " if on a fresh read the buffer variable is already set, it's wrong
-    au BufReadPost *
-          \ if exists('b:editHex') && b:editHex |
-          \   let b:editHex = 0 |
-          \ endif
-
-    " convert to hex on startup for binary files automatically
-    au BufReadPost *
-          \ if &binary | Hexmode | endif
-
-    " When the text is freed, the next time the buffer is made active it will
-    " re-read the text and thus not match the correct mode, we will need to
-    " convert it again if the buffer is again loaded.
-    au BufUnload *
-          \ if getbufvar(expand("<afile>"), 'editHex') == 1 |
-          \   call setbufvar(expand("<afile>"), 'editHex', 0) |
-          \ endif
-
-    " before writing a file when editing in hex mode, convert back to non-hex
-    au BufWritePre *
-          \ if exists("b:editHex") && b:editHex && &binary |
-          \  let oldro=&ro | let &ro=0 |
-          \  let oldma=&ma | let &ma=1 |
-          \  silent exe "%!xxd -r" |
-          \  let &ma=oldma | let &ro=oldro |
-          \  unlet oldma | unlet oldro |
-          \ endif
-
-    " after writing a binary file, if we're in hex mode, restore hex mode
-    au BufWritePost *
-          \ if exists("b:editHex") && b:editHex && &binary |
-          \  let oldro=&ro | let &ro=0 |
-          \  let oldma=&ma | let &ma=1 |
-          \  silent exe "%!xxd" |
-          \  exe "set nomod" |
-          \  let &ma=oldma | let &ro=oldro |
-          \  unlet oldma | unlet oldro |
-          \ endif
-  augroup END
-endif
-" refering from link http://vim.wikia.com/wiki/Improved_Hex_editing
-" }
-
-" 3.9. Make And Build {
+" + 3.8. Pretreatment {
 " ---------------------
-if has("autocmd") 
-    autocmd FileType python setlocal makeprg=python\ % 
-    if g:isWindows
-     "   autocmd FileType markdown setlocal makeprg=start "$ProgramFiles/Typora/Typora.exe"\ %
-     autocmd FileType markdown nmap <leader>mk :!start "C:/Program Files/Typora/Typora.exe"\ %<cr>
+"   autocmds to automatically enter hex mode and handle file writes properly
+    if has("autocmd")
+      " vim -b : edit binary using xxd-format!
+      augroup Binary
+        au!
+    
+        " set binary option for all binary files before reading them
+        au BufReadPre *.bin,*.hex,*.exe,*.dll setlocal binary
+    
+        " if on a fresh read the buffer variable is already set, it's wrong
+        au BufReadPost *
+              \ if exists('b:editHex') && b:editHex |
+              \   let b:editHex = 0 |
+              \ endif
+    
+        " convert to hex on startup for binary files automatically
+        au BufReadPost *
+              \ if &binary | Hexmode | endif
+    
+        " When the text is freed, the next time the buffer is made active it will
+        " re-read the text and thus not match the correct mode, we will need to
+        " convert it again if the buffer is again loaded.
+        au BufUnload *
+              \ if getbufvar(expand("<afile>"), 'editHex') == 1 |
+              \   call setbufvar(expand("<afile>"), 'editHex', 0) |
+              \ endif
+    
+        " before writing a file when editing in hex mode, convert back to non-hex
+        au BufWritePre *
+              \ if exists("b:editHex") && b:editHex && &binary |
+              \  let oldro=&ro | let &ro=0 |
+              \  let oldma=&ma | let &ma=1 |
+              \  silent exe "%!xxd -r" |
+              \  let &ma=oldma | let &ro=oldro |
+              \  unlet oldma | unlet oldro |
+              \ endif
+    
+        " after writing a binary file, if we're in hex mode, restore hex mode
+        au BufWritePost *
+              \ if exists("b:editHex") && b:editHex && &binary |
+              \  let oldro=&ro | let &ro=0 |
+              \  let oldma=&ma | let &ma=1 |
+              \  silent exe "%!xxd" |
+              \  exe "set nomod" |
+              \  let &ma=oldma | let &ro=oldro |
+              \  unlet oldma | unlet oldro |
+              \ endif
+      augroup END
     endif
-endif
+"   refering from link http://vim.wikia.com/wiki/Improved_Hex_editing
 " }
 
-" ==============================================================================
-"   * 0x04. SETTINGS FOR PLUGINS. *
-" ==============================================================================
+" + 3.9. Make And Build {
+" -----------------------
+    if has("autocmd") 
+        autocmd FileType python setlocal makeprg=python\ % 
+        if g:isWindows
+         "   autocmd FileType markdown setlocal makeprg=start "$ProgramFiles/Typora/Typora.exe"\ %
+         autocmd FileType markdown nmap <leader>mk :!start "C:/Program Files/Typora/Typora.exe"\ %<cr>
+        endif
+    endif
+" }
 
+
+
+" * **0x04. Setting For Plugins.**
+" ================================
 
 " + 4.1 plugins.vim-airline/vim-airline {
 " ---------------------------------------
@@ -541,7 +567,6 @@ endif
     nnoremap <C-N> :bn<CR>
     nnoremap <C-P> :bp<CR>
 " }
-
 
 " + 4.2. plugins.yggdroot/indentline {
 " ------------------------------------
@@ -576,7 +601,6 @@ endif
 
     nmap <F2> :NERDTreeToggle .<CR>
 " }
-
 
 " + 4.4. plugins.derekmcloughlin/gvimfullscreen_win32 {
 " -----------------------------------------------------
@@ -637,8 +661,7 @@ endif
 " }
 
 
-
-" + 4.x. plugins.mbbill/undotree {
+" + 4.7. plugins.mbbill/undotree {
 " --------------------------------
     if has("persistent_undo")
         set undodir=$HOME/.undo/
@@ -647,8 +670,8 @@ endif
     endif
 " }
 
-" { 4.7. plugins.maksimr/vim-jsbeautify
-" ----------------------------------
+" + 4.8. plugins.maksimr/vim-jsbeautify {
+" ---------------------------------------
     if (g:isWindows || g:isMsys)
         let g:editorconfig_Beautifier=expand('$HOME/vimfiles/.editorconfig')
 	elseif (g:isMac || g:isLinux)
@@ -660,11 +683,11 @@ endif
 
 
 
-" + 4.8. plugins.for.markdown {
+" + 4.9. plugins.for.markdown {
 " -----------------------------
 " - plasticboy/vim-markdown 
 " - 
-  "  au BufNewFile,BufFilePre,BufRead *.md setf markdown
+"   au BufNewFile,BufFilePre,BufRead *.md setf markdown
     au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown.pandoc
     let g:vim_markdown_folding_disabled=1 " Markdown
     let g:vim_markdown_math=1
@@ -680,8 +703,8 @@ endif
 " }
 
 
-" + 4.9. Plugins.scrooloose/syntastic {
-" -------------------------------------
+" + 4.10. Plugins.scrooloose/syntastic {
+" --------------------------------------
     set statusline+=%#warningmsg#
     if g:isWindows
         set statusline+=%{SyntasticStatuslineFlag()}
@@ -700,7 +723,7 @@ endif
 " }
 
 
-" + 4.10. plugins.kien/ctrlp {
+" + 4.11. plugins.kien/ctrlp {
 " ----------------------------
     let g:ctrlp_map = '<c-p>'
     let g:ctrlp_cmd = 'CtrlP'
@@ -724,8 +747,9 @@ endif
 " }
 
 
-" + 4.11. plugins.Valloric/YouCompleteMe {
+" + 4.12. plugins.Valloric/YouCompleteMe {
 " ----------------------------------------
+"
 "   After vim-plug first install this plugin, you need to update submodules and install 
 "   required components, if you want to execute ./install.py --all satisfactorily. Of cause,
 "   different OS platform use different package manager. example commands may be bellow:
@@ -787,12 +811,13 @@ endif
 
 
 
-" + 4.12. plugins.mhinz/vim-startify {
+" + 4.13. plugins.mhinz/vim-startify {
 " ------------------------------------
+"
     let g:startify_custom_header = [
             \ '  +--------------------------------------------------------------------------+   ',
-            \ ' /             --= F911''s RESEARCH AND DEVELOPMENT STUDIO  =--                \  ',
-            \ ' |                          0xf911@gmail.com                                  | ',
+            \ ' / =*=[ F911''S RESEARCH AND DEVELOPMENT STUDIO PRODUCED ( F911-R&D.SP ) ]=*=  \  ',
+            \ ' |----------------------------------------------------------------------------| ',
             \ ' |                     .__            ______     _______                      | ',
             \ ' |               ___  _|__| _____    /  __  \    \   _  \                     | ', 
             \ ' |               \  \/ /  |/     \   >      <    /  /_\  \                    | ',
@@ -805,17 +830,18 @@ endif
             \ ]
     let g:startify_custom_footer = [
             \ ' |                                                                            | ',
-            \ ' |                          0xf911@gmail.com                                  | ',
-            \ ' \             --=  F911''s RESEARCH AND DEVELOPMENT STUDIO  =--               /  ',
+            \ ' |----------------------------------------------------------------------------| ',
+            \ ' \ =*=[ F911''S RESEARCH AND DEVELOPMENT STUDIO PRODUCED ( F911-R&D.SP ) ]=*= /  ',
             \ '  +--------------------------------------------------------------------------+ ',
             \ '',
             \ ]
     map <leader>st <Esc>:Startify<CR>
 " }
 
-" ============================================================================== 
-"   * 0x05. Map Common Keyboard Shortcuts. *
-" ==============================================================================
+
+
+" * **0x05. Key Mappings.**
+" =========================
 
     imap <C-a> <Esc>I
     imap <C-e> <ESC>A
@@ -864,5 +890,5 @@ endif
     source $VIMRUNTIME/menu.vim
 " }
 
-" vim: se ai si et norl ts=4 sw=4 ft=vim ff=unix fenc=utf-8:
+" vim:ai:si:et:ts=4:sw=4:ft=vim:ff=unix:fenc=utf-8:norl:
 " EOF
