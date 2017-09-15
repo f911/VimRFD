@@ -19,19 +19,19 @@
 " License:  MIT (c) [@F911](https://github.com/f911)
 " =============================================================================
 
-"           Platforms:
+" Platforms:
 " + Windows / MSYS
 " + Linux: test on CentOS / Ubuntu / Kali
 " + Mac OS X
 
-"           Sections:
+" Sections:
 " + 0x01. Global Variable Definitions.
 " + 0x02. VIM-PLUG The Vim Plugin System.
 " + 0x03. General Display And Action Styles.
 " + 0x04. Setting For Plugins.
 " + 0x05. Key Mappings.
 
-"           Features:
+" Features:
 " + c/c++/bash
 " + vbscript 
 " + actionscript
@@ -40,7 +40,7 @@
 " + YouCompleteMe (BugsFixed:python_interpreter_path:2016-11-07)
 " + NerdFonts
 
-"           Changes:
+" Changes:
 " + Adding YouCompleteMe Supports on Windows
 " + Can self compile the gvim-x64 using vs2015
 " + Add $HOME=X:\home to user environment variable, and $HOME\vimfiles\bin to PATH
@@ -54,45 +54,48 @@
 " + Change comments' style to Markdown syntax like.
 
 
-"           TODO_List:
+" TODO_List:
 " + js's plugins configuration. and .editorconfig missing error.
 " + An excellent README is needed for this project and others
 " + Key mappings need readjusments.
 
-"           Reference:
+" Reference:
 " + [oschina](http://www.oschina.net/code/snippet_574132_13357)
 " + [github-dotfile-dotrc](https://github.com)
 " + [vim-wikia](http://vim.wikia.com/wiki/Vim_Tips_Wiki)
 
-"           Debug:
+" Debugging:
 " + feature:
 "   - use `:help feature-list` to see all feature list, 
 "   - and `:version` to show which has clear about `options` and `features` 
 "   - use has({feature}) function like `:echo has("unix")` in vim-script's 
 "     program.
 " + option:
-"   - use `:se OPTION` like `se ft` to show current vim options set
+"   - use `:se OPTION` like `se ft` to show current vim option setting
 " + variable:
 "   - use `:echo VAR` like `echo g:isMac` or `echo $HOME` to show vim-script's
 "     variable value or environment variables' value
+" + mapping:
+"   - use `:map` to list all currrent key mapping
 " + unknowns
 "   - use [vim-wikia](http://vim.wikia.com/wiki/Vim_Tips_Wiki) for more tips
 "   - and [sof](https://stackoverflow.com/tags/vim/info) for community help
 
 
+
 " * **0x01. Global Variable Definitions.**
 " ========================================
 "
-" Detect OS type, GUI environment and set the base variables, this vim resource file support
-" platform can be bellow:
+" Detect OS type, GUI environment and set the base variables, this vim resource file
+" support platform can be bellow:
 "
-" +-----------+-----------+--------+-------+---------+
-" |           | isWindows | isMsys | isMac | isLinux |
-" +-----------+-----------+--------+-------+---------+
-" | isGUI     |           |        |       |         |
-" +-----------+-----------+--------+-------+---------+
-" | isConsole |           |        |       |         |
-" +-----------+-----------+--------+-------+---------+
+" +-----------+-----------+------------+------------+---------+
+" |           | isWindows | isMsys     | isMac      | isLinux |
+" +-----------+-----------+------------+------------+---------+
+" | isGUI     |   usual   |  ---       | occasional |  rare   |
+" +-----------+-----------+------------+------------+---------+
+" | isConsole |   rare    | occasional | usual      |  hot    |
+" +-----------+-----------+------------+------------+---------+
 "     _tab1-1:supported platforms_
 " "
     set nocompatible
@@ -118,8 +121,10 @@
         let g:isConsole = 1
     endif
 
+
+
 " * ** 0x02. VIM-PLUG The Vim Plugin System.**
-" ==========================================
+" ============================================
 "
 " see :h vim-plug for more details
 " useful commands from vim-plug README.md
@@ -253,7 +258,6 @@
     Plug 'vim-scripts/ZoomWin'
     Plug 'jeroenbourgois/vim-actionscript'
 
-
 " + Adding plugins for nodejs {
 " -----------------------------
 "   Require npm install -g js-beautify
@@ -269,14 +273,12 @@
     call plug#end()
     filetype plugin indent on   " required
 
-    map <leader>up <Esc>:PlugUpdate<CR>
 " }
+
 
 
 " * **0x03. General Display And Action Styles.**
 " ==============================================
-
-" set shortmess=atI
 
 " + 3.1. Editing Interface {
 " --------------------------
@@ -285,11 +287,12 @@
     set laststatus=2        " always display statusline like airline
     set cmdheight=1
 
+"   set shortmess=atI
     set cursorline
     hi CursorLine term=underline cterm=underline guibg=#3A3A3A
     hi CursorLine ctermbg=darkgrey guibg=gray13
 
-    set colorcolumn=120
+    set colorcolumn=100
 
     if g:isGUI
         " au GUIEnter * simalt ~x
@@ -311,12 +314,14 @@
             set lines=9999 columns=9999
             let g:windowsSizeFixX = 58
             let g:windowsSizeFixY = 118
-            let g:windowsScaleX = 7.75
-            let g:windowsScaleY = 17.0
+            let g:windowsScaleX   = 7.75
+            let g:windowsScaleY   = 17.0
             let g:windowsPosOldX = getwinposx()
             let g:windowsPosOldY = getwinposy()
-            let g:windowsScreenWidth = float2nr(winwidth(0) * g:windowsScaleX) + g:windowsPosOldX + g:windowsSizeFixX
-            let g:windowsScreenHeight = float2nr(winheight(0) * g:windowsScaleY) + g:windowsPosOldY + g:windowsSizeFixY
+            let g:windowsScreenWidth  = float2nr(winwidth(0) * g:windowsScaleX) + \
+                                        g:windowsPosOldX + g:windowsSizeFixX
+            let g:windowsScreenHeight = float2nr(winheight(0) * g:windowsScaleY) + \
+                                        g:windowsPosOldY + g:windowsSizeFixY
             set lines=50 columns=168
             let g:windowsSizeWidth = float2nr(winwidth(0) * g:windowsScaleX) + g:windowsSizeFixX
             let g:windowsSizeHeight = float2nr(winheight(0) * g:windowsScaleY) + g:windowsSizeFixY
@@ -481,7 +486,8 @@
 
 " + 3.8. Pretreatment {
 " ---------------------
-"   autocmds to automatically enter hex mode and handle file writes properly
+" - autocmds to automatically enter hex mode and handle file writes properly
+"   refering from link http://vim.wikia.com/wiki/Improved_Hex_editing
     if has("autocmd")
       " vim -b : edit binary using xxd-format!
       augroup Binary
@@ -530,7 +536,12 @@
               \ endif
       augroup END
     endif
-"   refering from link http://vim.wikia.com/wiki/Improved_Hex_editing
+
+" - Opening Vim help in a vertical split window
+"   [sof](https://stackoverflow.com/questions/630884/opening-vim-help-in-a-vertical-split-window)
+    if has("autocmd")
+      autocmd FileType help wincmd L
+    endif
 " }
 
 " + 3.9. Make And Build {
@@ -815,26 +826,26 @@
 " ------------------------------------
 "
     let g:startify_custom_header = [
-            \ '  +--------------------------------------------------------------------------+   ',
-            \ ' / =*=[ F911''S RESEARCH AND DEVELOPMENT STUDIO PRODUCED ( F911-R&D.SP ) ]=*=  \  ',
-            \ ' |----------------------------------------------------------------------------| ',
-            \ ' |                     .__            ______     _______                      | ',
-            \ ' |               ___  _|__| _____    /  __  \    \   _  \                     | ', 
-            \ ' |               \  \/ /  |/     \   >      <    /  /_\  \                    | ',
-            \ ' |                \   /|  |  Y Y  \ /   --   \   \  \_/   \                   | ',
-            \ ' |                 \_/ |__|__|_|  / \______  / /\ \_____  /                   | ',
-            \ ' |                              \/         \/  \/       \/                    | ',
-            \ ' +----------------------------------------------------------------------------+ ',
-            \ ' |                                                                            |',
-            \ '',
-            \ ]
+        \ '  +--------------------------------------------------------------------------+   ',
+        \ ' / =*=[ F911''S RESEARCH AND DEVELOPMENT STUDIO PRODUCED ( F911-R&D.SP ) ]=*=  \  ',
+        \ ' |----------------------------------------------------------------------------| ',
+        \ ' |                     .__            ______     _______                      | ',
+        \ ' |               ___  _|__| _____    /  __  \    \   _  \                     | ', 
+        \ ' |               \  \/ /  |/     \   >      <    /  /_\  \                    | ',
+        \ ' |                \   /|  |  Y Y  \ /   --   \   \  \_/   \                   | ',
+        \ ' |                 \_/ |__|__|_|  / \______  / /\ \_____  /                   | ',
+        \ ' |                              \/         \/  \/       \/                    | ',
+        \ ' +----------------------------------------------------------------------------+ ',
+        \ ' |                                                                            |',
+        \ '',
+        \ ]
     let g:startify_custom_footer = [
-            \ ' |                                                                            | ',
-            \ ' |----------------------------------------------------------------------------| ',
-            \ ' \ =*=[ F911''S RESEARCH AND DEVELOPMENT STUDIO PRODUCED ( F911-R&D.SP ) ]=*= /  ',
-            \ '  +--------------------------------------------------------------------------+ ',
-            \ '',
-            \ ]
+        \ ' |                                                                            | ',
+        \ ' |----------------------------------------------------------------------------| ',
+        \ ' \ =*=[ F911''S RESEARCH AND DEVELOPMENT STUDIO PRODUCED ( F911-R&D.SP ) ]=*= /  ',
+        \ '  +--------------------------------------------------------------------------+ ',
+        \ '',
+        \ ]
     map <leader>st <Esc>:Startify<CR>
 " }
 
@@ -842,7 +853,77 @@
 
 " * **0x05. Key Mappings.**
 " =========================
-
+"
+" map commands, in some aspect, is so complicated, as it need adapt so many occasions.
+"
+" + Most meterial says vim has *FOUR* modes, they are:
+"
+"     1. Normal-mode  
+"     2. Insert-mode / Replace-mode
+"     3. Visual-mode / Select-mode  
+"     4. Command-mode
+"
+" + In vim official help documents, there are *SIX* sets of mappings:
+"
+"     1. For Normal mode: When typing commands.
+"     2. For Visual mode: When typing commands while the Visual area is highlighted.
+"     3. For Select mode: like Visual mode but typing text replaces the selection.
+"     4. For *Operator-pending mode*: When an operator is pending, for example, after \
+"        'd':delete, 'y':yank, 'c':cut, etc. afterwards arguments or commands waiting \
+"        to input.
+"     5. For Insert mode.  These are also used in *Replace mode*.
+"     6. For Command-line mode: When entering a ':' or '/' command.
+"
+" +  `map` command there are *THREE* type of usage in general:
+"
+"     1. Recurive-mapping or remap
+"     2. Non-recurive-mapping or noremap
+"     3. Cancel-mapping or unmap
+"     remap type is an option that makes mappings work recursively, which is usually
+"     on by default. for example: :map j gg + :map Q j = :map Q gg
+" 
+" Above all, you can get 6x3=18 kinds of mapping using cases, at least. WTF.
+" The common 'map' commands' action scope can be generally illustrated as table
+" bellow:
+"
+" +-------------------+--------+--------+------------------+-------------+--------------+
+" |   map commands    | Normal | Visual | Operator Pending | Insert Only | Command Line |
+" +-------+-+---------+--------+--------+------------------+-------------+--------------+
+" | :map  | :noremap  |   y    |   y    |        y         |             |              |
+" | :nmap | :nnoremap |   y    |        |                  |             |              |
+" | :vmap | :vnoremap |        |   y    |                  |             |              |
+" | :omap | :onoremap |        |        |        y         |             |              |
+" | :map! | :noremap! |        |        |                  |      y      |      y       |
+" | :imap | :inoremap |        |        |                  |      y      |              |
+" | :cmap | :cnoremap |        |        |                  |             |      y       |
+" +-------+-----------+--------+--------+------------------+-------------+--------------+
+"     _tab5-1:'map' commands' action scope_
+" 
+" What's more if you type help :map! you can get more map commands and more cases... Orz
+"
+" + map-mode and map-commands in official documents:
+" 
+"     1. mapmode-nvo   map    noremap    unmap    mapclear
+"     2. mapmode-n     nmap   nnoremap   nunmap   nmapclear
+"     3. mapmode-v     vmap   vnoremap   vunmap   vmapclear
+"     4. mapmode-x     xmap   xnoremap   xunmap   xmapclear
+"     5. mapmode-s     smap   snoremap   sunmap   smapclear
+"     6. mapmode-o     omap   onoremap   ounmap   omapclear
+"     7. mapmode-ic    map!   noremap!   unmap!   mapclear!
+"     8. mapmode-i     imap   inoremap   iunmap   imapclear
+"     9. mapmode-l     lmap   lnoremap   lunmap   lmapclear
+"    10. mapmode-c     cmap   cnoremap   cunmap   cmapclear
+"
+"    more details read Key mapping in vim's help
+"    
+"
+" Reference:
+" [zhihu-vimstudy-map](https://zhuanlan.zhihu.com/p/24713018)
+" [csdnblog-vimmap-forward](http://blog.csdn.net/lym152898/article/details/52171494)
+" [pythonclub](http://www.pythonclub.org/linux/vim/map)
+" [it-house](http://www.it1352.com/535382.html)
+" help :map!
+" "
     imap <C-a> <Esc>I
     imap <C-e> <ESC>A
     "map <C-Tab> <C-W>w
@@ -857,13 +938,16 @@
     nmap <C-c> "+yy
     vmap <C-x> "+d
     map <C-s> :w
-    
+   
+    " rc file and plug operations
     if g:isWindows
         nmap <leader>rc :tabnew $HOME/vimfiles/vimrc<CR>
     elseif g:isMsys
         nmap <leader>rc :tabnew $HOME/vimfiles/vimrc<CR>
     else " linux & Mac
         nmap <leader>rc :vsplit ~/.vim/vimrc<CR>
+        nmap <leader>pu <Esc>:PlugUpdate<CR>
+        nmap <leader>ps <Esc>:PlugStatus<CR>
     endif
     
     nmap <leader>t :tabnew<CR>
@@ -873,7 +957,10 @@
     nmap <C-S-Tab> <Esc>gT
     imap <C-Tab> <Esc>gt
     imap <C-S-Tab> <Esc>gT
-    nnoremap K i<CR><Esc>
+
+    " cutting to a new line and continue insert/edit
+    nnoremap K i<CR>
+    
     map  <leader>w <Esc><C-W><C-W>
     map <F9> <Esc>:w<CR>:!node %<CR>
     
