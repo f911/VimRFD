@@ -1,22 +1,18 @@
 " ==============================================================================
 " F911'S RESEARCH AND DEVELOPMENT STUDIO PRODUCED ( F911-R&D.SP )               
 " ------------------------------------------------------------------------------
-"
 " Project:  vimfiles - vim resource files' directory
-
 " FileDes:  This file contains optional runtime configuration settings to
 "           initialize Vim when it starts. It can customize the way vim run as. 
 "           The location usually comes to:
-"
 "           ~/.vim/vimrc on Linux and Mac OS X or \
 "           %HOME%/vimfiles/vimrc on Windows or \
 "           $HOME/vimfiles/vimrc on Msys
-"
-" Creator:  F911 <0xf911@gmail.com>
+" Creator:  F911 <0xf911@gmail.com> [GI+](https://github.com/f911)
 " Created:  2014-10-04
-" LastMod:  2017-09-15
-" Version:  v1.5.0
-" License:  MIT (c) [@F911](https://github.com/f911)
+" LastMod:  2017-10-22
+" Version:  v1.5.1
+" License:  MIT (c)
 " =============================================================================
 
 " Platforms:
@@ -294,46 +290,47 @@
 
     set colorcolumn=100
 
-    if g:isGUI
-        " au GUIEnter * simalt ~x
-        " winpos 100 20
-        set columns=200
-        set lines=60
-        set guioptions-=m  " use :se go+=m to recall menu
-        set guioptions-=T
-        set guioptions-=r
-        set guioptions-=L
+if g:isGUI
+    " au GUIEnter * simalt ~x
+    winpos 400 200
+    set columns=200
+    set lines=68
+    set guioptions-=m  " use :se go+=m to recall menu
+    set guioptions-=T
+    set guioptions-=r
+    set guioptions-=L
 
-        augroup VCenterCursor
-            au!
-            au BufEnter,WinEnter,WinNew,VimResized *,*.*
-                        \ let &scrolloff=winheight(win_getid())/2
-        augroup END
+    augroup VCenterCursor
+        au!
+        au BufEnter,WinEnter,WinNew,VimResized *,*.*
+                    \ let &scrolloff=winheight(win_getid())/2
+    augroup END
 
-        function WindowCenterInScreen()
-            set lines=9999 columns=9999
-            let g:windowsSizeFixX = 58
-            let g:windowsSizeFixY = 118
-            let g:windowsScaleX   = 7.75
-            let g:windowsScaleY   = 17.0
-            let g:windowsPosOldX = getwinposx()
-            let g:windowsPosOldY = getwinposy()
-            let g:windowsScreenWidth  = float2nr(winwidth(0) * g:windowsScaleX) + \
-                                        g:windowsPosOldX + g:windowsSizeFixX
-            let g:windowsScreenHeight = float2nr(winheight(0) * g:windowsScaleY) + \
-                                        g:windowsPosOldY + g:windowsSizeFixY
-            set lines=50 columns=168
-            let g:windowsSizeWidth = float2nr(winwidth(0) * g:windowsScaleX) + g:windowsSizeFixX
-            let g:windowsSizeHeight = float2nr(winheight(0) * g:windowsScaleY) + g:windowsSizeFixY
-            let g:windowsPosX = ((g:windowsScreenWidth - g:windowsSizeWidth) / 2)
-            let g:windowsPosY = ((g:windowsScreenHeight - g:windowsSizeHeight) / 2)
-            exec ':winpos ' . g:windowsPosX . ' ' . g:windowsPosY
-        endfunc
-        au GUIEnter * call WindowCenterInScreen()
+    function WindowCenterInScreen()
+        set lines=9999 columns=9999
+        let g:windowsSizeFixX = 58
+        let g:windowsSizeFixY = 118
+        let g:windowsScaleX   = 7.75
+        let g:windowsScaleY   = 17.0
+        let g:windowsPosOldX = getwinposx()
+        let g:windowsPosOldY = getwinposy()
+        let g:windowsScreenWidth  = float2nr(winwidth(0) * g:windowsScaleX) + \
+                                    g:windowsPosOldX + g:windowsSizeFixX
+        let g:windowsScreenHeight = float2nr(winheight(0) * g:windowsScaleY) + \
+                                    g:windowsPosOldY + g:windowsSizeFixY
+        set lines=60 columns=200
+        let g:windowsSizeWidth = float2nr(winwidth(0) * g:windowsScaleX) + g:windowsSizeFixX
+        let g:windowsSizeHeight = float2nr(winheight(0) * g:windowsScaleY) + g:windowsSizeFixY
+        let g:windowsPosX = ((g:windowsScreenWidth - g:windowsSizeWidth) / 2)
+        let g:windowsPosY = ((g:windowsScreenHeight - g:windowsSizeHeight) / 2)
+        "exec ':winpos ' g:windowsPosX ' ' g:windowsPosY
+        exec ':winpos ' 200  ' ' 400
+    endfunc
+    "au GUIEnter * call WindowCenterInScreen()
 
-        au! VCenterCursor
-        au VimEnter * normal zz
-    endif
+    "au! VCenterCursor
+    "au VimEnter * normal zz
+endif
    
     set background=dark
     if g:isWindows
@@ -372,9 +369,11 @@
     elseif g:isLinux
         set t_Co=256
         if g:isGUI
-            colorscheme rainbow_neon
+            "colorscheme rainbow_neon
             "set guifont=Terminus\ 12
-            set guifont=Terminess\ Powerline\ 12
+            "set guifont=Terminess\ Powerline\ 12
+            set guifont=xos4\ Terminess\ Powerline\ 10
+            colorscheme Tomorrow-Night-Eighties
         else
             colorscheme Tomorrow-Night
         endif
@@ -388,8 +387,9 @@
 
 " + 3.2. Tabs and Indent {
 " ------------------------
-    set shiftwidth=4
     set tabstop=4
+    set softtabstop=4
+    set shiftwidth=4
     set expandtab
     set cindent
     set smartindent
@@ -415,6 +415,7 @@
     syntax on
     filetype on
     filetype plugin on
+    filetype indent on
     filetype plugin indent on
     if has("multi_byte")
         set encoding=utf-8
@@ -555,6 +556,10 @@
     endif
 " }
 
+
+" + 3.A. vim-commentary
+" ---------------------
+autocmd FileType apache setlocal commentstring=#\ %s
 
 
 " * **0x04. Setting For Plugins.**
@@ -933,8 +938,10 @@
     map - :cp<C-M>
     map <kPlus> :cn<C-M>
     map + :cn<C-M>
-    vmap <C-c> "+y
-    vmap <S-Insert> "+gP
+
+    vnoremap <C-Insert> "+y
+    inoremap <S-Insert> <Esc>"+gP
+
     nmap <C-c> "+yy
     vmap <C-x> "+d
     map <C-s> :w
