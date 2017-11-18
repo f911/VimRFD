@@ -72,5 +72,19 @@ augroup Html
 augroup END
 
 
+" FileType Sh Pretreatment
+" --------------------------
+augroup Sh
+    au!
+    au BufNewFile *.sh,*.zsh
+        \ echo '[+] Filetype "sh" detected, recommend using zsh or bash.' |
+        \ 0r $HOME/.vim/skeleton/sh_skl.txt |
+        \ normal 2j
+augroup END
+
+
+
+
+
 " vim:nocp:ai:si:et:ts=4:sts=4:ft=vim:ff=unix:fenc=utf-8:
 " EOF

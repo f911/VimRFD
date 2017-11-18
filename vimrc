@@ -205,7 +205,8 @@
 " + color themes {
 " ----------------
     Plug 'jonathanfilip/lucius'
-    Plug 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
+    "Plug 'chriskempson/tomorrow-theme', {'rtp': 'vim/'} o
+    Plug 'chriskempson/base16-vim' 
 " }
 
     Plug 'idanarye/vim-vebugger'
@@ -265,6 +266,7 @@
     Plug 'nginx/nginx', {'for': 'nginx', 'rtp': 'contrib/vim/'} 
 
     Plug 'asins/vimcdoc'
+    Plug 'junegunn/vim-emoji'
 
     call plug#end()
     filetype plugin indent on   " required
@@ -373,9 +375,11 @@ endif
             "set guifont=Terminus\ 12
             "set guifont=Terminess\ Powerline\ 12
             set guifont=xos4\ Terminess\ Powerline\ 10
-            colorscheme Tomorrow-Night-Eighties
+            "colorscheme Tomorrow-Night-Eighties
+            colorscheme base16-tomorrow-night
         else
-            colorscheme Tomorrow-Night
+            "colorscheme Tomorrow-Night
+            colorscheme base16-tomorrow-night
         endif
     else
     endif
@@ -383,7 +387,7 @@ endif
     set lazyredraw       " Fix the problems for scrolling slowly
     set modifiable       " Fix E21: in NerdTree
 " }
-
+let base16colorspace=256
 
 " + 3.2. Tabs and Indent {
 " ------------------------
@@ -510,6 +514,16 @@ autocmd FileType apache setlocal commentstring=#\ %s
 
 " * **0x04. Setting For Plugins.**
 " ================================
+
+
+" + vim-emoji
+" -----------
+
+" for e in emoji#list()
+"   call append(line('$'), printf('%s (%s)', emoji#for(e), e))
+" endfor
+" set completefunc=emoji#complete
+
 
 " + 4.1 plugins.vim-airline/vim-airline {
 " ---------------------------------------

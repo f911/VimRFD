@@ -111,8 +111,8 @@ imap <C-S-Tab> <Esc>gT
 
 " Alt + l move right across quote.
 " 
-inoremap <C-h> <Left>
-inoremap <C-j> <Down>
+inoremap <C-h> <Esc>i
+inoremap <C-j> <Esc>ja
 inoremap <C-k> <Up>
 inoremap <C-l> <Right>
 inoremap <C-d> <DELETE>
