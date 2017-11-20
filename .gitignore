@@ -12,6 +12,9 @@ fonts/
 bundle/
 plugged/
 
+
+mkdocs/site
+
 **/DS_Store*
 **/*.exe
 **/*.dll

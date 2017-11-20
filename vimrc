@@ -15,10 +15,6 @@
 " License:  MIT (c)                                                     |0|0|0|
 " =============================================================================
 
-" Platforms:
-" + Windows / MSYS
-" + Linux: test on CentOS / Ubuntu / Kali / Fedora
-" + Mac OS X
 
 " Sections:
 " + 0x01. Global Variable Definitions.
@@ -27,27 +23,6 @@
 " + 0x04. Setting For Plugins.
 " + 0x05. Key Mappings.
 
-" Features:
-" + c/c++/bash
-" + vbscript 
-" + actionscript
-" + markdown
-" + nodejs
-" + YouCompleteMe (BugsFixed:python_interpreter_path:2016-11-07)
-" + NerdFonts
-
-" Changes:
-" + Adding YouCompleteMe Supports on Windows
-" + Can self compile the gvim-x64 using vs2015
-" + Add $HOME=X:\home to user environment variable, and $HOME\vimfiles\bin to PATH
-" + Accordingly change the user $PATH to right vimfiles\bin
-" + Update for vimtweak, 64 / 32
-" + [Disable beeping](http://vim.wikia.com/wiki/Disable_beeping)
-" + Upgrade to VIM 8.0 by both source building and packge installation.
-" + Change plugin manager from Vundle to vim-plug, thanks Vundle, which still inspirational.
-" + Adding YouCompleteMe requirements illustruction, now ./install.py --all is OK.
-" + Change file header style, drop old Copyright hug new License and Banner for honour.
-" + Change comments' style to Markdown syntax like.
 
 
 " TODO_List:
@@ -60,62 +35,11 @@
 " + [github-dotfile-dotrc](https://github.com)
 " + [vim-wikia](http://vim.wikia.com/wiki/Vim_Tips_Wiki)
 
-" Debugging:
-" + feature:
-"   - use `:help feature-list` to see all feature list, 
-"   - and `:version` to show which has clear about `options` and `features` 
-"   - use has({feature}) function like `:echo has("unix")` in vim-script's 
-"     program.
-" + option:
-"   - use `:se OPTION` like `se ft` to show current vim option setting
-" + variable:
-"   - use `:echo VAR` like `echo g:isMac` or `echo $HOME` to show vim-script's
-"     variable value or environment variables' value
-" + mapping:
-"   - use `:map` to list all currrent key mapping
-" + unknowns
-"   - use [vim-wikia](http://vim.wikia.com/wiki/Vim_Tips_Wiki) for more tips
-"   - and [sof](https://stackoverflow.com/tags/vim/info) for community help
 
 
+set nocompatible
 
-" * **0x01. Global Variable Definitions.**
-" ========================================
-"
-" Detect OS type, GUI environment and set the base variables, this vim resource file
-" support platform can be bellow:
-"
-" +-----------+-----------+------------+------------+---------+
-" |           | isWindows | isMsys     | isMac      | isLinux |
-" +-----------+-----------+------------+------------+---------+
-" | isGUI     |   usual   |  ---       | occasional |  rare   |
-" +-----------+-----------+------------+------------+---------+
-" | isConsole |   rare    | occasional | usual      |  hot    |
-" +-----------+-----------+------------+------------+---------+
-"     _tab1-1:supported platforms_
-" "
-    set nocompatible
-    let g:isWindows = 0
-    let g:isMsys    = 0
-    let g:isMac     = 0
-    let g:isLinux   = 0
-    let g:isGUI     = 0  " else isConsole
-    
-    if(has("win16") || has("win32") || has("win64") || has("win95"))
-        let g:isWindows = 1
-    elseif (has("win32unix") && $OS=="Windows_NT")
-        let g:isMsys    = 1
-    elseif (has("macunix"))
-        let g:isMac     = 1
-    elseif (has("unix"))
-        let g:isLinux   = 1
-    endif
-    
-    if has("gui_running")
-        let g:isGUI     = 1
-    else
-        let g:isConsole = 1
-    endif
+source $HOME/.vim/vimrc_d/module/platform.vim 
 
 
 
