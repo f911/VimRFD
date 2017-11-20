@@ -1,6 +1,13 @@
 ![vim-see-you](http://orig02.deviantart.net/a1f5/f/2009/363/1/8/vim_with_cleansing_action_by_carsonfire.jpg)
 ============================
 
+Vim ReFineD By Resources.
+
+
+![Vim|RFD](https://img.shields.io/badge/Vim-RFD-2B4683.svg)
+
+you can also use [Vim|RFD] or "Vim1RFD" in ascii-art way .
+
 The Big Vim Brother Is Watching You 
 
 usage
@@ -54,3 +61,13 @@ of editor, and the King Arthur in coder's Rounds.
  
 
 --- a vim player      
+
+
+
+
+
+
+![HACKER](http://www.catb.org/hacker-emblem/glider.png)
+|.|0|.|
+|.|.|0|
+|0|0|0|
