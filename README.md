@@ -4,7 +4,7 @@
 Vim ReFineD By Resources.
 
 
-![Vim|RFD](https://img.shields.io/badge/Vim-RFD-2B4683.svg)
+![Vim|RFD](https://img.shields.io/badge/Vim-RFD-4456FF.svg)
 
 you can also use [Vim|RFD] or "Vim1RFD" in ascii-art way .
 
