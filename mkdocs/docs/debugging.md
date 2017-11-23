@@ -1,4 +1,7 @@
- Debugging:
+ vimrc / vimscript Debugging
+ ===========================
+ :
+
  + feature:
    - use `:help feature-list` to see all feature list, 
    - and `:version` to show which has clear about `options` and `features` 
@@ -14,3 +17,6 @@
  + unknowns
    - use [vim-wikia](http://vim.wikia.com/wiki/Vim_Tips_Wiki) for more tips
    - and [sof](https://stackoverflow.com/tags/vim/info) for community help
+
+* using ":message"
+    + using ":message" to display 

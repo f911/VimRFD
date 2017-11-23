@@ -120,7 +120,8 @@ endif
     if g:isWindows
         if g:isGUI
             "colorscheme rainbow_neon
-            colorscheme Tomorrow-Night-Eighties
+            "colorscheme Tomorrow-Night-Eighties
+            colorscheme base16-eighties
             set guifont=MesloLGS_NF:h9:cANSI:qDRAFT
         "
         "    set guifont=Bitstream_Vera_Sans_Mono:h9.5
@@ -154,9 +155,9 @@ endif
         set t_Co=256
         if g:isGUI
             "colorscheme rainbow_neon
-            "set guifont=Terminus\ 12
+            set guifont=Terminus\ 12
             "set guifont=Terminess\ Powerline\ 12
-            set guifont=xos4\ Terminess\ Powerline\ 10
+            "set guifont=xos4\ Terminess\ Powerline\ 10
             "colorscheme Tomorrow-Night-Eighties
             colorscheme base16-tomorrow-night
         else
