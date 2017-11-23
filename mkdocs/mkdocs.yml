@@ -1,0 +1,6 @@
+site_name: VimRFD Documents
+pages:
+    - Home:     index.md
+    - Features: Features.md
+    - About:    about.md
+theme: windmillex

@@ -12,6 +12,9 @@ fonts/
 bundle/
 plugged/
 
+
+mkdocs/site
+
 **/DS_Store*
 **/*.exe
 **/*.dll
@@ -29,7 +32,7 @@ plugged/
 # !diff.exe
 # !gvimfullscreen.dll
 # !iconv.dll
-# !vimtweak.dll
+# !vimtweak64.dll
 
 
 # vim: se ai si et ts=4 sw=4 ft=conf ff=unix fenc=utf-8:

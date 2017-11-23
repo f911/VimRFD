@@ -1,28 +1,20 @@
 " ==============================================================================
 " F911'S RESEARCH AND DEVELOPMENT STUDIO PRODUCED ( F911-R&D.SP )               
 " ------------------------------------------------------------------------------
-"
 " Project:  vimfiles - vim resource files' directory
-
 " FileDes:  This file contains optional runtime configuration settings to
 "           initialize Vim when it starts. It can customize the way vim run as. 
 "           The location usually comes to:
-"
 "           ~/.vim/vimrc on Linux and Mac OS X or \
 "           %HOME%/vimfiles/vimrc on Windows or \
 "           $HOME/vimfiles/vimrc on Msys
-"
-" Creator:  F911 <0xf911@gmail.com>
+" Creator:  F911 <0xf911@gmail.com> [GI+](https://github.com/f911)
 " Created:  2014-10-04
-" LastMod:  2017-09-15
-" Version:  v1.5.0
-" License:  MIT (c) [@F911](https://github.com/f911)
+" LastMod:  2017-11-13                                                  |.|0|.|
+" Version:  v1.5.3                                                      |.|.|0|
+" License:  MIT (c)                                                     |0|0|0|
 " =============================================================================
 
-" Platforms:
-" + Windows / MSYS
-" + Linux: test on CentOS / Ubuntu / Kali
-" + Mac OS X
 
 " Sections:
 " + 0x01. Global Variable Definitions.
@@ -31,27 +23,6 @@
 " + 0x04. Setting For Plugins.
 " + 0x05. Key Mappings.
 
-" Features:
-" + c/c++/bash
-" + vbscript 
-" + actionscript
-" + markdown
-" + nodejs
-" + YouCompleteMe (BugsFixed:python_interpreter_path:2016-11-07)
-" + NerdFonts
-
-" Changes:
-" + Adding YouCompleteMe Supports on Windows
-" + Can self compile the gvim-x64 using vs2015
-" + Add $HOME=X:\home to user environment variable, and $HOME\vimfiles\bin to PATH
-" + Accordingly change the user $PATH to right vimfiles\bin
-" + Update for vimtweak, 64 / 32
-" + [Disable beeping](http://vim.wikia.com/wiki/Disable_beeping)
-" + Upgrade to VIM 8.0 by both source building and packge installation.
-" + Change plugin manager from Vundle to vim-plug, thanks Vundle, which still inspirational.
-" + Adding YouCompleteMe requirements illustruction, now ./install.py --all is OK.
-" + Change file header style, drop old Copyright hug new License and Banner for honour.
-" + Change comments' style to Markdown syntax like.
 
 
 " TODO_List:
@@ -64,216 +35,25 @@
 " + [github-dotfile-dotrc](https://github.com)
 " + [vim-wikia](http://vim.wikia.com/wiki/Vim_Tips_Wiki)
 
-" Debugging:
-" + feature:
-"   - use `:help feature-list` to see all feature list, 
-"   - and `:version` to show which has clear about `options` and `features` 
-"   - use has({feature}) function like `:echo has("unix")` in vim-script's 
-"     program.
-" + option:
-"   - use `:se OPTION` like `se ft` to show current vim option setting
-" + variable:
-"   - use `:echo VAR` like `echo g:isMac` or `echo $HOME` to show vim-script's
-"     variable value or environment variables' value
-" + mapping:
-"   - use `:map` to list all currrent key mapping
-" + unknowns
-"   - use [vim-wikia](http://vim.wikia.com/wiki/Vim_Tips_Wiki) for more tips
-"   - and [sof](https://stackoverflow.com/tags/vim/info) for community help
+
+
+set nocompatible
+
+if empty($MYVIMRCD) && empty($MYVIMMOD)
+    let $MYVIMRCD = join([$MYVIMRC, '_d'], '')              " usually $HOME/.vim/vimrc_d
+    let $MYVIMMOD = join([$MYVIMRCD, '/module'], '')       " usually $HOME/.vim/vimrc_d/scripts
+    let $MYVIMSKL = join([$MYVIMRCD, '/skeleton'], '')
+endif
+
+source $MYVIMMOD/platform.vim 
+source $MYVIMMOD/ftpretreat.vim
+source $MYVIMMOD/keymaps.vim
+
+source $MYVIMMOD/m_vimplug.vim           " Module or Plugin manager
+source $MYVIMMOD/m_startify.vim
 
 
 
-" * **0x01. Global Variable Definitions.**
-" ========================================
-"
-" Detect OS type, GUI environment and set the base variables, this vim resource file
-" support platform can be bellow:
-"
-" +-----------+-----------+------------+------------+---------+
-" |           | isWindows | isMsys     | isMac      | isLinux |
-" +-----------+-----------+------------+------------+---------+
-" | isGUI     |   usual   |  ---       | occasional |  rare   |
-" +-----------+-----------+------------+------------+---------+
-" | isConsole |   rare    | occasional | usual      |  hot    |
-" +-----------+-----------+------------+------------+---------+
-"     _tab1-1:supported platforms_
-" "
-    set nocompatible
-    let g:isWindows = 0
-    let g:isMsys    = 0
-    let g:isMac     = 0
-    let g:isLinux   = 0
-    let g:isGUI     = 0  " else isConsole
-    
-    if(has("win16") || has("win32") || has("win64") || has("win95"))
-        let g:isWindows = 1
-    elseif (has("win32unix") && $OS=="Windows_NT")
-        let g:isMsys    = 1
-    elseif (has("macunix"))
-        let g:isMac     = 1
-    elseif (has("unix"))
-        let g:isLinux   = 1
-    endif
-    
-    if has("gui_running")
-        let g:isGUI     = 1
-    else
-        let g:isConsole = 1
-    endif
-
-
-
-" * ** 0x02. VIM-PLUG The Vim Plugin System.**
-" ============================================
-"
-" see :h vim-plug for more details
-" useful commands from vim-plug README.md
-" +-------------------------------+---------------------------------------------+
-" | Command                       | Description                                 |
-" |-------------------------------+---------------------------------------------+
-" | PlugInstall [name] [#threads] | Install plugins                             |
-" | PlugUpdate [name] [#threads]  | Install or update plugins                   |
-" | PlugClean[!]                  | Remove unused directories \                 |
-" |                               | (bang version will clean without prompt)    |
-" | PlugUpgrade                   | Upgrade vim-plug itself                     |
-" | PlugStatus                    | Check the status of plugins                 |
-" | PlugDiff                      | Examine changes from the previous update \  |
-" |                               | and the pending changes                     |
-" | PlugSnapshot[!] [output path] | Generate script for restoring the current \ |
-" |                               | snapshot of the plugins                     |
-" +-------------------------------+---------------------------------------------+
-"     _tab2-1:vim-plug commands_
-" "
-    filetype off
-    if g:isWindows 
-        "set rtp+=$HOME/vimfiles/bundle/Vundle.vim/ x
-        "call vundle#begin('$HOME/vimfiles/bundle/') x
-        call plug#begin('$HOME/vimfiles/plugged')
-    elseif g:isMsys
-        "set rtp+=$HOME/vimfiles/bundle/Vundle.vim x
-        "call vundle#begin('$HOME/vimfiles/bundle/') x
-        call plug#begin('$HOME/vimfiles/plugged')
-    elseif g:isMac
-        "set rtp+=~/.vim/bundle/Vundle.vim x
-        "call vundle#begin() x
-        call plug#begin('~/.vim/plugged')
-    elseif g:isLinux
-        "set rtp+=~/.vim/bundle/Vundle.vim x
-        "call vundle#begin() x
-        call plug#begin('~/.vim/plugged')
-    else
-        "set rtp+=~/.vim/bundle/Vundle.vim x
-        "call vundle#begin() x
-        call plug#begin('~/.vim/plugged')
-    endif
-
-"   Plugin 'VundleVim/Vundle.vim'x
-
-" + looks and productivity {
-" --------------------------
-    Plug 'vim-airline/vim-airline'
-    Plug 'vim-airline/vim-airline-themes'
-    Plug 'ctrlpvim/ctrlp.vim'
-    Plug 'Shougo/unite.vim'
-    Plug 'majutsushi/tagbar'
-    Plug 'chrisbra/csv.vim'
-    Plug 'airblade/vim-gitgutter'
-"   Plug 'jmcantrell/vim-virtualenv'
-    Plug 'mbbill/fencview'
-    Plug 'mbbill/undotree'
-" }
- 
-    Plug 'mhinz/vim-startify'
-    Plug 'mhinz/vim-tmuxify'
-    Plug 'mhinz/vim-signify'
-
-    Plug 'mattn/vimtweak'
-"   Plug 'mattn/transparency-windows-vim'
-    Plug 'mattn/emmet-vim'
-    
-    Plug 'edkolev/tmuxline.vim'
-    Plug 'edkolev/promptline.vim'
-
-    Plug 'scrooloose/nerdtree'
-    Plug 'Xuyuanp/nerdtree-git-plugin'
-    Plug 'scrooloose/nerdcommenter'
-    Plug 'scrooloose/syntastic'
-   
-    Plug 'tpope/vim-fugitive'
-    Plug 'tpope/vim-surround'
-    Plug 'tpope/vim-commentary'
-
-    Plug 'xolox/vim-shell'
-    Plug 'xolox/vim-misc'
-
-" + color themes {
-" ----------------
-    Plug 'jonathanfilip/lucius'
-    Plug 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
-" }
-
-    Plug 'idanarye/vim-vebugger'
-
-" + auto code completion {
-" ------------------------
-    Plug 'Valloric/YouCompleteMe' 
-"   Plug 'SirVer/ultisnips'o
-    Plug 'honza/vim-snippets'
-" }
-
-"   full screen the window
-    Plug 'derekmcloughlin/gvimfullscreen_win32'
-"   Plug 'jistr/vim-nerdtree-tabs'
-    Plug 'ryanoasis/vim-devicons'
-
-" + markdown plugins {
-" --------------------
-    Plug 'godlygeek/tabular'
-"   Plug 'plasticboy/vim-markdown'
-    Plug 'vim-pandoc/vim-pandoc', {'for': 'markdown'}
-    Plug 'vim-pandoc/vim-pandoc-syntax', {'for': 'markdown'} 
-    Plug 'vim-pandoc/vim-pandoc-after', {'for': 'markdown'}
-    Plug 'iamcco/mathjax-support-for-mkdp', {'for': 'markdown'}
-    Plug 'iamcco/markdown-preview.vim', {'for': 'markdown'}
-" }
-    Plug 'Yggdroot/indentLine'
-"   Plug 'a.vim'o
-    Plug 'vim-scripts/Align'
-    Plug 'vim-scripts/bufexplorer.zip'
-    Plug 'vim-scripts/ccvext.vim'
-    Plug 'vim-scripts/cSyntaxAfter'
-    Plug 'chase/vim-ansible-yaml'
-    
-    Plug 'jiangmiao/auto-pairs'
-    Plug 'vim-scripts/std_c.zip'
-    Plug 'Shougo/neocomplcache.vim'
-    Plug 'vim-scripts/taglist.vim'
-    Plug 'vim-scripts/TxtBrowser'
-    Plug 'vim-scripts/Mark--Karkat'
-"   Plugin 'msanders/snipmate.vim' deprecated for compatible reasons with YCM
-    Plug 'vim-scripts/OmniCppComplete'
-    Plug 'vim-scripts/repeat.vim'
-    Plug 'artur-shaik/vim-javacomplete2'
-    Plug 'wesleyche/SrcExpl'
-    Plug 'vim-scripts/ZoomWin'
-    Plug 'jeroenbourgois/vim-actionscript'
-
-" + Adding plugins for nodejs {
-" -----------------------------
-"   Require npm install -g js-beautify
-"   Plug 'maksimr/vim-jsbeautify'
-    Plug 'einars/js-beautify'
-"   Plug 'walm/jshint'
-" }
-
-    Plug 'nginx/nginx', {'for': 'nginx', 'rtp': 'contrib/vim/'} 
-
-    Plug 'asins/vimcdoc'
-
-    call plug#end()
-    filetype plugin indent on   " required
-
-" }
 
 
 
@@ -294,46 +74,47 @@
 
     set colorcolumn=100
 
-    if g:isGUI
-        " au GUIEnter * simalt ~x
-        " winpos 100 20
-        set columns=200
-        set lines=60
-        set guioptions-=m  " use :se go+=m to recall menu
-        set guioptions-=T
-        set guioptions-=r
-        set guioptions-=L
+if g:isGUI
+    " au GUIEnter * simalt ~x
+    winpos 400 200
+    set columns=200
+    set lines=68
+    set guioptions-=m  " use :se go+=m to recall menu
+    set guioptions-=T
+    set guioptions-=r
+    set guioptions-=L
 
-        augroup VCenterCursor
-            au!
-            au BufEnter,WinEnter,WinNew,VimResized *,*.*
-                        \ let &scrolloff=winheight(win_getid())/2
-        augroup END
+    augroup VCenterCursor
+        au!
+        au BufEnter,WinEnter,WinNew,VimResized *,*.*
+                    \ let &scrolloff=winheight(win_getid())/2
+    augroup END
 
-        function WindowCenterInScreen()
-            set lines=9999 columns=9999
-            let g:windowsSizeFixX = 58
-            let g:windowsSizeFixY = 118
-            let g:windowsScaleX   = 7.75
-            let g:windowsScaleY   = 17.0
-            let g:windowsPosOldX = getwinposx()
-            let g:windowsPosOldY = getwinposy()
-            let g:windowsScreenWidth  = float2nr(winwidth(0) * g:windowsScaleX) + \
-                                        g:windowsPosOldX + g:windowsSizeFixX
-            let g:windowsScreenHeight = float2nr(winheight(0) * g:windowsScaleY) + \
-                                        g:windowsPosOldY + g:windowsSizeFixY
-            set lines=50 columns=168
-            let g:windowsSizeWidth = float2nr(winwidth(0) * g:windowsScaleX) + g:windowsSizeFixX
-            let g:windowsSizeHeight = float2nr(winheight(0) * g:windowsScaleY) + g:windowsSizeFixY
-            let g:windowsPosX = ((g:windowsScreenWidth - g:windowsSizeWidth) / 2)
-            let g:windowsPosY = ((g:windowsScreenHeight - g:windowsSizeHeight) / 2)
-            exec ':winpos ' . g:windowsPosX . ' ' . g:windowsPosY
-        endfunc
-        au GUIEnter * call WindowCenterInScreen()
+    function WindowCenterInScreen()
+        set lines=9999 columns=9999
+        let g:windowsSizeFixX = 58
+        let g:windowsSizeFixY = 118
+        let g:windowsScaleX   = 7.75
+        let g:windowsScaleY   = 17.0
+        let g:windowsPosOldX = getwinposx()
+        let g:windowsPosOldY = getwinposy()
+        let g:windowsScreenWidth  = float2nr(winwidth(0) * g:windowsScaleX) + \
+                                    g:windowsPosOldX + g:windowsSizeFixX
+        let g:windowsScreenHeight = float2nr(winheight(0) * g:windowsScaleY) + \
+                                    g:windowsPosOldY + g:windowsSizeFixY
+        set lines=60 columns=200
+        let g:windowsSizeWidth = float2nr(winwidth(0) * g:windowsScaleX) + g:windowsSizeFixX
+        let g:windowsSizeHeight = float2nr(winheight(0) * g:windowsScaleY) + g:windowsSizeFixY
+        let g:windowsPosX = ((g:windowsScreenWidth - g:windowsSizeWidth) / 2)
+        let g:windowsPosY = ((g:windowsScreenHeight - g:windowsSizeHeight) / 2)
+        "exec ':winpos ' g:windowsPosX ' ' g:windowsPosY
+        exec ':winpos ' 200  ' ' 400
+    endfunc
+    "au GUIEnter * call WindowCenterInScreen()
 
-        au! VCenterCursor
-        au VimEnter * normal zz
-    endif
+    "au! VCenterCursor
+    "au VimEnter * normal zz
+endif
    
     set background=dark
     if g:isWindows
@@ -372,11 +153,15 @@
     elseif g:isLinux
         set t_Co=256
         if g:isGUI
-            colorscheme rainbow_neon
+            "colorscheme rainbow_neon
             "set guifont=Terminus\ 12
-            set guifont=Terminess\ Powerline\ 12
+            "set guifont=Terminess\ Powerline\ 12
+            set guifont=xos4\ Terminess\ Powerline\ 10
+            "colorscheme Tomorrow-Night-Eighties
+            colorscheme base16-tomorrow-night
         else
-            colorscheme Tomorrow-Night
+            "colorscheme Tomorrow-Night
+            colorscheme base16-tomorrow-night
         endif
     else
     endif
@@ -384,12 +169,13 @@
     set lazyredraw       " Fix the problems for scrolling slowly
     set modifiable       " Fix E21: in NerdTree
 " }
-
+let base16colorspace=256
 
 " + 3.2. Tabs and Indent {
 " ------------------------
-    set shiftwidth=4
     set tabstop=4
+    set softtabstop=4
+    set shiftwidth=4
     set expandtab
     set cindent
     set smartindent
@@ -413,6 +199,7 @@
 " + 3.4. File Options {
 " ---------------------
     syntax on
+    filetype plugin indent on
     if has("multi_byte")
         set encoding=utf-8
     endif
@@ -483,79 +270,39 @@
 
 " + 3.8. Pretreatment {
 " ---------------------
-" - autocmds to automatically enter hex mode and handle file writes properly
-"   refering from link http://vim.wikia.com/wiki/Improved_Hex_editing
-    if has("autocmd")
-      " vim -b : edit binary using xxd-format!
-      augroup Binary
-        au!
-    
-        " set binary option for all binary files before reading them
-        au BufReadPre *.bin,*.hex,*.exe,*.dll setlocal binary
-    
-        " if on a fresh read the buffer variable is already set, it's wrong
-        au BufReadPost *
-              \ if exists('b:editHex') && b:editHex |
-              \   let b:editHex = 0 |
-              \ endif
-    
-        " convert to hex on startup for binary files automatically
-        au BufReadPost *
-              \ if &binary | Hexmode | endif
-    
-        " When the text is freed, the next time the buffer is made active it will
-        " re-read the text and thus not match the correct mode, we will need to
-        " convert it again if the buffer is again loaded.
-        au BufUnload *
-              \ if getbufvar(expand("<afile>"), 'editHex') == 1 |
-              \   call setbufvar(expand("<afile>"), 'editHex', 0) |
-              \ endif
-    
-        " before writing a file when editing in hex mode, convert back to non-hex
-        au BufWritePre *
-              \ if exists("b:editHex") && b:editHex && &binary |
-              \  let oldro=&ro | let &ro=0 |
-              \  let oldma=&ma | let &ma=1 |
-              \  silent exe "%!xxd -r" |
-              \  let &ma=oldma | let &ro=oldro |
-              \  unlet oldma | unlet oldro |
-              \ endif
-    
-        " after writing a binary file, if we're in hex mode, restore hex mode
-        au BufWritePost *
-              \ if exists("b:editHex") && b:editHex && &binary |
-              \  let oldro=&ro | let &ro=0 |
-              \  let oldma=&ma | let &ma=1 |
-              \  silent exe "%!xxd" |
-              \  exe "set nomod" |
-              \  let &ma=oldma | let &ro=oldro |
-              \  unlet oldma | unlet oldro |
-              \ endif
-      augroup END
-    endif
 
 " - Opening Vim help in a vertical split window
 "   [sof](https://stackoverflow.com/questions/630884/opening-vim-help-in-a-vertical-split-window)
-    if has("autocmd")
-      autocmd FileType help wincmd L
-    endif
+    autocmd FileType help wincmd L
 " }
 
 " + 3.9. Make And Build {
 " -----------------------
-    if has("autocmd") 
-        autocmd FileType python setlocal makeprg=python\ % 
-        if g:isWindows
-         "   autocmd FileType markdown setlocal makeprg=start "$ProgramFiles/Typora/Typora.exe"\ %
-         autocmd FileType markdown nmap <leader>mk :!start "C:/Program Files/Typora/Typora.exe"\ %<cr>
-        endif
+    autocmd FileType python setlocal makeprg=python\ % 
+    if g:isWindows
+     "   autocmd FileType markdown setlocal makeprg=start "$ProgramFiles/Typora/Typora.exe"\ %
+        autocmd FileType markdown nmap <leader>mk :!start "C:/Program Files/Typora/Typora.exe"\ %<cr>
     endif
 " }
 
 
+" + 3.A. vim-commentary
+" ---------------------
+autocmd FileType apache setlocal commentstring=#\ %s
+
 
 " * **0x04. Setting For Plugins.**
 " ================================
+
+
+" + vim-emoji
+" -----------
+
+" for e in emoji#list()
+"   call append(line('$'), printf('%s (%s)', emoji#for(e), e))
+" endfor
+" set completefunc=emoji#complete
+
 
 " + 4.1 plugins.vim-airline/vim-airline {
 " ---------------------------------------
@@ -829,150 +576,12 @@
 " + 4.13. plugins.mhinz/vim-startify {
 " ------------------------------------
 "
-    let g:startify_custom_header = [
-        \ '  +--------------------------------------------------------------------------+   ',
-        \ ' / =*=[ F911''S RESEARCH AND DEVELOPMENT STUDIO PRODUCED ( F911-R&D.SP ) ]=*=  \  ',
-        \ ' |----------------------------------------------------------------------------| ',
-        \ ' |                     .__            ______     _______                      | ',
-        \ ' |               ___  _|__| _____    /  __  \    \   _  \                     | ', 
-        \ ' |               \  \/ /  |/     \   >      <    /  /_\  \                    | ',
-        \ ' |                \   /|  |  Y Y  \ /   --   \   \  \_/   \                   | ',
-        \ ' |                 \_/ |__|__|_|  / \______  / /\ \_____  /                   | ',
-        \ ' |                              \/         \/  \/       \/                    | ',
-        \ ' +----------------------------------------------------------------------------+ ',
-        \ ' |                                                                            |',
-        \ '',
-        \ ]
-    let g:startify_custom_footer = [
-        \ ' |                                                                            | ',
-        \ ' |----------------------------------------------------------------------------| ',
-        \ ' \ =*=[ F911''S RESEARCH AND DEVELOPMENT STUDIO PRODUCED ( F911-R&D.SP ) ]=*= /  ',
-        \ '  +--------------------------------------------------------------------------+ ',
-        \ '',
-        \ ]
-    map <leader>st <Esc>:Startify<CR>
-" }
 
 
 
-" * **0x05. Key Mappings.**
-" =========================
-"
-" map commands, in some aspect, is so complicated, as it need adapt so many occasions.
-"
-" + Most meterial says vim has *FOUR* modes, they are:
-"
-"     1. Normal-mode  
-"     2. Insert-mode / Replace-mode
-"     3. Visual-mode / Select-mode  
-"     4. Command-mode
-"
-" + In vim official help documents, there are *SIX* sets of mappings:
-"
-"     1. For Normal mode: When typing commands.
-"     2. For Visual mode: When typing commands while the Visual area is highlighted.
-"     3. For Select mode: like Visual mode but typing text replaces the selection.
-"     4. For *Operator-pending mode*: When an operator is pending, for example, after \
-"        'd':delete, 'y':yank, 'c':cut, etc. afterwards arguments or commands waiting \
-"        to input.
-"     5. For Insert mode.  These are also used in *Replace mode*.
-"     6. For Command-line mode: When entering a ':' or '/' command.
-"
-" +  `map` command there are *THREE* type of usage in general:
-"
-"     1. Recurive-mapping or remap
-"     2. Non-recurive-mapping or noremap
-"     3. Cancel-mapping or unmap
-"     remap type is an option that makes mappings work recursively, which is usually
-"     on by default. for example: :map j gg + :map Q j = :map Q gg
-" 
-" Above all, you can get 6x3=18 kinds of mapping using cases, at least. WTF.
-" The common 'map' commands' action scope can be generally illustrated as table
-" bellow:
-"
-" +-------------------+--------+--------+------------------+-------------+--------------+
-" |   map commands    | Normal | Visual | Operator Pending | Insert Only | Command Line |
-" +-------+-+---------+--------+--------+------------------+-------------+--------------+
-" | :map  | :noremap  |   y    |   y    |        y         |             |              |
-" | :nmap | :nnoremap |   y    |        |                  |             |              |
-" | :vmap | :vnoremap |        |   y    |                  |             |              |
-" | :omap | :onoremap |        |        |        y         |             |              |
-" | :map! | :noremap! |        |        |                  |      y      |      y       |
-" | :imap | :inoremap |        |        |                  |      y      |              |
-" | :cmap | :cnoremap |        |        |                  |             |      y       |
-" +-------+-----------+--------+--------+------------------+-------------+--------------+
-"     _tab5-1:'map' commands' action scope_
-" 
-" What's more if you type help :map! you can get more map commands and more cases... Orz
-"
-" + map-mode and map-commands in official documents:
-" 
-"     1. mapmode-nvo   map    noremap    unmap    mapclear
-"     2. mapmode-n     nmap   nnoremap   nunmap   nmapclear
-"     3. mapmode-v     vmap   vnoremap   vunmap   vmapclear
-"     4. mapmode-x     xmap   xnoremap   xunmap   xmapclear
-"     5. mapmode-s     smap   snoremap   sunmap   smapclear
-"     6. mapmode-o     omap   onoremap   ounmap   omapclear
-"     7. mapmode-ic    map!   noremap!   unmap!   mapclear!
-"     8. mapmode-i     imap   inoremap   iunmap   imapclear
-"     9. mapmode-l     lmap   lnoremap   lunmap   lmapclear
-"    10. mapmode-c     cmap   cnoremap   cunmap   cmapclear
-"
-"    more details read Key mapping in vim's help
-"    
-"
-" Reference:
-" [zhihu-vimstudy-map](https://zhuanlan.zhihu.com/p/24713018)
-" [csdnblog-vimmap-forward](http://blog.csdn.net/lym152898/article/details/52171494)
-" [pythonclub](http://www.pythonclub.org/linux/vim/map)
-" [it-house](http://www.it1352.com/535382.html)
-" help :map!
-" "
-    imap <C-a> <Esc>I
-    imap <C-e> <ESC>A
-    "map <C-Tab> <C-W>w
-    "imap <C-Tab> <C-O><C-W>w
-    "imap <C-Tab> <C-C><C-Tab>
-    map <kMinus> :cp<C-M>
-    map - :cp<C-M>
-    map <kPlus> :cn<C-M>
-    map + :cn<C-M>
-    vmap <C-c> "+y
-    vmap <S-Insert> "+gP
-    nmap <C-c> "+yy
-    vmap <C-x> "+d
-    map <C-s> :w
-   
-    " rc file and plug operations
-    if g:isWindows
-        nmap <leader>rc :tabnew $HOME/vimfiles/vimrc<CR>
-    elseif g:isMsys
-        nmap <leader>rc :tabnew $HOME/vimfiles/vimrc<CR>
-    else " linux & Mac
-        nmap <leader>rc :vsplit ~/.vim/vimrc<CR>
-        nmap <leader>pu <Esc>:PlugUpdate<CR>
-        nmap <leader>ps <Esc>:PlugStatus<CR>
-    endif
-    
-    nmap <leader>t :tabnew<CR>
-    nmap <leader>nl <ESC>:nohl<CR>
-    
-    nmap <C-Tab> <Esc>gt
-    nmap <C-S-Tab> <Esc>gT
-    imap <C-Tab> <Esc>gt
-    imap <C-S-Tab> <Esc>gT
 
-    " cutting to a new line and continue insert/edit
-    nnoremap K i<CR>
-    
-    map  <leader>w <Esc><C-W><C-W>
-    map <F9> <Esc>:w<CR>:!node %<CR>
-    
-    "map <leader> <Esc>:w<CR><Esc>:so $HOME/_vimrc<CR><Esc>:PluginUpdate<CR>
-    "nnoremap <leader>gq :%!pandoc -f html -t markdown <bar> pandoc -f markdown -t html<CR>
-    "vnoremap <leader>gq :!pandoc -f html -t markdown <bar> pandoc -f markdown -t html<CR>
-" }
-
+"autocmd BufNewFile *.py 0r $HOME/.vim/template/python.tlp
+set verbose=0
 " + fix messy code problem {
 " --------------------------
     set langmenu=en_US.UTF-8
