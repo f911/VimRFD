@@ -413,9 +413,6 @@
 " + 3.4. File Options {
 " ---------------------
     syntax on
-    filetype on
-    filetype plugin on
-    filetype plugin indent on
     if has("multi_byte")
         set encoding=utf-8
     endif
@@ -765,11 +762,18 @@
 "   required components, if you want to execute ./install.py --all satisfactorily. Of cause,
 "   different OS platform use different package manager. example commands may be bellow:
 " 
-"       cd ~/.vim/plugged/YouCompleteMe
-"       git submodule update --init --recursive
-"       sudo dnf install -y automake gcc gcc-c++ kernel-devel cmake \
-"                           python-devel python3-devel nodejs nodejs-devel \
-"                           go rust cargo cargo-devel
+"   ```sh
+"     cd ~/.vim/plugged/YouCompleteMe
+"     git submodule update --init --recursive
+"
+"     sudo dnf install -y \
+"     automake gcc gcc-c++ kernel-devel cmake \
+"     python-devel python3-devel nodejs nodejs-devel \
+"     go rust cargo cargo-devel mono-devel
+"
+"     sudo apt-get install -y \
+"     golang cargo mono-devel
+"   ```
 
     let g:ycm_complete_in_comments = 1
     let g:ycm_complete_in_strings = 1

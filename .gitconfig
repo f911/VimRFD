@@ -1,8 +1,0 @@
-[user]
-	name = F911
-	email = 0xf911@gmail.com
-[core]
-	autocrlf = false
-	excludesfile = $HOME/.gitignore_global
-[push]
-	default = simple
