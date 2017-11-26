@@ -42,6 +42,7 @@ set nocompatible
 if empty($MYVIMRCD) && empty($MYVIMMOD)
     let $MYVIMRCD = join([$MYVIMRC, '_d'], '')              " usually $HOME/.vim/vimrc_d
     let $MYVIMMOD = join([$MYVIMRCD, '/module'], '')       " usually $HOME/.vim/vimrc_d/scripts
+    let $MYVIMMOD = $MYVIMRCD
     let $MYVIMSKL = join([$MYVIMRCD, '/skeleton'], '')
 endif
 

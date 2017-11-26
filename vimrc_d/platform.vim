@@ -2,13 +2,13 @@
 " ========================================
 "
 " Detect OS type, GUI environment and set the base variables, this vim resource file
-" support platform can be bellow:
+" support platform can be described bellow. For practical reason, currently, servircommon platform:
 "
 " +-----------+-----------+------------+------------+---------+
 " |           | isWindows | isMsys     | isMac      | isLinux |
 "           
 " +-----------+-----------+------------+------------+---------+
-" | isGUI     |   usual   |  ---       | occasional |  rare   |
+" | isGUI     |   usual   |  ---       | occasional |  usual  |
 " +-----------+-----------+------------+------------+---------+
 " | isConsole |   rare    | occasional | usual      |  hot    |
 " +-----------+-----------+------------+------------+---------+
@@ -35,3 +35,8 @@ if has("gui_running")
 else
     let g:isConsole = 1
 endif
+
+
+
+" vim:nocp:cin:sr:et:ts=4:sts=4:ft=vim:ff=unix:fenc=utf-8:
+" EOF
