@@ -18,5 +18,7 @@
    - use [vim-wikia](http://vim.wikia.com/wiki/Vim_Tips_Wiki) for more tips
    - and [sof](https://stackoverflow.com/tags/vim/info) for community help
 
-* using ":message"
-    + using ":message" to display 
+* Persistent Echoing
+    + using `:echom[sg]` will save the output and let you run `:messages` to view it later.
+    + `:message` / `:messa` will also be ok. 
+    + like `:echom`, there are `:echoh[l]` `:echoe[rr]`

@@ -1,86 +1,56 @@
-VimRFD Documets
-===============
+![vim-see-you](http://orig02.deviantart.net/a1f5/f/2009/363/1/8/vim_with_cleansing_action_by_carsonfire.jpg)
+============================
 
+The Big Vim Brother Is Watching You 
 
-![Vim|RFD](https://img.shields.io/badge/Vim-RFD-4456FF.svg) 
+usage
+-----
 
-
-
-
- - 0x01. Objective About These Documents
-----------------------------------------
-
-1. We trying to make these documents more frendly and easy to be read in various conditions.
-
-2. We trying to let these documents more modernized, and flexilbe to conver to different format,
-   like HTML PDF etc.
-
-3. We trying to add more functional features in   
-
-
-
- - 0x02. View in Browser
-------------------------
-
-
-### Install mkdocs and mkdocs themes.
-
-> **Prerequisite:** Make sure python and pip are install correctly on your 'workstation'.
-> use:
-> ```sh
-> sudo PKG_MGR install -y python python-pip python3 python3-pip
-> ```
-
-
-
-
-* Debian : Ubuntu / Kali 
+* checkout corresponding branch, like Mac OS X is vim-on-mac
 
 ```sh
-sudo apt-get install -y mkdocs
-sudo pip install mkdocs-windmillex  # maybe `sudo` is not nessary
+cd .vim
+git init
+git commit -a -m "first commit and prepare for merging"
+git remote add origin https://github.com/f911/vimfiles.git
+git pull 
 ```
 
-* RedHat : REHL / CentOS / Fedora
+after some merge you can push to your own forks
+
+* update submodules and install vim-plug
+
+You can use choose [Vundle](http://github.com/VundleVim/Vundle.Vim) instead, which is also a greate vim
+plugin manager. But vim-plug is seems to be a better choice by now, with faster speed and more update.
+
 
 ```sh
-sudo dnf install -y mkdocs
-sudo pip install mkdocs-windmillex  # maybe `sudo` is not nessary
+git submodule update --init --recursive
+cd ~/.vim/vim-plug
+ln plug.vim ../autoload/plug.vim
 ```
 
-* Windows 
-```bat
+* update plugins
 
+open vim / gvim / mvim 
+
+```vim
+:PlugUpdate
 ```
 
-* Mac OS X
-```sh
-brew install -y mkdocs
-pip install mkdocs-windmillex
-```
 
-You can also install other `mkdocs-themes` list on [PyPI][1] 
+Vim A Real Big Game For Coder
+----------------------------
 
+It seems that the "vim" could turns out to be a big game with endless adventures and tasks 
+for us, rather than a simple text editor. But the "vim" is in essence a simple text editor.
+The first time you enter the game, "vim" is a innocent role, the last time you leave the 
+game, "vim" becomes a blazeding one, leaving both hateful and lovely but precious experiences
+for you. Though there are many other fairly good editors like emacs, UEStudio, EditPlus,
+EmEditor, EverEditor, and so on, brings you enjoyment for some periods, the "vim" should be
+the last and ever editor for you. For the sake of old hard times, for the sake of working on 
+servers for servering public, for the sake of contribution and aspiration. "vim" is the King
+of editor, and the King Arthur in coder's Rounds.
  
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-[1] (https://pypi.python.org/pypi?%3Aaction=search&term=mkdocs&submit=search)
-
-
-
-<!--
-vim:nocp:cin:sr:et:ts=4:sts=4:sw=4:ft=markdown:ff=unix:fenc=utf-8:
-EOF
--->
+--- a vim player      

@@ -26,6 +26,7 @@ VimRFD Documets
 ### Install mkdocs and mkdocs themes.
 
 > **Prerequisite:** Make sure python and pip are install correctly on your 'workstation'.
+>
 > use:
 > ```sh
 > sudo PKG_MGR install -y python python-pip python3 python3-pip

@@ -39,6 +39,13 @@
 
 set nocompatible
 
+" For Learning Vimscript the Hard Way
+
+echom ">^.^<"
+
+
+
+
 if empty($MYVIMRCD) && empty($MYVIMMOD)
     let $MYVIMRCD = join([$MYVIMRC, '_d'], '')              " usually $HOME/.vim/vimrc_d
     let $MYVIMMOD = join([$MYVIMRCD, '/module'], '')       " usually $HOME/.vim/vimrc_d/scripts
@@ -156,11 +163,12 @@ endif
         set t_Co=256
         if g:isGUI
             "colorscheme rainbow_neon
-            set guifont=Terminus\ 12
-            "set guifont=Terminess\ Powerline\ 12
+            "set guifont=Terminus\ 12
+            set guifont=Terminess\ Powerline\ 12
             "set guifont=xos4\ Terminess\ Powerline\ 10
             "colorscheme Tomorrow-Night-Eighties
-            colorscheme base16-tomorrow-night
+            "colorscheme base16-tomorrow-night
+            colorscheme base16-eighties
         else
             "colorscheme Tomorrow-Night
             colorscheme base16-tomorrow-night
