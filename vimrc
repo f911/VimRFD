@@ -39,26 +39,23 @@
 
 set nocompatible
 
-" For Learning Vimscript the Hard Way
 
-echom ">^.^<"
-
-
+" suppose $MYVIMRC is not empty, otherwise this vimrc file would not be
+" loaded and no script as well as plugins will be execute, also safe.
 
 
 if empty($MYVIMRCD) && empty($MYVIMMOD)
-    let $MYVIMRCD = join([$MYVIMRC, '_d'], '')              " usually $HOME/.vim/vimrc_d
-    let $MYVIMMOD = join([$MYVIMRCD, '/module'], '')       " usually $HOME/.vim/vimrc_d/scripts
-    let $MYVIMMOD = $MYVIMRCD
+"   let $MYVIMMOD = join([$MYVIMRCD, '/module'], '')          another choice
+    let $MYVIMMOD = join([$MYVIMRC, '_d'], '')              " usually $HOME/.vim/vimrc_d
     let $MYVIMSKL = join([$MYVIMRCD, '/skeleton'], '')
 endif
 
 source $MYVIMMOD/platform.vim 
+source $MYVIMMOD/vimplug.vim           " Module or Plugin manager
 source $MYVIMMOD/ftpretreat.vim
 source $MYVIMMOD/keymaps.vim
 
-source $MYVIMMOD/m_vimplug.vim           " Module or Plugin manager
-source $MYVIMMOD/m_startify.vim
+source $MYVIMMOD/startify.vim
 
 
 

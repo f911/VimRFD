@@ -1,12 +1,14 @@
 site_name: VimRFD Documents
 pages:
-    - Home: index.md
-    - Changelog: UserManual/changelog.md
-    - Features:  UserManual/features.md
-    - Install:   UserManual/install.md
-    - SourceCode/Debugging: SourceCode/debugging.md
+    - Home:      index.md
+    - Install:   install.md
+    - Features:  features.md
+    - Changelog: changelog.md
+    - Debugging: debugging.md
+    - Platform:  platform.md
     - About:     about.md
 theme: windmillex
+plugin: search
 
 # vim:nocp:cin:sr:et:ts=4:sts=4:sw=4:ft=yaml:ff=unix:fenc=utf-8:
 # EOF
