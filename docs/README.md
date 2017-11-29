@@ -7,8 +7,8 @@ VimRFD Documets
 
 
 
- - 0x01. Objective About These Documents
-----------------------------------------
+0x01. Objective About These Documents
+-------------------------------------
 
 1. We trying to make these documents more frendly and easy to be read in various conditions.
 
@@ -19,15 +19,18 @@ VimRFD Documets
 
 
 
- - 0x02. View in Browser
-------------------------
+0x02. View in Browser
+---------------------
 
 
 ### Install mkdocs and mkdocs themes.
 
-> **Prerequisite:** Make sure python and pip are install correctly on your 'workstation'.
+> **Prerequisite:** 
+>
+> Make sure python and pip are install correctly on your 'workstation'.
 >
 > use:
+>
 > ```sh
 > sudo PKG_MGR install -y python python-pip python3 python3-pip
 > ```
@@ -77,7 +80,7 @@ You can also install other `mkdocs-themes` list on [PyPI][1]
 
 
 
-[1] (https://pypi.python.org/pypi?%3Aaction=search&term=mkdocs&submit=search)
+[1]: https://pypi.python.org/pypi?%3Aaction=search&term=mkdocs&submit=search
 
 
 

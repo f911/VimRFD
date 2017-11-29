@@ -12,8 +12,8 @@
 
 
 
-Former Design
--------------
+Former Used Design
+------------------
 
  
 |  ENVs     | isWindows | isMsys     | isMac      | isLinux |
@@ -30,8 +30,8 @@ later on down the road, let alone **flexiablity** and **extendibility**.
 
 
 
-New Design 
-----------
+Later Considered Design 
+-----------------------
 
 to identify more and get it more clear. In the most customers and producers views, 
 our platform can be described as below:
@@ -40,7 +40,7 @@ our platform can be described as below:
 ```text
   kinds of information need to collect   or                 combine them like this
               :                                                       :
-  runtime:         OS type:                   +--------------------+-----+---------+-----+-----+
+   x lib:          OS type:                   +--------------------+-----+---------+-----+-----+
  +---------+     +----------+---------+       |       OS type      | GUI | Console | x32 | x64 | 
  | GUI     |     | Linux    | REHL    |       +----------+---------+-----+---------+-----+-----+
  +---------+  X  |          | Fedora  |       | Linux    | REHL    |     |         |     |     | 
@@ -53,15 +53,45 @@ our platform can be described as below:
  |---------+  X  +----------+---------+       |          | Msys    |     |         |     |     |
  |   x64   |     | Mac OS X | Darwin  |       +----------+---------+-----+---------+-----+-----+
  +---------+     +----------+---------+       | Mac OS X | Darwin  |     |         |     |     |
-                                              +----------+---------+-----+---------+-----+-----+
-                                              | Others   |         |     |         |     |     | 
-                                              +----------+---------+-----+---------+-----+-----+
-                                              | Unknown  |                                     | 
+                 |  others  | beos    |       +----------+---------+-----+---------+-----+-----+
+                 |          | qnx     |       | Others   |         |     |         |     |     | 
+                 |          | ...     |       +----------+---------+-----+---------+-----+-----+
+                 +----------+---------+       | Unknown  |                                     | 
                                               +----------+-------------------------------------+
 ``` 
 » _tab1-2 : new supported OS contexts_ 
 
 see the possable context above, so **various** ...
+
+
+
+
+Now Practical Design
+-------------------
+
+use 2-D tables to describe our `platform` circumstances.
+
+```text
+
+                 →             →            →            ∞
+     os type:          x lib:        arch:      neovim
+   +-------------+   +---------+   +------+   +----------+
+   | Msys        | χ | GUI     | χ | x64  | χ | NeoVim   |
+   | Windows     |   +---------+   +------+   +----------+
+   | Mac OS X    |   | Console |   | x32  |   | Original |
+   | Linux       |   +---------+   +------+   +----------+
+ ↓ | unsupported |  
+   +-------------+  
+ ↓ | ( can be    |
+   |   extended  |  
+ ↓ |   later )   |
+   | ... ...     |  
+ ∞ +-------------+   
+                      
+```
+
+
+
 
 
 Discipline
@@ -74,7 +104,7 @@ Discipline
   there, as they are rarely used, and can be gain by plugin itself, or write codes for that
   condition separely.
 
-* In this module we only concern **OS** relative things or OS layer, some **Software** layer 
+
   environments like `tmux` would not place here, as more and more software will have influence
   on vim, we need handle it conditionally. On the other hand, OS type is stable and 
   vim-features as well.
