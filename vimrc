@@ -44,18 +44,17 @@ set nocompatible
 " loaded and no script as well as plugins will be execute, also safe.
 
 
-if empty($MYVIMRCD) && empty($MYVIMMOD)
-"   let $MYVIMMOD = join([$MYVIMRCD, '/module'], '')          another choice
-    let $MYVIMMOD = join([$MYVIMRC, '_d'], '')              " usually $HOME/.vim/vimrc_d
+if empty($MYVIMRCD)
+    let $MYVIMRCD = join([$MYVIMRC, '_d'], '')              " usually $HOME/.vim/vimrc_d
     let $MYVIMSKL = join([$MYVIMRCD, '/skeleton'], '')
 endif
 
-source $MYVIMMOD/platform.vim 
-source $MYVIMMOD/vimplug.vim           " Module or Plugin manager
-source $MYVIMMOD/ftpretreat.vim
-source $MYVIMMOD/keymaps.vim
-
-source $MYVIMMOD/startify.vim
+source $MYVIMRCD/platform.vim 
+source $MYVIMRCD/pluginmgr.vim          " load external plugin by vim-plug
+source $MYVIMRCD/customlook.vim         " 
+source $MYVIMRCD/fthandle.vim           " ft & ff & fenc etc.
+"source $MYVIMRCD/keymaps.vim
+source $MYVIMRCD/startify.vim
 
 
 
@@ -64,216 +63,6 @@ source $MYVIMMOD/startify.vim
 
 " * **0x03. General Display And Action Styles.**
 " ==============================================
-
-" + 3.1. Editing Interface {
-" --------------------------
-    set number
-    set ruler
-    set laststatus=2        " always display statusline like airline
-    set cmdheight=1
-
-"   set shortmess=atI
-    set cursorline
-    hi CursorLine term=underline cterm=underline guibg=#3A3A3A
-    hi CursorLine ctermbg=darkgrey guibg=gray13
-
-    set colorcolumn=100
-
-if g:isGUI
-    " au GUIEnter * simalt ~x
-    winpos 400 200
-    set columns=200
-    set lines=68
-    set guioptions-=m  " use :se go+=m to recall menu
-    set guioptions-=T
-    set guioptions-=r
-    set guioptions-=L
-
-    augroup VCenterCursor
-        au!
-        au BufEnter,WinEnter,WinNew,VimResized *,*.*
-                    \ let &scrolloff=winheight(win_getid())/2
-    augroup END
-
-    function WindowCenterInScreen()
-        set lines=9999 columns=9999
-        let g:windowsSizeFixX = 58
-        let g:windowsSizeFixY = 118
-        let g:windowsScaleX   = 7.75
-        let g:windowsScaleY   = 17.0
-        let g:windowsPosOldX = getwinposx()
-        let g:windowsPosOldY = getwinposy()
-        let g:windowsScreenWidth  = float2nr(winwidth(0) * g:windowsScaleX) + \
-                                    g:windowsPosOldX + g:windowsSizeFixX
-        let g:windowsScreenHeight = float2nr(winheight(0) * g:windowsScaleY) + \
-                                    g:windowsPosOldY + g:windowsSizeFixY
-        set lines=60 columns=200
-        let g:windowsSizeWidth = float2nr(winwidth(0) * g:windowsScaleX) + g:windowsSizeFixX
-        let g:windowsSizeHeight = float2nr(winheight(0) * g:windowsScaleY) + g:windowsSizeFixY
-        let g:windowsPosX = ((g:windowsScreenWidth - g:windowsSizeWidth) / 2)
-        let g:windowsPosY = ((g:windowsScreenHeight - g:windowsSizeHeight) / 2)
-        "exec ':winpos ' g:windowsPosX ' ' g:windowsPosY
-        exec ':winpos ' 200  ' ' 400
-    endfunc
-    "au GUIEnter * call WindowCenterInScreen()
-
-    "au! VCenterCursor
-    "au VimEnter * normal zz
-endif
-   
-    set background=dark
-    if g:isWindows
-        if g:isGUI
-            "colorscheme rainbow_neon
-            "colorscheme Tomorrow-Night-Eighties
-            colorscheme base16-eighties
-            set guifont=MesloLGS_NF:h9:cANSI:qDRAFT
-        "
-        "    set guifont=Bitstream_Vera_Sans_Mono:h9.5
-        "    set guifont=Terminus:h12
-        "    set guifontwide=PowerlineSymbols:h10
-        "    set guifontwide=Meslo\ LG\ S\ for\ Powerline:h9
-        "
-            "set guifontwide=MesloLGS_NF:h9:cANSI:qDRAFT
-        else
-            set t_Co=256
-            colorscheme industry
-            set guifont=Bitstream_Vera_Sans_Mono:h10.5
-        endif
-    elseif g:isMsys
-        if g:isGUI
-            colorscheme rainbow_neon
-            set t_Co=256
-            set guifont=Terminus\ 12
-        else
-            colorscheme Tomorrow-Night
-        endif
-    elseif g:isMac
-        if g:isGUI
-            colorscheme rainbow_neon
-            set guifont=MesloLGS_NF:h11
-        else
-            colorscheme Tomorrow-Night
-            set guifont=Meslo\ LG\ S\ Regular\ for\ Powerline:h11
-        endif
-    elseif g:isLinux
-        set t_Co=256
-        if g:isGUI
-            "colorscheme rainbow_neon
-            "set guifont=Terminus\ 12
-            set guifont=Terminess\ Powerline\ 12
-            "set guifont=xos4\ Terminess\ Powerline\ 10
-            "colorscheme Tomorrow-Night-Eighties
-            "colorscheme base16-tomorrow-night
-            colorscheme base16-eighties
-        else
-            "colorscheme Tomorrow-Night
-            colorscheme base16-tomorrow-night
-        endif
-    else
-    endif
-    
-    set lazyredraw       " Fix the problems for scrolling slowly
-    set modifiable       " Fix E21: in NerdTree
-" }
-let base16colorspace=256
-
-" + 3.2. Tabs and Indent {
-" ------------------------
-    set tabstop=4
-    set softtabstop=4
-    set shiftwidth=4
-    set expandtab
-    set cindent
-    set smartindent
-    set autoindent
-    " Except for Makefiles; hard tabs of width 2
-    au FileType make set ts=2
-    " And Markdown
-" }
-
-
-" + 3.3. Search Options {
-" -----------------------
-    set showmatch
-    set incsearch
-    set ignorecase
-    set smartcase
-    set hlsearch
-" }
-
-
-" + 3.4. File Options {
-" ---------------------
-    syntax on
-    filetype plugin indent on
-    if has("multi_byte")
-        set encoding=utf-8
-    endif
-    "set fileencoding=utf-8
-    "set termencoding=utf-8
-    let &termencoding=&encoding
-    set fileencodings=utf-8,cp936,default,latin-1,GB232,GBK,GB8030,ucs-bom
-
-    if g:isWindows
-        set fileformat=dos
-        set fileformats=dos,unix,mac
-    elseif g:isMsys
-        set fileformat=unix
-        set fileformats=unix,dos,mac
-    elseif g:isMac
-        set fileformat=mac
-        set fileformats=mac,dos,unix
-    elseif g:isLinux
-        set fileformat=unix
-        set fileformats=unix,mac,dos
-    else
-    endif
-
-    set formatoptions=croql
-    set backspace=indent,eol,start
-" } 
-
-" + 3.5. Code Folding {
-" ---------------------
-    set foldenable
-    set foldmethod=indent    "/marker/syntax"
-    set foldcolumn=1
-    set foldlevelstart=20
-    let javaScript_fold=1                 " JavaScript
-    let perl_fold=1                       " Perl
-    let php_folding=1                     " PHP
-    let r_syntax_folding=1                " R
-    let ruby_fold=1                       " Ruby
-    let sh_fold_enabled=1                 " sh
-    let vimsyn_folding='af'               " Vim script
-    let xml_syntax_folding=1              " XML
-    " use SPACE to unfold code, zR: open all folds zM: close all folds
-    nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
-" }
-
-
-" + 3.6. Text Wrapping {
-" ----------------------
-    set writebackup
-    set nobackup
-    set noswapfile          " use version control insead
-    set clipboard=unnamed   " use OS clipboard ro copypasta
-    set paste               " fix bad autoindent of pasted text
-    if has("mouse")         " Enable OS mouse clicking and scrolling
-        set mouse=a
-    endif
-    set autoread
-    set autochdir
-" }
-
-" au BufWinEnter * let w:m2=matchadd('Underlined', '\%>' . 80 . 'v.\+', -1)
-
-" + 3.7. Disable Beeping {
-" ------------------------
-    set noerrorbells visualbell t_vb=
-    autocmd GUIEnter * set visualbell t_vb=
-" }
 
 " + 3.8. Pretreatment {
 " ---------------------
@@ -286,7 +75,7 @@ let base16colorspace=256
 " + 3.9. Make And Build {
 " -----------------------
     autocmd FileType python setlocal makeprg=python\ % 
-    if g:isWindows
+    if GetOSType() == "win"
      "   autocmd FileType markdown setlocal makeprg=start "$ProgramFiles/Typora/Typora.exe"\ %
         autocmd FileType markdown nmap <leader>mk :!start "C:/Program Files/Typora/Typora.exe"\ %<cr>
     endif
@@ -317,7 +106,6 @@ autocmd FileType apache setlocal commentstring=#\ %s
     let g:airline#extensions#tabline#enabled = 1
     let g:airline#extensions#tabline#buffer_nr_show = 1
     let g:Powerline_symbols = 'fancy'
-    set t_Co=256
     set fillchars+=stl:\ ,stlnc:\
     set laststatus=2
 
@@ -335,7 +123,7 @@ autocmd FileType apache setlocal commentstring=#\ %s
     nmap <leader>il :IndentLinesToggle<CR>
     let g:indentLine_enabled=1
     "let g:indentLine_char = '┊'
-    if g:isGUI
+    if IsGUI()
         let g:indentLine_char = "¦"
         let g:indentLine_first_char = "¦"
         "let g:indentLine_color_gui = '#A4E57E'
@@ -351,11 +139,11 @@ autocmd FileType apache setlocal commentstring=#\ %s
                 \ exists("b:NERDTreeType") && 
                 \ b:NERDTreeType == "primary") | q | 
                 \ endif
-    if g:isWindows
-        let g:NERDTreeCopyCmd = 'copy '
-    else
-        let g:NERDTreeCopyCmd = 'cp -r'
-    endif
+   " if g:isWindows
+   "     let g:NERDTreeCopyCmd = 'copy '
+   " else
+   "     let g:NERDTreeCopyCmd = 'cp -r'
+   " endif
     let g:NERDTreeMouseMode = 2
     let g:NERDTreeWinSize   = 40
     let g:NERDTreeMinimalUI = 1
@@ -366,15 +154,15 @@ autocmd FileType apache setlocal commentstring=#\ %s
 
 " + 4.4. plugins.derekmcloughlin/gvimfullscreen_win32 {
 " -----------------------------------------------------
-    if g:isWindows && g:isGUI
-        map <F11> <Esc>:call libcallnr('gvimfullscreen.dll',
-                \ 'ToggleFullScreen', 0)<CR><C-L>
-    endif
+   " if g:isWindows && g:isGUI
+   "     map <F11> <Esc>:call libcallnr('gvimfullscreen.dll',
+   "             \ 'ToggleFullScreen', 0)<CR><C-L>
+   " endif
 " }
 
 " + 4.5. plugins.mattn/vimtweak { 
 " -------------------------------
-    if g:isWindows && g:isGUI
+    "if g:isWindows && g:isGUI
         "let g:alpha_value=242
         "call libcallnr("vimtweak.dll", "SetAlpha", 235)
         " call libcallnr("vimtweak64.dll", "EnableMaximize", 1)
@@ -382,8 +170,8 @@ autocmd FileType apache setlocal commentstring=#\ %s
         "call libcallnr("vimtweak.dll", "EnableTopMost", 0)
 
         "autocmd FocusGained * call libcallnr("vimtweak.dll", "SetAlpha", 235)
-        autocmd FocusGained * call libcallnr("vimtweak64.dll", "SetAlpha", 242)
-        autocmd FocusLost * call libcallnr("vimtweak64.dll", "SetAlpha", 166)
+        "autocmd FocusGained * call libcallnr("vimtweak64.dll", "SetAlpha", 242)
+        "autocmd FocusLost * call libcallnr("vimtweak64.dll", "SetAlpha", 166)
         
         "function TweakWindowAlphaM(alpha_mod, sign)
         "    if sign == 1
@@ -407,12 +195,12 @@ autocmd FileType apache setlocal commentstring=#\ %s
     "    augroup transparency_windows
     "      autocmd!
     "    augroup END
-        map <F10> <Esc>:call libcallnr('vimtweak64.dll', 'SetAlpha', 200)<CR>
-        "map <F10> <Esc>:call TweakWindowAlphaM(10,1)<CR>
-        map <S-F10> <Esc>:call libcallnr('vimtweak64.dll', 'SetAlpha', 242)<CR>
+        "map <F10> <Esc>:call libcallnr('vimtweak64.dll', 'SetAlpha', 200)<CR>
+        ""map <F10> <Esc>:call TweakWindowAlphaM(10,1)<CR>
+        "map <S-F10> <Esc>:call libcallnr('vimtweak64.dll', 'SetAlpha', 242)<CR>
         "map <S-F10> <Esc>:call TweakWindowAlphaM(10, 0)<CR>
-	    map <C-S-F10> <Esc>:call libcallnr('vimtweak64.dll', 'SetAlpha', 255)<CR>
-    endif
+		"map <C-S-F10> <Esc>:call libcallnr('vimtweak64.dll', 'SetAlpha', 255)<CR>
+    "endif
 " }
 
 
@@ -434,13 +222,13 @@ autocmd FileType apache setlocal commentstring=#\ %s
 
 " + 4.8. plugins.maksimr/vim-jsbeautify {
 " ---------------------------------------
-    if (g:isWindows || g:isMsys)
-        let g:editorconfig_Beautifier=expand('$HOME/vimfiles/.editorconfig')
-	elseif (g:isMac || g:isLinux)
-        let g:editorconfig_Beautifier=expand('$HOME/.vim/.editorconfig')
-	else
-        let g:editorconfig_Beautifier=expand('$HOME/.vim/.editorconfig')
-    endif
+  "  if (g:isWindows || g:isMsys)
+  "      let g:editorconfig_Beautifier=expand('$HOME/vimfiles/.editorconfig')
+  "  elseif (g:isMac || g:isLinux)
+  "      let g:editorconfig_Beautifier=expand('$HOME/.vim/.editorconfig')
+  "  else
+  "      let g:editorconfig_Beautifier=expand('$HOME/.vim/.editorconfig')
+  "  endif
 " }
 
 
@@ -468,7 +256,7 @@ autocmd FileType apache setlocal commentstring=#\ %s
 " + 4.10. Plugins.scrooloose/syntastic {
 " --------------------------------------
     set statusline+=%#warningmsg#
-    if g:isWindows
+    if GetOSType() == "win"
         set statusline+=%{SyntasticStatuslineFlag()}
     endif
     set statusline+=%*
@@ -477,7 +265,7 @@ autocmd FileType apache setlocal commentstring=#\ %s
     let g:syntastic_auto_loc_list = 1
     let g:syntastic_check_on_open = 1
     let g:syntastic_check_on_wq = 0
-    if g:isWindows
+    if GetOSType() == "win"
         let g:syntastic_python_python_exec = 'C:/Python36/'
     endif
 
@@ -536,7 +324,7 @@ autocmd FileType apache setlocal commentstring=#\ %s
     let g:ycm_key_list_select_completion = ['<tab>', '<c-n>', '<Down>']
     let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
     let g:ycm_confirm_extra_conf = 0
-    if g:isWindows
+    if GetOSType() == "win"
         let g:ycm_server_python_interpreter = 'C:/Python36/python.exe'
     endif
 

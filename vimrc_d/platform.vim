@@ -9,7 +9,7 @@
 "
 " Interface
 " ---------  
-" * EXTERN: 
+" * IMPORT 
 "      None
 " * EXPORT: 
 "    + IsGUI() : bool
@@ -17,6 +17,9 @@
 "    + IsNeoVim() : bool
 "    + GetOSType(): str
 "    + TODO: GetOSVersion(): str, or maybe needless
+" * FUNCTION:
+"    + the layer below application,
+"    + after so $MYVIMRC before all other VimRFD moduals.
 "
 " Procedure
 " ---------

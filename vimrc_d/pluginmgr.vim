@@ -5,7 +5,11 @@
 "
 " Interface
 " ---------  
-" * extern None
+" * IMPORT:
+"    + platform.vim/GetOSType()
+" * EXPORT:
+"    + $MYVIMDIR
+"
 " * export g:isGUI, g:isX64, g:isWindows, g:isMsys, g:isMac, g:isLinux
 "
 " Procedure
@@ -13,14 +17,16 @@
 "
 " (EOC)
 
+" envrionment variables
+let s:isWin = (GetOSType() == "win")
+let $MYVIMDIR = $HOME.(s:isWin ? '\vimfiles' : '/.vim') 
+let s:bundled = $MYVIMDIR.(s:isWin ? '\bundle' : '/bundle')
 
-let s:bundle_dir = $v.'/bundle'
+" vim-plug global options
+let g:plug_timeout = 120
 
-let g:plug_shallow = 0
-let g:plug_window  = 'enew'
-let g:plug_pwindow = 'vertical rightbelow new'
 
-call plug#begin(s:bundle_dir)
+call plug#begin(s:bundled)
 
 " + looks and productivity {
 " --------------------------
@@ -35,6 +41,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'mbbill/fencview'
 Plug 'mbbill/undotree'
 " }
+Plug 'chrisbra/unicode.vim', { 'on': ['<plug>(UnicodeComplete)', '<plug>(UnicodeGA)', 'UnicodeTable'] }
 
 Plug 'mhinz/vim-startify'
 Plug 'mhinz/vim-tmuxify'
@@ -126,6 +133,8 @@ Plug 'asins/vimcdoc'
 Plug 'junegunn/vim-emoji'
 
 call plug#end()
+" no need to toggle fileindent options
+
 
 " vim:nocp:cin:sr:et:ts=4:sts=4:tw=98:ft=vim:ff=unix:fenc=utf-8:
 " EOF
