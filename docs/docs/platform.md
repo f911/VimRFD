@@ -74,7 +74,7 @@ use 2-D tables to describe our `platform` circumstances.
 ```text
 
                  →             →            →            ∞
-     os type:          x lib:        arch:      neovim
+     os type:          x lib:        arch:      neovim       ( can be extended later )
    +-------------+   +---------+   +------+   +----------+
    | Msys        | χ | GUI     | χ | x64  | χ | NeoVim   |
    | Windows     |   +---------+   +------+   +----------+
