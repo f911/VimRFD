@@ -110,7 +110,7 @@ if IsGUI()
 	" au GUIEnter * simalt ~x
 	winpos 420 200
 	set columns=200
-	set lines=60
+	set lines=61
 	set guioptions-=m  " use :se go+=m to recall menu
 	set guioptions-=T
 	set guioptions-=r

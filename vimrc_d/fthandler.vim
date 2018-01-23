@@ -78,9 +78,7 @@ augroup Python
 		\ silent! execute '0r $MYVIMSKL/'.&ft.'_skl.txt' | 
         \ echo '[✓]:☞ Creating '.&ft.' file, loading corresponding template.'
     autocmd BufEnter *.py
-        \ setlocal makeprg=python3\ %| 
-        \ nnoremap <F5> :w<Bar>make<CR>|
-        \ nnoremap <C-F5> :w <bar> exec '!python3 -m pdb '.shellescape('%')<CR>
+        \ source $MYVIMRCD/fthandler_d/python_hdl.vim
 augroup END
 
 
