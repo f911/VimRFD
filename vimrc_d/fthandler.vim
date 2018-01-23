@@ -2,6 +2,27 @@
 
 " - autocmds to automatically enter hex mode and handle file writes properly
 "   refering from link http://vim.wikia.com/wiki/Improved_Hex_editing
+" IMPORT:
+"   + vimrc/$MYVIMRCD
+"   + platform/GetOSType()
+"
+
+
+let $MYVIMSKL = $MYVIMRCD.((GetOSType() == 'win') ? '\skeleton\':'/skeleton/')
+
+
+
+
+" + 3.8. Pretreatment {
+" ---------------------
+
+" - Opening Vim help in a vertical split window
+"   [sof](https://stackoverflow.com/questions/630884/opening-vim-help-in-a-vertical-split-window)
+    "autocmd FileType help wincmd L
+" }
+
+
+
 augroup Binary
   au!
 
@@ -52,22 +73,35 @@ augroup END
 " FileType Python Pretreatment
 " ----------------------------
 augroup Python
-	au BufNewFile *.py 
-		\ echo '[+] Filetype "python" detected, and set the corresponding template.' |
-		\ 0r $HOME/.vim/skeleton/python_skl.txt  |
-		\ normal 4jW
+    autocmd!
+	autocmd BufNewFile *.py 
+		\ silent! execute '0r $MYVIMSKL/'.&ft.'_skl.txt' | 
+        \ echo '[✓]:☞ Creating '.&ft.' file, loading corresponding template.'
+    autocmd BufEnter *.py
+        \ setlocal makeprg=python3\ %| 
+        \ nnoremap <F5> :w<Bar>make<CR>|
+        \ nnoremap <C-F5> :w <bar> exec '!python3 -m pdb '.shellescape('%')<CR>
 augroup END
 
 
 
+augroup Vim
+    autocmd!
+    " not like python3 'so' is not a external command so we cannot use make
+    autocmd BufEnter *.vim,*vimrc
+        \ nnoremap <F5> :w<Bar>so %<Bar>echom '[✓]☞ sourced ok!'<CR>
+augroup END
+
+
+autocmd FileType apache setlocal commentstring=#\ %s
 
 " FileType Html Pretreatment
 " --------------------------
 augroup Html
-	au!
-	au BufNewFile *.html,*.htm 
+	autocmd!
+	autocmd BufNewFile *.html,*.htm 
 		\ echo '[+] Filetype "html" detected, try to cast the corresponding skeleton.' |
-		\ 0r $HOME/.vim/skeleton/html_skl.txt  |
+		\ 0r $MYVIMSKL/html_skl.txt  |
 		\ normal 2j
 augroup END
 
@@ -75,10 +109,10 @@ augroup END
 " FileType Sh Pretreatment
 " --------------------------
 augroup Sh
-    au!
-    au BufNewFile *.sh,*.zsh
+    autocmd!
+    autocmd BufEnter *.sh,*.zsh
         \ echo '[+] Filetype "sh" detected, recommend using zsh or bash.' |
-        \ 0r $HOME/.vim/skeleton/sh_skl.txt |
+        \ 0r $MYVIMSKL/sh_skl.txt |
         \ normal 2j
 augroup END
 

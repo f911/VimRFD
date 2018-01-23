@@ -9,9 +9,10 @@ import sys
 def main():
     pass
 
+
 if __name__ == "__main__":
     main()
 
 
-# vim:nocp:ai:si:ci:et:ts=4:sts=4:sw=4:ft=python:ff=unix:fenc=utf-8:
+# vim:cin:et:ts=4:sts=4:sw=4:tw=98:ft=python:ff=unix:fenc=utf-8:
 # EOF

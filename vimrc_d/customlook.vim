@@ -27,71 +27,8 @@
 "
 " (EOC)
 
-" basic theme
-let base16colorspace=256
-set background=dark
-
-" window componets
-set number
-set ruler
-set laststatus=2        " always display statusline like airline
-set cmdheight=1
-set colorcolumn=100
-set cursorline
-hi CursorLine term=underline cterm=underline guibg=#3A3A3A
-hi CursorLine ctermbg=darkgrey guibg=gray13
-set shortmess=at
-
-" tabs and indent 
-set cindent   " overrides ai si
-set expandtab
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
-" Except for Makefiles; hard tabs of width 2
-"au FileType make set ts=2
-" And Markdown
-
-
-" text wrapping 
-set writebackup
-set nobackup
-set noswapfile          " use version control insead
-set clipboard=unnamed   " use OS clipboard ro copypasta
-set paste               " fix bad autoindent of pasted text
-if has("mouse")         " Enable OS mouse clicking and scrolling
-    set mouse=a
-endif
-set autoread
-set autochdir
-
-" code folding
-set foldenable
-set foldmethod=indent    "/marker/syntax"
-set foldcolumn=1
-set foldlevelstart=20
-let javaScript_fold=1                 " JavaScript
-let perl_fold=1                       " Perl
-let php_folding=1                     " PHP
-let r_syntax_folding=1                " R
-let ruby_fold=1                       " Ruby
-let sh_fold_enabled=1                 " sh
-let vimsyn_folding='af'               " Vim script
-let xml_syntax_folding=1              " XML
-" use SPACE to unfold code, zR: open all folds zM: close all folds
-nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
-
-" search options 
-set showmatch
-set incsearch
-set ignorecase
-set smartcase
-set hlsearch
-
-
-
-
-
+" functions
+"
 function! s:SetGUITheme(ost) abort
     " overrides colo if need	
 	colorscheme base16-eighties
@@ -145,15 +82,35 @@ endfunction
 
 
 
-set lazyredraw       " Fix the problems for scrolling slowly
-set modifiable       " Fix E21: in NerdTree
-" }
+
+
+
+
+
+
+
+
+
+" basic theme
+let base16colorspace=256
+set background=dark
+
+" window componets
+set number
+set ruler
+set laststatus=2        " always display statusline like airline
+set cmdheight=1
+set colorcolumn=100
+set cursorline
+hi CursorLine term=underline cterm=underline guibg=#202020
+hi CursorLine ctermbg=darkgrey guibg=gray13
+set shortmess=at
 
 if IsGUI()
 	" au GUIEnter * simalt ~x
-	winpos 400 200
+	winpos 420 200
 	set columns=200
-	set lines=68
+	set lines=60
 	set guioptions-=m  " use :se go+=m to recall menu
 	set guioptions-=T
 	set guioptions-=r
@@ -162,6 +119,66 @@ if IsGUI()
 else
 	call s:SetConTheme(GetOSType())
 endif
+
+" tabs and indent 
+set cindent   " overrides ai si
+set expandtab
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+" Except for Makefiles; hard tabs of width 2
+"au FileType make set ts=2
+" And Markdown
+
+
+" text wrapping 
+set writebackup
+set nobackup
+set noswapfile          " use version control insead
+set clipboard=unnamed   " use OS clipboard ro copypasta
+set paste               " fix bad autoindent of pasted text
+if has("mouse")         " Enable OS mouse clicking and scrolling
+    set mouse=a
+endif
+set autoread
+set autochdir
+
+" code folding
+set foldenable
+set foldmethod=indent    "/marker/syntax"
+set foldcolumn=1
+set foldlevelstart=20
+let javaScript_fold=1                 " JavaScript
+let perl_fold=1                       " Perl
+let php_folding=1                     " PHP
+let r_syntax_folding=1                " R
+let ruby_fold=1                       " Ruby
+let sh_fold_enabled=1                 " sh
+let vimsyn_folding='af'               " Vim script
+let xml_syntax_folding=1              " XML
+" use SPACE to unfold code, zR: open all folds zM: close all folds
+nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
+
+" search options 
+set showmatch
+set incsearch
+set ignorecase
+set smartcase
+set hlsearch
+
+
+
+
+
+
+
+
+
+
+set lazyredraw       " Fix the problems for scrolling slowly
+set modifiable       " Fix E21: in NerdTree
+" }
+
 
 " + 3.4. File Options {
 " ---------------------

@@ -3,16 +3,37 @@
 " =========================================
 "
 "
-" Interface
-" ---------  
+" Interface:
+" ---------- 
 " * IMPORT:
-"    + platform.vim/GetOSType()
+"    + platform/GetOSType()
 " * EXPORT:
 "    + $MYVIMDIR
 "
 " * export g:isGUI, g:isX64, g:isWindows, g:isMsys, g:isMac, g:isLinux
 "
-" Procedure
+"
+" Sketch:
+" -------
+" ```text
+"  +-----------------------------+
+"  | If Not Exists,              |
+"  | First Auto Install vim-plug |
+"  +-----------------------------+
+"               |
+"  +---------------------------+
+"  | Update Plugins & vim-plug |
+"  +---------------------------+ -->-->---+
+"  | Update vim-plug By `cp`   |          V
+"  +---------------------------+  [ can be repeated ]
+"               |                         V
+"               A------------<--<--<--<---+
+"               |
+"  +------------------------+
+"  | Plugin Config & Invoke |
+"  +------------------------+
+" ```
+" Procedure:
 " ---------
 "
 " (EOC)
@@ -20,7 +41,34 @@
 " envrionment variables
 let s:isWin = (GetOSType() == "win")
 let $MYVIMDIR = $HOME.(s:isWin ? '\vimfiles' : '/.vim') 
-let s:bundled = $MYVIMDIR.(s:isWin ? '\bundle' : '/bundle')
+let s:bundled = $MYVIMDIR.(s:isWin ? '\' : '/').'bundle'.(s:isWin ? '\' : '/')
+
+
+
+silent function! FirstAutoInstall(ostyp)
+    if empty(glob("$MYVIMDIR/autoload/plug.vim")) 
+        if ( a:ostyp == 'linux' ) || ( a:ostyp == 'mac' )
+            silent !curl -fLo $MYVIMDIR/autoload/plug.vim --create-dirs
+            \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+            autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+        elseif
+            echoerr 'You need to download vim-plug first.'
+        endif
+    endif
+endfunction
+
+
+" TODO: need test on various os.
+silent function! EveryManualUpdate(ostyp)
+    if a:ostyp == 'win'
+        silent xcopy glob('s:bundled/vim-plug/plug.vim') glob('$MYVIMDIR/autoload/plug.vim')
+        " elseif
+    endif
+endfunction
+
+call FirstAutoInstall(GetOSType())
+
+
 
 " vim-plug global options
 let g:plug_timeout = 120
@@ -30,18 +78,22 @@ call plug#begin(s:bundled)
 
 " + looks and productivity {
 " --------------------------
+Plug 'junegunn/vim-plug'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'Shougo/unite.vim'
 Plug 'majutsushi/tagbar'
+Plug 'jszakmeister/markdown2ctags'
 Plug 'chrisbra/csv.vim'
 Plug 'airblade/vim-gitgutter'
+Plug 'severin-lemaignan/vim-minimap'
 "   Plug 'jmcantrell/vim-virtualenv'
 Plug 'mbbill/fencview'
 Plug 'mbbill/undotree'
 " }
-Plug 'chrisbra/unicode.vim', { 'on': ['<plug>(UnicodeComplete)', '<plug>(UnicodeGA)', 'UnicodeTable'] }
+"Plug 'chrisbra/unicode.vim', { 'on': ['<plug>(UnicodeComplete)', '<plug>(UnicodeGA)', 'UnicodeTable'] }
+Plug 'chrisbra/unicode.vim'
 
 Plug 'mhinz/vim-startify'
 Plug 'mhinz/vim-tmuxify'
@@ -57,7 +109,7 @@ Plug 'edkolev/promptline.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'scrooloose/nerdcommenter'
-Plug 'scrooloose/syntastic'
+"Plug 'scrooloose/syntastic'
 
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
@@ -135,6 +187,10 @@ Plug 'junegunn/vim-emoji'
 call plug#end()
 " no need to toggle fileindent options
 
+if !empty(glob("$MYVIMRCD/pluginconf.vim"))
+    source $MYVIMRCD/pluginconf.vim
+endif
 
-" vim:nocp:cin:sr:et:ts=4:sts=4:tw=98:ft=vim:ff=unix:fenc=utf-8:
+
+" vim:cin:et:ts=4:sts=4:tw=98:ft=vim:ff=unix:fenc=utf-8:
 " EOF

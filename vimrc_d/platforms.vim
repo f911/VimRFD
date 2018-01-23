@@ -1,13 +1,14 @@
-" 0x01. Global Variable Definitions.
-" ========================================
+" 0x01. platforms.vim
+" ===================
+" Recognize OS Contexts And Get The Spectific Argurments.
 "
-" More documents please check ~/.vim/docs/docs/platform.md
+" More documents please check ~/.vim/docs/docs/platforms.md
 " 
 " all list in popular order for performance concern
 " we just supply possible you pick choice as need.
 " use `:message` to debug by checking g:isXXX value
 "
-" Interface
+" Interface:
 " ---------  
 " * IMPORT 
 "      None
@@ -21,7 +22,29 @@
 "    + the layer below application,
 "    + after so $MYVIMRC before all other VimRFD moduals.
 "
-" Procedure
+" Sketch:
+" -------
+" use 2-D tables to describe our `platform` circumstances.
+" 
+" ```text
+"                  →             →            →            ∞
+"      os type:          x lib:        arch:      neovim       
+"    +-------------+   +---------+   +------+   +----------+
+"    | Msys        | χ | GUI     | χ | x64  | χ | NeoVim   |
+"    | Windows     |   +---------+   +------+   +----------+
+"    | Mac OS X    |   | Console |   | x32  |   | Original |
+"    | Linux       |   +---------+   +------+   +----------+
+"  ↓ | unsupported |  
+"    +-------------+               ( can be extended later )
+"  ↓ | ( can be    |
+"    |   extended  |  
+"  ↓ |   later )   |
+"    | ... ...     |  
+"  ∞ +-------------+   
+"                       
+" ```
+"
+" Procedure:
 " ---------
 " 1. Detect GUI
 " 2. Detect System Archityre

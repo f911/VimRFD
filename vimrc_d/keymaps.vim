@@ -71,59 +71,90 @@
 " [it-house](http://www.it1352.com/535382.html)
 " help :map!
 " "
-imap <C-a> <Esc>I
-imap <C-e> <ESC>A
-"map <C-Tab> <C-W>w
-"imap <C-Tab> <C-O><C-W>w
-"imap <C-Tab> <C-C><C-Tab>
-map <kMinus> :cp<C-M>
-map - :cp<C-M>
-map <kPlus> :cn<C-M>
-map + :cn<C-M>
+"imap <C-a> <Esc>I
+"imap <C-e> <ESC>A
+""map <C-Tab> <C-W>w
+""imap <C-Tab> <C-O><C-W>w
+""imap <C-Tab> <C-C><C-Tab>
+"map <kMinus> :cp<C-M>
+"map - :cp<C-M>
+"map <kPlus> :cn<C-M>
+"map + :cn<C-M>
 
-vnoremap <C-Insert> "+y
-inoremap <S-Insert> <Esc>"+gP
+"vnoremap <C-Insert> "+y
+"inoremap <S-Insert> <Esc>"+gP
 
-nmap <C-c> "+yy
-vmap <C-x> "+d
-map <C-s> :w
+"nmap <C-c> "+yy
+"vmap <C-x> "+d
+"map <C-s> :w
 
-" rc file and plug operations
-if g:isWindows
-	nmap <leader>rc :tabnew $HOME/vimfiles/vimrc<CR>
-elseif g:isMsys
-	nmap <leader>rc :tabnew $HOME/vimfiles/vimrc<CR>
-else " linux & Mac
-	nmap <leader>rc :vsplit ~/.vim/vimrc<CR>
-	nmap <leader>pu <Esc>:PlugUpdate<CR>
-	nmap <leader>ps <Esc>:PlugStatus<CR>
-endif
+"" rc file and plug operations
 
-nmap <leader>t :tabnew<CR>
-nmap <leader>nl <ESC>:nohl<CR>
+"nmap <leader>t :tabnew<CR>
+"nmap <leader>nl <ESC>:nohl<CR>
 
-nmap <C-Tab> <Esc>gt
-nmap <C-S-Tab> <Esc>gT
-imap <C-Tab> <Esc>gt
-imap <C-S-Tab> <Esc>gT
+"nmap <C-Tab> <Esc>gt
+"nmap <C-S-Tab> <Esc>gT
+"imap <C-Tab> <Esc>gt
+"imap <C-S-Tab> <Esc>gT
 
-
+nnoremap <leader>rc :tabnew $MYVIMRC<CR>
 
 " Alt + l move right across quote.
 " 
-inoremap <C-h> <Esc>i
-inoremap <C-j> <Esc>ja
-inoremap <C-k> <Up>
-inoremap <C-l> <Right>
-inoremap <C-d> <DELETE>
+nnoremap <M-h> <Left>
+nnoremap <M-j> <Down>
+nnoremap <M-k> <Up>
+nnoremap <M-l> <Right>
+nnoremap <M-o> o
+
+inoremap <M-h> <Esc>i
+inoremap <M-j> <Esc><Down>a
+inoremap <M-k> <Esc><Up>a
+inoremap <M-l> <Esc><Right>a
+inoremap <M-o> <Esc>o
+inoremap <M-x> <Del>
+
+imap jj <Esc>
+imap kk <Esc>:w<CR>
+imap :: <Esc>:
+
+
+" use <C-Insert> for universal copy 
+" and <S-Insert> for universal paste.
+" ref: [1]
+vnoremap <C-Insert> "+y
+
+nnoremap <S-Insert> "+p
+inoremap <S-Insert> <Esc>"+p
+cnoremap <S-Insert> <C-f>"+p
 
 
 
+nnoremap <M-s> <Esc><Esc>:w<CR>
+inoremap <M-s> <Esc><Esc>:w<CR>
+
+" use <C-w-q> to quit
 " cutting to a new line and continue insert/edit
 nnoremap K i<CR>
 
-map  <leader>w <Esc><C-W><C-W>
-map <F9> <Esc>:w<CR>:!node %<CR>
+nnoremap <C-Tab> gt
+nnoremap <S-C-Tab> gT
+
+" + 4.6. Modify the Window Size {
+" -------------------------------
+noremap  <F12>   <Esc>:se co=100 lines=40<Bar>echom '[✓]☞ Resized MIN OK!'<CR>
+noremap! <F12>   <Esc>:se co=100 lines=40<Bar>echom '[✓]☞ Resized MIN OK!'<CR>
+
+noremap  <S-F12> <Esc>:se co=220 lines=69<Bar>echom '[✓]☞ Resized Max OK!'<CR>
+noremap! <S-F12> <Esc>:se co=220 lines=52<Bar>echom '[✓]☞ Resized Max OK!'<CR>
+" }
+
+
+" [1](http://vim.wikia.com/wiki/Copy,_cut_and_paste)
+
+"map  <leader>w <Esc><C-W><C-W>
+"map <F9> <Esc>:w<CR>:!node %<CR>
 
 "map <leader> <Esc>:w<CR><Esc>:so $HOME/_vimrc<CR><Esc>:PluginUpdate<CR>
 "nnoremap <leader>gq :%!pandoc -f html -t markdown <bar> pandoc -f markdown -t html<CR>

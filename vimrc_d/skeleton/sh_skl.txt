@@ -2,5 +2,5 @@
 
 
 
-# vim:nocp:ai:si:et:ts=4:sts=4:sw=4:ft=zsh:ff=unix:fenc=utf-8:
+# vim:cin:sr:et:ts=4:sts=4:sw=4:tw=98:ft=zsh:ff=unix:fenc=utf-8:
 # EOF
