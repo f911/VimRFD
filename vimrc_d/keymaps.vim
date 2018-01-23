@@ -148,6 +148,7 @@ noremap! <F12>   <Esc>:se co=100 lines=40<Bar>echom '[✓]☞ Resized MIN OK!'<C
 
 noremap  <S-F12> <Esc>:se co=200 lines=69<Bar>echom '[✓]☞ Resized Max OK!'<CR>
 noremap! <S-F12> <Esc>:se co=200 lines=52<Bar>echom '[✓]☞ Resized Max OK!'<CR>
+
 " }
 
 
