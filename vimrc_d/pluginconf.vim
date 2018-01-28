@@ -30,15 +30,18 @@ let g:airline_mode_map = {
     \ }
 
 
-" * undotree 
-" ----------
+" Undotree: 
+" ---------
 if has("persistent_undo")
     set undodir=$HOME/.undo/
     set undofile
-    nnoremap <F3> :UndotreeToggle<CR>
+    nnoremap <S-F2> :UndotreeToggle<CR>
 endif
-" }
 
+" Tagbar:
+" ------
+nnoremap <F3> :TagbarToggle<CR>
+inoremap <F3> <Esc>:w<Bar>TagbarToggle<CR>
 
 
 " + 4.9. plugins.for.markdown {
@@ -154,7 +157,7 @@ endif
 
 " + 4.2. plugins.yggdroot/indentline {
 " ------------------------------------
-    nmap <leader>il :IndentLinesToggle<CR>
+    nmap <LocalLeader>il :IndentLinesToggle<CR>
     let g:indentLine_enabled=1
     "let g:indentLine_char = '┊'
     if IsGUI()

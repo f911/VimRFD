@@ -74,13 +74,21 @@ augroup Binary
         \ endif
 augroup END
 
-" FileType Python Pretreatment
-" ----------------------------
+augroup C
+    autocmd!
+    autocmd BufNewFile *.c
+        \ silent! execute '0r $MYVIMSKL'.&ft.'_skl.txt' |
+        \ echo '[✓]:☞ Creating '.&ft.' file. Loading corresponding template.'
+    autocmd BufEnter *.c
+        \ source $MYVIMFTH/c_hdl.vim
+augroup END
+
+
 augroup Python
     autocmd!
 	autocmd BufNewFile *.py 
-		\ silent! execute '0r $MYVIMSKL/'.&ft.'_skl.txt' | 
-        \ echo '[✓]:☞ Creating '.&ft.' file, loading corresponding template.'
+		\ silent! execute '0r $MYVIMSKL'.&ft.'_skl.txt' | 
+        \ echo '[✓]:☞ Creating '.&ft.' file. Loading corresponding template.'
     autocmd BufEnter *.py
         \ source $MYVIMFTH/python_hdl.vim
 augroup END
@@ -92,7 +100,7 @@ augroup Vim
     " not like python3 'so' is not a external command so we cannot use make
 	autocmd BufNewFile *.vim,*vimrc 
 		\ silent! execute '0r $MYVIMSKL/'.&ft.'_skl.txt' | 
-        \ echo '[✓]:☞ Creating '.&ft.' file, loading corresponding template.'
+        \ echo '[✓]:☞ Creating '.&ft.' file. Loading corresponding template.'
     autocmd BufEnter *.vim,*vimrc
          \ source $MYVIMFTH/vim_hdl.vim
 augroup END

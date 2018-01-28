@@ -141,6 +141,9 @@ nnoremap <S-Insert> "+p
 inoremap <S-Insert> <Esc>"+p
 cnoremap <S-Insert> <C-f>"+p
 
+" Search_and_Replace:
+" ------------------
+nnoremap <LocalLeader>hl <Esc>:nohl<CR>
 
 " Save_and_Exit:
 " -------------
@@ -150,8 +153,10 @@ cnoremap <S-Insert> <C-f>"+p
 "  or use <C-w-q> to quit by plugin config
 nnoremap <M-s> <Esc><Esc>:w<CR>
 inoremap <M-s> <Esc><Esc>:w<CR>
-nnoremap <M-q> <Esc><Esc>:wq<CR>
-inoremap <M-q> <Esc><Esc>:wq<CR>
+nnoremap <M-q> <Esc><Esc>:q!<CR>
+inoremap <M-q> <Esc><Esc>:q!<CR>
+nnoremap <M-Q> <Esc><Esc>:wq<CR>
+inoremap <M-Q> <Esc><Esc>:wq<CR>
 
 
 " Buffer_Tab_Window:

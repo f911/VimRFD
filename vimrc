@@ -12,8 +12,8 @@
 "           <
 " Creator:  F911 <0xf911@gmail.com> [GI+](https://github.com/f911)
 " Created:  2014-10-04
-" LastMod:  2018-01-13 PM                                               |.|0|.|
-" Version:  v1.5.4                                                      |.|.|0|
+" LastMod:  2018-01-29 PM                                               |.|0|.|
+" Version:  v1.5.6                                                      |.|.|0|
 " License:  [(CC BY-ND 4.0)][1]                                         |0|0|0|
 " =============================================================================
 "
@@ -24,16 +24,24 @@
 " + 0x04. Setting For Plugins.
 " + 0x05. Key Mappings.
 "
+" FileTypeSupport:
+" + python
+" + vim
+" + c
+" + html
+" + nodejs
+" + markdown
+"
+" KeyMapList:
+" + F2 -- NerdTreeToggle
+" + F3 -- TagbarToggle 
+" + 
+" 
 " TODO_List:
 " + js's plugins configuration. and .editorconfig missing error.
 " + An excellent README is needed for this project and others
 " + Key mappings need readjusments.
 "
-" Reference:
-" + [oschina](http://www.oschina.net/code/snippet_574132_13357)
-" + [github-dotfile-dotrc](https://github.com)
-" + [vim-wikia](http://vim.wikia.com/wiki/Vim_Tips_Wiki)
-" + [1]: https://creativecommons.org/licenses/by-nd/4.0/ 
 " Import:
 "     vim builtin variables and functions
 " Export:
@@ -68,6 +76,13 @@ if $LANG != 'en_US.utf-8'
     source $VIMRUNTIME/menu.vim
 endif
 
+
+
+" Reference:
+" + [oschina](http://www.oschina.net/code/snippet_574132_13357)
+" + [github-dotfile-dotrc](https://github.com)
+" + [vim-wikia](http://vim.wikia.com/wiki/Vim_Tips_Wiki)
+" + [1]: https://creativecommons.org/licenses/by-nd/4.0/ 
 
 " vim:ai:si:et:ts=4:sw=4:ft=vim:ff=unix:fenc=utf-8:norl:
 " EOF
