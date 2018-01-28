@@ -102,6 +102,12 @@ nnoremap <leader>rc :tabnew $MYVIMRC<CR>
 
 " Alt + l move right across quote.
 " 
+"
+" Improved_Movements:
+" ------------------
+"  <jj> -- <Esc> in Inser-Mode only
+"  <kk> -- Save in Inser-Mode only
+"
 nnoremap <M-h> <Left>
 nnoremap <M-j> <Down>
 nnoremap <M-k> <Up>
@@ -119,37 +125,49 @@ imap jj <Esc>
 imap kk <Esc>:w<CR>
 imap :: <Esc>:
 
+" Text_Edit:
+" ---------
+" cutting to a new line and continue insert/edit
+nnoremap K i<CR>
 
-" use <C-Insert> for universal copy 
-" and <S-Insert> for universal paste.
-" ref: [1]
+" Copy_and_Paste:
+" --------------
+"   Universally use: 
+"   <C-Insert> -- Copy. 
+"   <S-Insert> -- Paste.
+"   ref: [1]
 vnoremap <C-Insert> "+y
-
 nnoremap <S-Insert> "+p
 inoremap <S-Insert> <Esc>"+p
 cnoremap <S-Insert> <C-f>"+p
 
 
-
+" Save_and_Exit:
+" -------------
+"  if use conbined key-shortcuts, choose win/emacs-like style.
+"  <M-s> -- Save.
+"  <M-q> -- Save & Exit.
+"  or use <C-w-q> to quit by plugin config
 nnoremap <M-s> <Esc><Esc>:w<CR>
 inoremap <M-s> <Esc><Esc>:w<CR>
+nnoremap <M-q> <Esc><Esc>:wq<CR>
+inoremap <M-q> <Esc><Esc>:wq<CR>
 
-" use <C-w-q> to quit
-" cutting to a new line and continue insert/edit
-nnoremap K i<CR>
 
+" Buffer_Tab_Window:
+" -----------------
 nnoremap <C-Tab> gt
 nnoremap <S-C-Tab> gT
+nnoremap <M-b> :ls<CR>
+inoremap <M-b> <Esc>:w<Bar>ls<CR>
 
-" + 4.6. Modify the Window Size {
-" -------------------------------
+" App_Size_Position:
+" -----------------
 noremap  <F12>   <Esc>:se co=100 lines=40<Bar>echom '[✓]☞ Resized MIN OK!'<CR>
 noremap! <F12>   <Esc>:se co=100 lines=40<Bar>echom '[✓]☞ Resized MIN OK!'<CR>
-
 noremap  <S-F12> <Esc>:se co=200 lines=69<Bar>echom '[✓]☞ Resized Max OK!'<CR>
 noremap! <S-F12> <Esc>:se co=200 lines=52<Bar>echom '[✓]☞ Resized Max OK!'<CR>
 
-" }
 
 
 " [1](http://vim.wikia.com/wiki/Copy,_cut_and_paste)

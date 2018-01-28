@@ -4,11 +4,15 @@
 "   refering from link http://vim.wikia.com/wiki/Improved_Hex_editing
 " IMPORT:
 "   + vimrc/$MYVIMRCD
-"   + platform/GetOSType()
+"   + platform/Ops()
+" EXPORT: (can be used)
+"   + $MYVIMSKL
+"   + $MYVIMFTH
 "
 
 
-let $MYVIMSKL = $MYVIMRCD.((GetOSType() == 'win') ? '\skeleton\':'/skeleton/')
+let $MYVIMSKL = $MYVIMRCD.Ops().'skeleton'.Ops()
+let $MYVIMFTH = $MYVIMRCD.Ops().'fthandler_d'.Ops()
 
 
 
@@ -78,7 +82,7 @@ augroup Python
 		\ silent! execute '0r $MYVIMSKL/'.&ft.'_skl.txt' | 
         \ echo '[✓]:☞ Creating '.&ft.' file, loading corresponding template.'
     autocmd BufEnter *.py
-        \ source $MYVIMRCD/fthandler_d/python_hdl.vim
+        \ source $MYVIMFTH/python_hdl.vim
 augroup END
 
 
@@ -86,8 +90,11 @@ augroup END
 augroup Vim
     autocmd!
     " not like python3 'so' is not a external command so we cannot use make
+	autocmd BufNewFile *.vim,*vimrc 
+		\ silent! execute '0r $MYVIMSKL/'.&ft.'_skl.txt' | 
+        \ echo '[✓]:☞ Creating '.&ft.' file, loading corresponding template.'
     autocmd BufEnter *.vim,*vimrc
-        \ nnoremap <F5> :w<Bar>so %<Bar>echom '[✓]☞ sourced ok!'<CR>
+         \ source $MYVIMFTH/vim_hdl.vim
 augroup END
 
 
@@ -118,5 +125,5 @@ augroup END
 
 
 
-" vim:nocp:ai:si:et:ts=4:sts=4:ft=vim:ff=unix:fenc=utf-8:
+" vim:cin:et:ts=4:sts=4:tw=98:ft=vim:ff=unix:fenc=utf-8:
 " EOF

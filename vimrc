@@ -53,6 +53,7 @@ endif
 source $MYVIMRCD/platforms.vim 
 source $MYVIMRCD/pluginmgmt.vim          " load external plugin by vim-plug
 source $MYVIMRCD/customlook.vim         " 
+source $MYVIMRCD/apphelper.vim          " functions for custom handlers
 source $MYVIMRCD/fthandler.vim           " ft & ff & fenc etc.
 source $MYVIMRCD/keymaps.vim
 source $MYVIMRCD/startify.vim

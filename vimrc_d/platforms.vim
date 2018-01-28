@@ -17,6 +17,7 @@
 "    + Is64Bit() : bool
 "    + IsNeoVim() : bool
 "    + GetOSType(): str
+"    + Ops(): char -- OS Path Seperator
 "    + TODO: GetOSVersion(): str, or maybe needless
 " * FUNCTION:
 "    + the layer below application,
@@ -124,6 +125,9 @@ silent function! GetOSType()
 endfunction
 
 
+silent function! Ops()
+    return (GetOSType() == 'win') ? '\' : '/'
+endfunction
 
 
 " vim:nocp:cin:sr:et:ts=4:sts=4:tw=98:ft=vim:ff=unix:fenc=utf-8:
