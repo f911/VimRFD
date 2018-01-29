@@ -16,6 +16,8 @@ inoremap <F7> <Esc>:!splint %<CR>
 nnoremap <F8> :call GitUpdate()<CR>
 
 
+let g:ycm_global_ycm_extra_conf=expand($MYVIMFTH).'ycm_extra_conf_4cpp.py'
+
 
 
 " vim:cin:sr:et:ts=4:sts=4:tw=98:ft=vim:ff=unix:fenc=utf-8:
