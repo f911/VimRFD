@@ -123,7 +123,7 @@ inoremap <M-x> <Del>
 
 imap jj <Esc>
 imap kk <Esc>:w<CR>
-imap :: <Esc>:
+"imap :: <Esc>:
 
 " Text_Edit:
 " ---------
@@ -151,8 +151,9 @@ nnoremap <LocalLeader>hl <Esc>:nohl<CR>
 "  <M-s> -- Save.
 "  <M-q> -- Save & Exit.
 "  or use <C-w-q> to quit by plugin config
-nnoremap <M-s> <Esc><Esc>:w<CR>
-inoremap <M-s> <Esc><Esc>:w<CR>
+noremap  <M-s> <Esc><Esc>:w<CR>
+noremap! <M-s> <Esc><Esc>:w<CR>
+
 nnoremap <M-q> <Esc><Esc>:q!<CR>
 inoremap <M-q> <Esc><Esc>:q!<CR>
 nnoremap <M-Q> <Esc><Esc>:wq<CR>

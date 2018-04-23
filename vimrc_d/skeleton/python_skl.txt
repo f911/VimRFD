@@ -14,5 +14,5 @@ if __name__ == "__main__":
     main()
 
 
-# vim:cin:et:ts=4:sts=4:sw=4:tw=98:ft=python:ff=unix:fenc=utf-8:
+# vim:noeol:cin:sr:et:ts=4:sts=4:sw=4:tw=98:ft=python:ff=unix:fenc=utf-8:
 # EOF

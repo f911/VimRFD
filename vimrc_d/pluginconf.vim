@@ -258,13 +258,14 @@ inoremap <F3> <Esc>:w<Bar>TagbarToggle<CR>
 "   nnoremap <leader>lo :lopen<CR> "open locationlist
 " }
 
+" 4.x. plugins.vim-javacomplete2
+" ------------------------------
+let g:JavaComplete_BaseDir='~/.cache'
 
 
 
 
-" + 4.13. plugins.mhinz/vim-startify {
-" ------------------------------------
-"
+
 
 " + 4.4. plugins.derekmcloughlin/gvimfullscreen_win32 {
 " -----------------------------------------------------

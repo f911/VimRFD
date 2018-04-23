@@ -193,6 +193,7 @@ let &termencoding=&encoding
 set fileencodings=utf-8,cp936,default,latin-1,GB232,GBK,GB8030,ucs-bom
 set formatoptions=croql
 set backspace=indent,eol,start
+set noendofline
 call s:SetFileFormat(GetOSType())
 
 
@@ -240,3 +241,6 @@ set noerrorbells visualbell t_vb=
 autocmd GUIEnter * set visualbell t_vb=
 " }
 
+
+" vim:noeol:cin:sr:et:ts=4:sw=4:tw=98:ft=vim:ff=unix:fenc=utf-8:
+" EOF

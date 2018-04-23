@@ -31,6 +31,7 @@
 " + html
 " + nodejs
 " + markdown
+" + java
 "
 " KeyMapList:
 " + F2 -- NerdTreeToggle
@@ -57,7 +58,7 @@ set nocompatible
 if empty($MYVIMRCD)
     let $MYVIMRCD = $MYVIMRC.'_d'              " usually $HOME/.vim/vimrc_d
 endif
-
+" TODO: Ops() first ?
 source $MYVIMRCD/platforms.vim 
 source $MYVIMRCD/pluginmgmt.vim          " load external plugin by vim-plug
 source $MYVIMRCD/customlook.vim         " 
@@ -84,5 +85,5 @@ endif
 " + [vim-wikia](http://vim.wikia.com/wiki/Vim_Tips_Wiki)
 " + [1]: https://creativecommons.org/licenses/by-nd/4.0/ 
 
-" vim:ai:si:et:ts=4:sw=4:ft=vim:ff=unix:fenc=utf-8:norl:
+" vim:noeol:cin:sr:et:ts=4:sw=4:tw=98:ft=vim:ff=unix:fenc=utf-8:
 " EOF

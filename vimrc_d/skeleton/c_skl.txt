@@ -1,0 +1,15 @@
+/**
+ * FILENAME
+ */
+#include <stdio.h>
+
+
+int main(void)
+{
+
+    return 0;
+}
+
+
+/* vim:se cin sr et ts=4 sw=4 tw=98 ft=c ff=unix fenc=utf-8: */
+/* EOF */

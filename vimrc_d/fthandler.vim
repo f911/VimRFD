@@ -2,6 +2,7 @@
 
 " - autocmds to automatically enter hex mode and handle file writes properly
 "   refering from link http://vim.wikia.com/wiki/Improved_Hex_editing
+" - use execute to construct commandlines.
 " IMPORT:
 "   + vimrc/$MYVIMRCD
 "   + platform/Ops()
@@ -15,15 +16,6 @@ let $MYVIMSKL = $MYVIMRCD.Ops().'skeleton'.Ops()
 let $MYVIMFTH = $MYVIMRCD.Ops().'fthandler_d'.Ops()
 
 
-
-
-" + 3.8. Pretreatment {
-" ---------------------
-
-" - Opening Vim help in a vertical split window
-"   [sof](https://stackoverflow.com/questions/630884/opening-vim-help-in-a-vertical-split-window)
-    "autocmd FileType help wincmd L
-" }
 
 
 
@@ -74,64 +66,51 @@ augroup Binary
         \ endif
 augroup END
 
-augroup C
+augroup GenFTResponse
     autocmd!
-    autocmd BufNewFile *.c
-        \ silent! execute '0r $MYVIMSKL'.&ft.'_skl.txt' |
-        \ echo '[✓]:☞ Creating '.&ft.' file. Loading corresponding template.'
-    autocmd BufEnter *.c
-        \ source $MYVIMFTH/c_hdl.vim
+    autocmd BufNewFile *.* call s:LoadFTSkeleton(&ft)
+    autocmd BufEnter *.* call s:LoadFTHandler(&ft)
 augroup END
 
 
-augroup Python
-    autocmd!
-	autocmd BufNewFile *.py 
-		\ silent! execute '0r $MYVIMSKL'.&ft.'_skl.txt' | 
-        \ echo '[✓]:☞ Creating '.&ft.' file. Loading corresponding template.'
-    autocmd BufEnter *.py
-        \ source $MYVIMFTH/python_hdl.vim
-augroup END
+silent! function s:LoadFTSkeleton(ft)
+    
+    let s:ft_skl=expand($MYVIMSKL).a:ft.'_skl.txt'
+    if filereadable(s:ft_skl)
+        set noendofline
+        silent! execute '0r '.s:ft_skl
+        " Delete last blank line(LF) after read-in skeleton
+        normal GGddgg2j
+        silent! echo '[✓]:⧓ :Creating '.a:ft.' file. Loading corresponding template.'
+    else
+    "    echom '[Δ]:☞ :You can create your own skeleton file in place: '.s:ft_skl
+    "   open a blank buffer
+    "   maybe create your own skeleton file is a better idea than nothing to do.
+    endif
+endfunction
+
+silent! function s:LoadFTHandler(ft)
+    let s:ft_hdl=expand($MYVIMFTH).a:ft.'_hdl.vim'
+    if filereadable(s:ft_hdl)
+        silent! execute 'source '.s:ft_hdl
+        silent! echo '[✓]:⧓ :Switch to filetype: '.a:ft.' settings.'
+    else
+    "    echom '[Δ]:☞ :You can create your own handler file in place: '.s:ft_hdl
+    endif
+endfunction
 
 
 
-augroup Vim
-    autocmd!
-    " not like python3 'so' is not a external command so we cannot use make
-	autocmd BufNewFile *.vim,*vimrc 
-		\ silent! execute '0r $MYVIMSKL/'.&ft.'_skl.txt' | 
-        \ echo '[✓]:☞ Creating '.&ft.' file. Loading corresponding template.'
-    autocmd BufEnter *.vim,*vimrc
-         \ source $MYVIMFTH/vim_hdl.vim
-augroup END
 
 
 autocmd FileType apache setlocal commentstring=#\ %s
 
-" FileType Html Pretreatment
-" --------------------------
-augroup Html
-	autocmd!
-	autocmd BufNewFile *.html,*.htm 
-		\ echo '[+] Filetype "html" detected, try to cast the corresponding skeleton.' |
-		\ 0r $MYVIMSKL/html_skl.txt  |
-		\ normal 2j
-augroup END
 
 
-" FileType Sh Pretreatment
-" --------------------------
-augroup Sh
-    autocmd!
-    autocmd BufEnter *.sh,*.zsh
-        \ echo '[+] Filetype "sh" detected, recommend using zsh or bash.' |
-        \ 0r $MYVIMSKL/sh_skl.txt |
-        \ normal 2j
-augroup END
-
-
-
-
+" Reference:
+" + Opening Vim help in a vertical split window
+"   [sof](https://stackoverflow.com/questions/630884/opening-vim-help-in-a-vertical-split-window)
+"       autocmd FileType help wincmd L
 
 " vim:cin:et:ts=4:sts=4:tw=98:ft=vim:ff=unix:fenc=utf-8:
 " EOF

@@ -39,10 +39,8 @@
 " (EOC)
 
 " envrionment variables
-let s:isWin = (GetOSType() == "win")
-let $MYVIMDIR = $HOME.(s:isWin ? '\vimfiles' : '/.vim') 
-let s:bundled = $MYVIMDIR.(s:isWin ? '\' : '/').'bundle'.(s:isWin ? '\' : '/')
-
+let $MYVIMDIR = $HOME.((GetOSType() == "win") ? '\vimfiles\' : '/.vim/') 
+let s:bundled = $MYVIMDIR.'bundle'.Ops()
 
 
 silent function! FirstAutoInstall(ostyp)
@@ -150,7 +148,6 @@ Plug 'iamcco/mathjax-support-for-mkdp', {'for': 'markdown'}
 Plug 'iamcco/markdown-preview.vim', {'for': 'markdown'}
 " }
 Plug 'Yggdroot/indentLine'
-"   Plug 'a.vim'o
 Plug 'vim-scripts/Align'
 Plug 'vim-scripts/bufexplorer.zip'
 Plug 'vim-scripts/ccvext.vim'
@@ -166,6 +163,7 @@ Plug 'vim-scripts/Mark--Karkat'
 "   Plugin 'msanders/snipmate.vim' deprecated for compatible reasons with YCM
 Plug 'vim-scripts/OmniCppComplete'
 Plug 'vim-scripts/repeat.vim'
+
 Plug 'artur-shaik/vim-javacomplete2'
 Plug 'wesleyche/SrcExpl'
 Plug 'vim-scripts/ZoomWin'
@@ -183,6 +181,7 @@ Plug 'nginx/nginx', {'for': 'nginx', 'rtp': 'contrib/vim/'}
 
 Plug 'asins/vimcdoc'
 Plug 'junegunn/vim-emoji'
+" Plug 'chemzqm/vim-run'
 
 call plug#end()
 " no need to toggle fileindent options
