@@ -68,6 +68,8 @@ augroup END
 
 augroup GenFTResponse
     autocmd!
+    autocmd BufNewFile *.md call s:LoadFTSkeleton('markdown')
+    autocmd BufEnter *.md call s:LoadFTHandler('markdown')
     autocmd BufNewFile *.* call s:LoadFTSkeleton(&ft)
     autocmd BufEnter *.* call s:LoadFTHandler(&ft)
 augroup END
