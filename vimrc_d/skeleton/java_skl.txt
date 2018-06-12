@@ -1,9 +1,18 @@
 /**
  * @version 1.01 
  * @author F911
+ *
+ * Need rename this file to JavaSklTest to test.
  */
 
+class JavaSklTest
+{
 
+    public static void main(String[] args)
+    {
+
+    }
+}
 
 // vim:cin:sr:et:ts=4:sw=4:sts=4:tw=98:ft=java:ff=unix:fenc=utf-8:
 // EOF

@@ -121,8 +121,8 @@ inoremap <M-l> <Esc><Right>a
 inoremap <M-o> <Esc>o
 inoremap <M-x> <Del>
 
-imap jj <Esc>
-imap kk <Esc>:w<CR>
+imap jj  <Esc>
+imap jjj <Esc>:w<CR>
 "imap :: <Esc>:
 
 " Text_Edit:

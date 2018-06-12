@@ -13,7 +13,7 @@
 
 
 let $MYVIMSKL = $MYVIMRCD.Ops().'skeleton'.Ops()
-let $MYVIMFTH = $MYVIMRCD.Ops().'fthandler_d'.Ops()
+let $MYVIMFTH = $MYVIMRCD.Ops().'fthandler'.Ops()
 
 
 

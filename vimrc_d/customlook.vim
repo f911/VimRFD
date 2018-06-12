@@ -33,7 +33,7 @@ function! s:SetGUITheme(ost) abort
     " overrides colo if need	
 	colorscheme base16-eighties
 	if a:ost == "linux"
-		set guifont=Terminess\ Powerline\ 12
+		set guifont=Terminus\ 12
 	elseif a:ost == "win"
 		set guifont=MesloLGS_NF:h9:cANSI:qDRAFT
 	elseif a:ost == "mac"
@@ -51,6 +51,7 @@ function! s:SetConTheme(ost) abort
 	if a:ost == "linux"
 		set t_Co=256
 		colorscheme base16-eighties
+        set guifont=Terminus\ 12
 	elseif a:ost == "win"
 		set t_Co=256
 		colorscheme industry
