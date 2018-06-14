@@ -1,0 +1,15 @@
+/**
+ * FILENAME
+ */
+#include <cstdio>
+
+
+int main(void)
+{
+
+    return 0;
+}
+
+
+// vim:cin:sr:et:ts=4:sts=4:sw=4:tw=98:ft=cpp:ff=unix:fenc=utf-8:
+// EOF

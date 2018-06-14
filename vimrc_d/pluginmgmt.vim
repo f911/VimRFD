@@ -182,6 +182,10 @@ Plug 'nginx/nginx', {'for': 'nginx', 'rtp': 'contrib/vim/'}
 Plug 'asins/vimcdoc'
 Plug 'junegunn/vim-emoji'
 " Plug 'chemzqm/vim-run'
+"
+
+Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+Plug 'idanarye/vim-vebugger'
 
 call plug#end()
 " no need to toggle fileindent options

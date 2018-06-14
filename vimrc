@@ -1,6 +1,6 @@
 " ==============================================================================
 "           F911'S RESEARCH AND DEVELOPMENT STUDIO PRODUCED ( F911-R&D.SP )               
-" ------------------------------------------------------------------------------
+" ------ * ------- * ------- * ------- * ------- * ------- * ------- * ------- *  
 " Project:  VimRFD - VIM Refined
 " FileDes:  Contains settings to initialize VIM when it starts. customize the 
 "           way VIM run as. This file acts like a 'facade' to load other VIM
@@ -50,8 +50,11 @@
 
 
 " BEGIN:
-
-set nocompatible
+"
+" ------ * ------- * ------- * ------- * ------- * ------- * ------- * ------- *  
+if &compatible
+    set nocompatible
+endif
 
 " suppose $MYVIMRC is not empty, otherwise this vimrc file would not be
 " loaded and no script as well as plugins will be execute, also safe.

@@ -122,7 +122,6 @@ inoremap <M-o> <Esc>o
 inoremap <M-x> <Del>
 
 imap jj  <Esc>
-imap jjj <Esc>:w<CR>
 "imap :: <Esc>:
 
 " Text_Edit:
@@ -144,6 +143,7 @@ cnoremap <S-Insert> <C-f>"+p
 " Search_and_Replace:
 " ------------------
 nnoremap <LocalLeader>hl <Esc>:nohl<CR>
+nnoremap <LocalLeader>ww <Esc>:w<CR>
 
 " Save_and_Exit:
 " -------------

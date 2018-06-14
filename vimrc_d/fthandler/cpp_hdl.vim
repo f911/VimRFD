@@ -26,10 +26,10 @@
 "
 "  +-----+----------------------------+--------------------------------------+
 "  |     | F5                         | F6                                   |
-"  +-----+----------------------------+--------------------------------------+
-"  |     | Compile Only               | Debug Compiled                       |
-"  | Ctrl| Recompile and Run in Gvim  | Debug Compiled And Debug in Gvim     |
-"  | Alt | Recompile and Open Terminal| Debug Compiled And Debug in Terminal |
+"  +-------+----------------------------+--------------------------------------+
+"  |       | Compile Only               | Debug Compiled                       |
+"  | Ctrl  | Recompile and Run in Gvim  | Debug Compiled And Debug in Gvim     |
+"  | Shift | Recompile and Open Terminal| Debug Compiled And Debug in Terminal |
 "  +-----+----------------------------+--------------------------------------+
 "  |     | F7                         | F8                                   |
 "  +-----+----------------------------+--------------------------------------+
@@ -38,6 +38,7 @@
 "  | Ctrl|                            |                                      |
 "  | Alt |                            |                                      |
 "  +-----+----------------------------+--------------------------------------+
+"  Note: There are some problems about meta alt key mapping
 " ******************************************************************
 
 
@@ -51,15 +52,33 @@ if !(GetOSType()=='win')
     setlocal makeprg=g++\ -O2\ -std=c++11\ -lm\ -o\ %<\ %
 endif
 
-
+" Normal / Distribution Compilation
 noremap  <F5> <Esc>:make<CR>
 noremap! <F5> <Esc>:make<CR>
 
-noremap  <C-F5> <Esc>:make<Bar>!./%<CR>
-noremap! <C-F5> <Esc>:make<Bar>!./%<CR>
+noremap  <C-F5> <Esc>:make<Bar>!./%<<CR>
+noremap! <C-F5> <Esc>:make<Bar>!./%<<CR>
 
-noremap  <A-F5> <Esc>:make<Bar>!/usr/bin/gnome-terminal --geometry=120x42+500+220<CR>
-noremap! <A-F5> <Esc>:make<Bar>!/usr/bin/gnome-terminal --geometry=120x42+500+220<CR>
+" use cmd: ./% < some.in.rc
+noremap  <S-F5> <Esc>:make <Bar> !gnome-terminal --geometry=160x48+300+300<CR>
+noremap! <S-F5> <Esc>:make <Bar> !gnome-terminal --geometry=160x48+300+300<CR>
+
+" Debug Compliation
+noremap  <F6>   <Esc>:!g++ -g -std=c++11 -lm -o %< %<CR>
+noremap! <F6>   <Esc>:!g++ -g -std=c++11 -lm -o %< %<CR>
+
+noremap  <C-F6> <Esc>:!g++ -g -std=c++11 -lm -o %< % <Bar> !gdb %< <CR>
+noremap! <C-F6> <Esc>:!g++ -g -std=c++11 -lm -o %< % <Bar> !gdb %< <CR>
+
+
+" use gdb -tui to debug
+noremap  <S-F6> <Esc>:!g++ -g -std=c++11 -lm -o %< % <Bar> !gnome-terminal --geometry=160x48+300+300<CR>
+noremap! <S-F6> <Esc>:!g++ -g -std=c++11 -lm -o %< % <Bar> !gnome-terminal --geometry=160x48+300+300<CR>
+
+silent function! DebugCompliation()
+endfunction
+
+
 
 
 
@@ -67,6 +86,8 @@ noremap! <A-F5> <Esc>:make<Bar>!/usr/bin/gnome-terminal --geometry=120x42+500+22
 " TODO: detect if ycm installed
 let g:ycm_global_ycm_extra_conf='$MYVIMFTH/ycm_extra_conf_4cpp.py'
 
+let NERDTreeIgnore = ['\.o$[[file]]'] 
+let NERDTreeSortOrder=['\.cpp$']
 
 " Note: if need c-c & c-v :se nocin first.
 " vim:noeol:cin:sr:et:ts=4:sts=4:tw=98:ft=vim:ff=unix:fenc=utf-8:
