@@ -118,8 +118,13 @@ inoremap <M-h> <Esc>i
 inoremap <M-j> <Esc><Down>a
 inoremap <M-k> <Esc><Up>a
 inoremap <M-l> <Esc><Right>a
+" typo
+inoremap <M-;> <Esc><Right>a 
+"inoremap <M-o> <Esc><CR>i
 inoremap <M-o> <Esc>o
 inoremap <M-x> <Del>
+
+
 
 imap jj  <Esc>
 "imap :: <Esc>:

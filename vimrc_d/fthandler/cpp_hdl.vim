@@ -24,21 +24,26 @@
 "  F8: Outlines(TargbarToggle)
 "  F9: 
 "
-"  +-----+----------------------------+--------------------------------------+
-"  |     | F5                         | F6                                   |
+"  +-------+----------------------------+--------------------------------------+
+"  |       | F5                         | F6                                   |
 "  +-------+----------------------------+--------------------------------------+
 "  |       | Compile Only               | Debug Compiled                       |
 "  | Ctrl  | Recompile and Run in Gvim  | Debug Compiled And Debug in Gvim     |
 "  | Shift | Recompile and Open Terminal| Debug Compiled And Debug in Terminal |
-"  +-----+----------------------------+--------------------------------------+
-"  |     | F7                         | F8                                   |
-"  +-----+----------------------------+--------------------------------------+
-"  |     | Check Codes                | Synchronized to Version Control      |
-"  +-----+----------------------------+--------------------------------------+
-"  | Ctrl|                            |                                      |
-"  | Alt |                            |                                      |
-"  +-----+----------------------------+--------------------------------------+
+"  +-------+----------------------------+--------------------------------------+
+"  |       | F7                         | F8                                   |
+"  +-------+----------------------------+--------------------------------------+
+"  |       | Check Codes                | Synchronized to Version Control      |
+"  +-------+----------------------------+--------------------------------------+
+"  | Ctrl  |                            |                                      |
+"  | Alt   |                            |                                      |
+"  +-------+----------------------------+--------------------------------------+
 "  Note: There are some problems about meta alt key mapping
+"
+"   *   Alt can only pair with ascii alphabates, but can not pair with Function Keys. e.g.
+"       `Alt + q`  : YES is OK can work 
+"       `Alt + F5` : NO  invalid can not work !!!
+"   *   use `:w | e` to refresh edit window
 " ******************************************************************
 
 
@@ -67,8 +72,8 @@ noremap! <S-F5> <Esc>:make <Bar> !gnome-terminal --geometry=160x48+300+300<CR>
 noremap  <F6>   <Esc>:!g++ -g -std=c++11 -lm -o %< %<CR>
 noremap! <F6>   <Esc>:!g++ -g -std=c++11 -lm -o %< %<CR>
 
-noremap  <C-F6> <Esc>:!g++ -g -std=c++11 -lm -o %< % <Bar> !gdb %< <CR>
-noremap! <C-F6> <Esc>:!g++ -g -std=c++11 -lm -o %< % <Bar> !gdb %< <CR>
+noremap  <C-F6> <Esc>:!g++ -g -std=c++11 -lm -o %< % | gdb %< <CR>
+noremap! <C-F6> <Esc>:!g++ -g -std=c++11 -lm -o %< % | gdb %< <CR>
 
 
 " use gdb -tui to debug

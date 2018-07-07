@@ -187,6 +187,7 @@ Plug 'junegunn/vim-emoji'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'idanarye/vim-vebugger'
 
+Plug 'aklt/plantuml-syntax'
 call plug#end()
 " no need to toggle fileindent options
 

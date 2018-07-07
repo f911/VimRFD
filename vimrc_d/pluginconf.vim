@@ -66,11 +66,11 @@ inoremap <F3> <Esc>:w<Bar>TagbarToggle<CR>
 
 " + 4.10. Plugins.scrooloose/syntastic {
 " --------------------------------------
-    set statusline+=%#warningmsg#
+    "set statusline+=%#warningmsg#
     if GetOSType() == "win"
         set statusline+=%{SyntasticStatuslineFlag()}
     endif
-    set statusline+=%*
+"    set statusline+=%*
 
     let g:syntastic_always_populate_loc_list = 1
     let g:syntastic_auto_loc_list = 1
@@ -155,20 +155,21 @@ inoremap <F3> <Esc>:w<Bar>TagbarToggle<CR>
 
 
 
-" + 4.2. plugins.yggdroot/indentline {
-" ------------------------------------
-    nmap <LocalLeader>il :IndentLinesToggle<CR>
-    let g:indentLine_enabled=1
-    "let g:indentLine_char = '┊'
-    if IsGUI()
-        let g:indentLine_char = "¦"
-        let g:indentLine_first_char = "¦"
-        "let g:indentLine_color_gui = '#A4E57E'
-        let g:indentLine_color_gui = '#C0C0C0'
-    else
-        let g:indentLine_color_term =239
-    endif
-" }
+" * plugins.yggdroot/indentline 
+" -----------------------------
+nmap <LocalLeader>il :IndentLinesToggle<CR>
+let g:indentLine_enabled=1
+"let g:indentLine_char = '┊'
+if IsGUI()
+    "let g:indentLine_char = "▏"
+    let g:indentLine_first_char = "│"
+    "let g:indentLine_color_gui = '#5D478B'
+    "let g:indentLine_color_gui = '#708090'
+    "let g:indentLine_color_gui = '#36648B'
+    let g:indentLine_color_gui = '#393939'
+else
+    let g:indentLine_color_term =239
+endif
 
 " + 4.3. plugins.scrooloose/nerdtree {
 " ------------------------------------
@@ -333,3 +334,6 @@ let g:JavaComplete_BaseDir='~/.cache'
   "  endif
 " }
 
+
+" vim:noeol:cin:sr:et:ts=4:sts=4:sw=4:tw=98:ft=vim:ff=unix:fenc=utf-8:
+" EOF

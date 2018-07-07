@@ -32,6 +32,7 @@
 " + nodejs
 " + markdown
 " + java
+" + PlantUML
 "
 " KeyMapList:
 " + F2 -- NerdTreeToggle
@@ -51,7 +52,7 @@
 
 " BEGIN:
 "
-" ------ * ------- * ------- * ------- * ------- * ------- * ------- * ------- *  
+" ------ + ------- + ------- + ------- + ------- + ------- + ------- + ------- +  
 if &compatible
     set nocompatible
 endif
@@ -88,5 +89,5 @@ endif
 " + [vim-wikia](http://vim.wikia.com/wiki/Vim_Tips_Wiki)
 " + [1]: https://creativecommons.org/licenses/by-nd/4.0/ 
 
-" vim:noeol:cin:sr:et:ts=4:sw=4:tw=98:ft=vim:ff=unix:fenc=utf-8:
+" vim:noeol:cin:sr:et:ts=4:sts=4:sw=4:tw=98:ft=vim:ff=unix:fenc=utf-8:
 " EOF
