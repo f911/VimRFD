@@ -119,7 +119,6 @@ Plug 'xolox/vim-misc'
 " + color themes {
 " ----------------
 Plug 'jonathanfilip/lucius'
-"Plug 'chriskempson/tomorrow-theme', {'rtp': 'vim/'} o
 Plug 'chriskempson/base16-vim' 
 " }
 

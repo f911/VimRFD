@@ -165,10 +165,16 @@ nnoremap <M-Q> <Esc><Esc>:wq<CR>
 inoremap <M-Q> <Esc><Esc>:wq<CR>
 
 
-" Buffer_Tab_Window:
+" Tab:
 " -----------------
 nnoremap <C-Tab> gt
 nnoremap <S-C-Tab> gT
+inoremap <C-Tab> <Esc>gt
+inoremap <S-C-Tab> <Esc>gT
+
+
+" Buffer:
+" -------
 nnoremap <M-b> :ls<CR>
 inoremap <M-b> <Esc>:w<Bar>ls<CR>
 

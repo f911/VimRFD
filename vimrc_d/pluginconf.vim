@@ -171,24 +171,30 @@ else
     let g:indentLine_color_term =239
 endif
 
-" + 4.3. plugins.scrooloose/nerdtree {
-" ------------------------------------
-    autocmd bufenter * if (winnr("$") == 1 && 
-                \ exists("b:NERDTreeType") && 
-                \ b:NERDTreeType == "primary") | q | 
-                \ endif
-   " if g:isWindows
-   "     let g:NERDTreeCopyCmd = 'copy '
-   " else
-   "     let g:NERDTreeCopyCmd = 'cp -r'
-   " endif
-    let g:NERDTreeMouseMode = 2
-    let g:NERDTreeWinSize   = 40
-    let g:NERDTreeMinimalUI = 1
-    let g:NERDTreeIgnore    = ['\*NTUSER*','\*ntuser*','\NTUSER.DAT','\ntuser.ini']
+" * plugins.scrooloose/nerdtree
+" ----------------------------------
+"  + settings
+"   - Close vim if the only window left open is NERDTree
+autocmd bufenter * if (winnr("$") == 1 && 
+            \ exists("b:NERDTreeType") && 
+            \ b:NERDTreeType == "primary") | q | 
+            \ endif
 
-    nmap <F2> :NERDTreeToggle .<CR>
-" }
+
+let g:NERDTreeMouseMode = 2
+let g:NERDTreeWinSize   = 40
+let g:NERDTreeMinimalUI = 1
+let g:NERDTreeIgnore    = ['\*NTUSER*','\*ntuser*','\NTUSER.DAT','\ntuser.ini']
+
+"  + keymaps
+nmap <F2> :NERDTreeToggle ..<CR>
+
+
+" if g:isWindows
+"     let g:NERDTreeCopyCmd = 'copy '
+" else
+"     let g:NERDTreeCopyCmd = 'cp -r'
+" endif
 
 
 
