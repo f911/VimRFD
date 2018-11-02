@@ -24,6 +24,25 @@ noremap! <C-F5> <Esc>:w<Bar>e<Bar>make && java %<<CR>
 noremap  <S-F5> <Esc>:w<Bar>e<Bar>make<Bar>!gnome-terminal --geometry=160x48+600+300<CR>
 noremap! <S-F5> <Esc>:w<Bar>e<Bar>make<Bar>!gnome-terminal --geometry=160x48+600+300<CR>
 
+
+
+
+
+
+
+
+
+
+
+noremap  <F6>   <Esc>:w<Bar>setlocal makeprg=javac\ -g\ %<Bar>make<CR>
+noremap! <F6>   <Esc>:w<Bar>setlocal makeprg=javac\ -g\ %<Bar>make<CR>
+
+
+noremap  <S-F6> <Esc>:w<Bar>setlocal makeprg=javac\ -g\ %<Bar>make<Bar>!gnome-terminal --geometry=160x48+600+300<CR>
+noremap! <S-F6> <Esc>:w<Bar>setlocal makeprg=javac\ -g\ %<Bar>make<Bar>!gnome-terminal --geometry=160x48+600+300<CR>
+
+
+
 "noremap  <F5>   <Esc>:w<Bar>e<Bar>call delete(expand('%<').'.class')<Bar>make && java %<<CR>
 "noremap! <F5>   <Esc>:w<Bar>e<Bar>call delete(expand('%<').'.class')<Bar>make && java %<<CR>
 

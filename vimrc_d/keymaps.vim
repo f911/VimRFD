@@ -113,6 +113,8 @@ nnoremap <M-j> <Down>
 nnoremap <M-k> <Up>
 nnoremap <M-l> <Right>
 nnoremap <M-o> o
+nnoremap <M-[> o{<CR><Esc>
+
 
 inoremap <M-h> <Esc>i
 inoremap <M-j> <Esc><Down>a
@@ -122,11 +124,12 @@ inoremap <M-l> <Esc><Right>a
 inoremap <M-;> <Esc><Right>a 
 "inoremap <M-o> <Esc><CR>i
 inoremap <M-o> <Esc>o
+inoremap <M-[> <Esc>o{<CR><Esc>
 inoremap <M-x> <Del>
 
 
 
-imap jj  <Esc>
+imap jj  <Esc>:w<CR>
 "imap :: <Esc>:
 
 " Text_Edit:
@@ -167,8 +170,9 @@ inoremap <M-Q> <Esc><Esc>:wq<CR>
 
 " Tab:
 " -----------------
-nnoremap <C-Tab> gt
-nnoremap <S-C-Tab> gT
+nnoremap   <C-Tab> gt
+nnoremap   <S-C-Tab> gT
+
 inoremap <C-Tab> <Esc>gt
 inoremap <S-C-Tab> <Esc>gT
 
