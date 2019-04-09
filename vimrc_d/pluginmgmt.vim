@@ -4,7 +4,7 @@
 "
 "
 " Interface:
-" ---------- 
+" ----------
 " * IMPORT:
 "    + platform/GetOSType()
 " * EXPORT:
@@ -39,12 +39,12 @@
 " (EOC)
 
 " envrionment variables
-let $MYVIMDIR = $HOME.((GetOSType() == "win") ? '\vimfiles\' : '/.vim/') 
+let $MYVIMDIR = $HOME.((GetOSType() == "win") ? '\vimfiles\' : '/.vim/')
 let s:bundled = $MYVIMDIR.'bundle'.Ops()
 
 
 silent function! FirstAutoInstall(ostyp)
-    if empty(glob("$MYVIMDIR/autoload/plug.vim")) 
+    if empty(glob("$MYVIMDIR/autoload/plug.vim"))
         if ( a:ostyp == 'linux' ) || ( a:ostyp == 'mac' )
             silent !curl -fLo $MYVIMDIR/autoload/plug.vim --create-dirs
             \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -119,14 +119,15 @@ Plug 'xolox/vim-misc'
 " + color themes {
 " ----------------
 Plug 'jonathanfilip/lucius'
-Plug 'chriskempson/base16-vim' 
+"Plug 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
+"Plug 'chriskempson/base16-vim'
 " }
 
 Plug 'idanarye/vim-vebugger'
 
 " + auto code completion {
 " ------------------------
-Plug 'Valloric/YouCompleteMe' 
+Plug 'Valloric/YouCompleteMe', {'do': 'install.py --all'}
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 " }
@@ -141,7 +142,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'godlygeek/tabular'
 "   Plug 'plasticboy/vim-markdown'
 Plug 'vim-pandoc/vim-pandoc', {'for': 'markdown'}
-Plug 'vim-pandoc/vim-pandoc-syntax', {'for': 'markdown'} 
+Plug 'vim-pandoc/vim-pandoc-syntax', {'for': 'markdown'}
 Plug 'vim-pandoc/vim-pandoc-after', {'for': 'markdown'}
 Plug 'iamcco/mathjax-support-for-mkdp', {'for': 'markdown'}
 Plug 'iamcco/markdown-preview.vim', {'for': 'markdown'}
@@ -176,7 +177,7 @@ Plug 'einars/js-beautify'
 "   Plug 'walm/jshint'
 " }
 
-Plug 'nginx/nginx', {'for': 'nginx', 'rtp': 'contrib/vim/'} 
+Plug 'nginx/nginx', {'for': 'nginx', 'rtp': 'contrib/vim/'}
 
 Plug 'asins/vimcdoc'
 Plug 'junegunn/vim-emoji'

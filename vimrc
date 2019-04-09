@@ -1,8 +1,8 @@
 " ==============================================================================
-"           F911'S RESEARCH AND DEVELOPMENT STUDIO PRODUCED ( F911-R&D.SP )               
-" ------ * ------- * ------- * ------- * ------- * ------- * ------- * ------- *  
+"           F911'S RESEARCH AND DEVELOPMENT STUDIO PRODUCED ( F911-R&D.SP )
+" ------ * ------- * ------- * ------- * ------- * ------- * ------- * ------- *
 " Project:  VimRFD - VIM Refined
-" FileDes:  Contains settings to initialize VIM when it starts. customize the 
+" FileDes:  Contains settings to initialize VIM when it starts. customize the
 "           way VIM run as. This file acts like a 'facade' to load other VIM
 "           custom config files. Location usually comes to: >
 "
@@ -36,9 +36,9 @@
 "
 " KeyMapList:
 " + F2 -- NerdTreeToggle
-" + F3 -- TagbarToggle 
-" + 
-" 
+" + F3 -- TagbarToggle
+" +
+"
 " TODO_List:
 " + js's plugins configuration. and .editorconfig missing error.
 " + An excellent README is needed for this project and others
@@ -52,10 +52,11 @@
 
 " BEGIN:
 "
-" ------ + ------- + ------- + ------- + ------- + ------- + ------- + ------- +  
+" ------ + ------- + ------- + ------- + ------- + ------- + ------- + ------- +
 if &compatible
     set nocompatible
 endif
+"let base16colorspace=256
 
 " suppose $MYVIMRC is not empty, otherwise this vimrc file would not be
 " loaded and no script as well as plugins will be execute, also safe.
@@ -63,9 +64,9 @@ if empty($MYVIMRCD)
     let $MYVIMRCD = $MYVIMRC.'_d'              " usually $HOME/.vim/vimrc_d
 endif
 " TODO: Ops() first ?
-source $MYVIMRCD/platforms.vim 
+source $MYVIMRCD/platforms.vim
 source $MYVIMRCD/pluginmgmt.vim          " load external plugin by vim-plug
-source $MYVIMRCD/customlook.vim         " 
+source $MYVIMRCD/customlook.vim         "
 source $MYVIMRCD/apphelper.vim          " functions for custom handlers
 source $MYVIMRCD/fthandler.vim           " ft & ff & fenc etc.
 source $MYVIMRCD/keymaps.vim
@@ -87,7 +88,7 @@ endif
 " + [oschina](http://www.oschina.net/code/snippet_574132_13357)
 " + [github-dotfile-dotrc](https://github.com)
 " + [vim-wikia](http://vim.wikia.com/wiki/Vim_Tips_Wiki)
-" + [1]: https://creativecommons.org/licenses/by-nd/4.0/ 
+" + [1]: https://creativecommons.org/licenses/by-nd/4.0/
 
 " vim:noeol:cin:sr:et:ts=4:sts=4:sw=4:tw=98:ft=vim:ff=unix:fenc=utf-8:
 " EOF

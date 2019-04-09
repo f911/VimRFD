@@ -31,13 +31,13 @@
 "
 function! s:SetGUITheme(ost) abort
     " overrides colo if need	
-	colorscheme base16-eighties
 	if a:ost == "linux"
 		set guifont=Terminess\ Powerline\ 12
 	elseif a:ost == "win"
-		set guifont=MesloLGS_NF:h9:cANSI:qDRAFT
+		set guifont=MesloLGS\ Nerd\ Font:h12:cANSI:qDRAFT
 	elseif a:ost == "mac"
-		set guifont=MesloLGS_NF:h11
+		set guifont=MesloLGS\ Nerd\ Font:h12
+        colorscheme rainbow_neon
 	elseif a:ost == "msys"
 		set guifont=Terminus\ 12
 	else
@@ -47,7 +47,7 @@ endfunction
 
 function! s:SetConTheme(ost) abort
     " overrides colo if need	
-	colorscheme base16-eighties
+	colorscheme rainbow_neon
 	if a:ost == "linux"
 		set t_Co=256
 		colorscheme base16-eighties
@@ -87,8 +87,8 @@ endfunction
 
 
 " basic theme
-let base16colorspace=256
-set background=dark
+"let base16colorspace=256
+"set background=dark
 
 " window componets
 set number
