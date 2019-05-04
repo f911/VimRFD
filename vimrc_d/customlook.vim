@@ -37,7 +37,8 @@ function! s:SetGUITheme(ost) abort
 		set guifont=MesloLGS\ Nerd\ Font:h12:cANSI:qDRAFT
 	elseif a:ost == "mac"
 		set guifont=MesloLGS\ Nerd\ Font:h12
-        colorscheme rainbow_neon
+        "colorscheme rainbow_neon
+        colorscheme Tomorrow-Night-Eighties
 	elseif a:ost == "msys"
 		set guifont=Terminus\ 12
 	else

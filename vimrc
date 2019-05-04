@@ -56,7 +56,7 @@
 if &compatible
     set nocompatible
 endif
-"let base16colorspace=256
+let base16colorspace=256
 
 " suppose $MYVIMRC is not empty, otherwise this vimrc file would not be
 " loaded and no script as well as plugins will be execute, also safe.
