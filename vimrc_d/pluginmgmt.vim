@@ -127,7 +127,7 @@ Plug 'idanarye/vim-vebugger'
 
 " + auto code completion {
 " ------------------------
-Plug 'Valloric/YouCompleteMe', {'do': 'install.py --all'}
+Plug 'ycm-core/YouCompleteMe', {'do': 'install.py --all'}
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 " }
